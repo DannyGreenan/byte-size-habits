@@ -1,24 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import NavBar from "../components/NavBar";
+import HeroBar from "../components/HeroBar";
 
 const HomeLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-byteLightBlue">
         <header>
           <NavBar />
+          <HeroBar />
         </header>
         {children}
-        <footer className="bg-green-200">
+        <footer className="bg-base-100">
           <div className="flex justify-center items-center">
-            <Image
-              src={"/banner.png"}
-              height={200}
-              width={200}
-              alt="ByteSizeHabits banner"
-              className="mx-auto"
-            />
+            Byte Size Habits
           </div>
         </footer>
       </body>
