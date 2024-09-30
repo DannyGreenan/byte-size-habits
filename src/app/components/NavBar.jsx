@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const NavBar = () => {
   return (
@@ -38,6 +39,12 @@ const NavBar = () => {
           </ul>
         </div>
         <Link href="/home" className="btn btn-ghost text-xl">
+          <Image
+            alt="Tailwind CSS Navbar component"
+            width={50}
+            height={50}
+            src="/logo-no-bg.png"
+          />
           Byte Size Habits
         </Link>
       </div>
