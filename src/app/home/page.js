@@ -1,62 +1,34 @@
 const Home = () => {
   return (
-    <div>
-      <section className="hero bg-base-200 py-5">
-        <div className="relative w-full max-w-4xl mx-auto">
-          <div
-            className="bg-cover bg-center rounded-lg"
-            style={{
-              backgroundImage: "url('/banner.png')",
-              height: "200px",
-            }}></div>
-
-          <div className="absolute inset-0 flex justify-between items-center px-4 py-2">
-            <div className="flex items-center space-x-2 text-gray-800">
-              {" "}
-              <img
-                src="/happy.png"
-                alt="Small Character"
-                className="w-16 h-16 rounded-full border-2 border-white shadow-lg"
-              />
-              <span className="text-lg font-bold">Username</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-800">
-              {" "}
-              <span className="text-lg font-bold">User Coins</span>
-              <div className="badge badge-warning flex items-center">
-                <img src="/coin-icon.png" alt="Coins" className="w-8 h-8" />
-                <span className="ml-2">100</span>
-              </div>
+    <div className="bg-byteLightBlue">
+      <div className="container mx-auto flex flex-col items-center my-10  bg-byteOrange">
+        <div className="card w-96  bg-byteOrange shadow-xl">
+          <div className="chat chat-start justify-end">
+            <div className="absolute top-5 left-21 chat-bubble chat-bubble-primary">
+              Did you code today ?
             </div>
           </div>
-        </div>
-      </section>
-      <div className="container mx-auto flex flex-col items-center my-10">
-        <div className="card w-96 bg-base-100 shadow-xl">
           <figure>
             <img src="/happy.png" alt="Main PC Character" />
           </figure>
-          <div className="card-body items-center text-center">
-            <h2 className="card-title">Did you code?</h2>
-            <div className="flex items-center space-x-2">
-              <div className="badge badge-success">✅</div>
-            </div>
+
+          <div className="flex flex-col space-x-4 my-5">
+            <button className="btn glass btn-primary">
+              <img src="/memory.png" className="w-10 h-10" alt="Feed" /> Feed
+              <progress
+                class="progress progress-success w-56"
+                value="40"
+                max="100"></progress>
+            </button>{" "}
+            <button className="btn glass btn-secondary">
+              <img src="/battery.png" className="w-10 h-10" alt="Charge" />{" "}
+              Charge
+              <progress
+                class="progress progress-warning w-56"
+                value="70"
+                max="100"></progress>
+            </button>
           </div>
-        </div>
-
-        <div className="flex space-x-4 my-5">
-          <button className="btn btn-primary">
-            <img src="memory-card.png" className="w-6 h-6" alt="Feed" /> Feed
-          </button>
-
-          <button className="btn btn-secondary">
-            <img src="battery.png" className="w-6 h-6" alt="Charge" /> Charge
-          </button>
-        </div>
-
-        <div className="flex space-x-2">
-          <div className="radial-progress text-green-500">80%</div>
-          <div className="radial-progress text-yellow-500">50%</div>
         </div>
       </div>
     </div>
