@@ -1,36 +1,146 @@
+"use client";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+
 const Home = () => {
+  const [seconds, setSeconds] = useState(60);
+  const [minutes, setMinutes] = useState(24);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      } else {
+        setSeconds(59);
+        if (minutes > 0) {
+          setMinutes(minutes - 1);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [seconds, minutes]);
+
   return (
-    <div className="bg-byteLightBlue">
-      <div className="container mx-auto flex flex-col items-center my-10  bg-byteOrange">
-        <div className="card w-96  bg-byteOrange shadow-xl">
-          <div className="chat chat-start justify-end">
-            <div className="absolute top-5 left-21 chat-bubble chat-bubble-primary">
-              Did you code today ?
+    <div>
+      <section className="relative py-20">
+        <div
+          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          style={{ height: "80px" }}>
+          <svg
+            className="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0">
+            <polygon
+              className="text-byteOrange fill-current"
+              points="2560 0 2560 100 0 100"></polygon>
+          </svg>
+        </div>
+
+        <div className="container mx-auto px-4">
+          <div className="items-center flex flex-wrap">
+            <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
+              <img
+                alt="..."
+                className="max-w-full rounded-lg shadow-lg"
+                src="/happy.png"
+              />
+            </div>
+            <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
+              <div className="md:pr-12">
+                <div className=" p-3 text-center inline-flex items-center justify-center w-20 h-20 mb-6 shadow-lg rounded-full">
+                  <img
+                    src="/logo.png"
+                    alt="Small Character"
+                    className="rounded-full border-2 border-white shadow-lg"
+                  />
+                  Username
+                </div>
+                <div className="chat chat-start">
+                  <div className="chat-image avatar">
+                    <div className="w-10 rounded-full">
+                      <img
+                        alt="Tailwind CSS chat bubble component"
+                        src="/happy.png"
+                      />
+                    </div>
+                  </div>
+                  <div className="chat-bubble chat-bubble-info">
+                    Did you code today ?
+                  </div>
+                </div>
+                <div className="chat chat-start">
+                  <div className="chat-image avatar">
+                    <div className="w-10 rounded-full">
+                      <img
+                        alt="Tailwind CSS chat bubble component"
+                        src="/happy.png"
+                      />
+                    </div>
+                  </div>
+                  <div className="chat-bubble chat-bubble-info">
+                    Ready to start a timer ?
+                    <button className="btn btn-primary mx-2">Yes !</button>
+                  </div>
+                </div>
+                <div className="m-5">
+                  <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
+                    <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                      <span className="countdown font-mono text-5xl">
+                        <span style={{ "--value": minutes }}></span>
+                      </span>
+                      min
+                    </div>
+                    <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
+                      <span className="countdown font-mono text-5xl">
+                        <span style={{ "--value": seconds }}></span>
+                      </span>
+                      sec
+                    </div>
+                  </div>
+                </div>
+                <ul className="list-none mt-6">
+                  <li className="py-2">
+                    <div className="flex items-center">
+                      <div>
+                        <progress
+                          className="progress progress-warning w-56 h-6"
+                          value="70"
+                          max="100"></progress>
+                      </div>
+                      <button className="btn m-4 hover:bg-yellow-300 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
+                        Charge
+                        <Image src="/battery.png" height={35} width={35} />
+                      </button>
+                    </div>
+                  </li>
+                  <li className="py-2">
+                    <div className="flex items-center">
+                      <div>
+                        <progress
+                          className="progress progress-success w-56 h-6"
+                          value="40"
+                          max="100"></progress>
+                      </div>
+                      <button className="btn m-4 hover:bg-green-600 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
+                        Feed
+                        <Image src="/memory.png" height={35} width={35} />
+                      </button>
+                    </div>
+                  </li>
+                  <li className="py-2">
+                    <div className="flex items-center"></div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <figure>
-            <img src="/happy.png" alt="Main PC Character" />
-          </figure>
-
-          <div className="flex flex-col space-x-4 my-5">
-            <button className="btn glass btn-primary">
-              <img src="/memory.png" className="w-10 h-10" alt="Feed" /> Feed
-              <progress
-                className="progress progress-success w-56"
-                value="40"
-                max="100"></progress>
-            </button>{" "}
-            <button className="btn glass btn-secondary">
-              <img src="/battery.png" className="w-10 h-10" alt="Charge" />{" "}
-              Charge
-              <progress
-                className="progress progress-warning w-56"
-                value="70"
-                max="100"></progress>
-            </button>
-          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

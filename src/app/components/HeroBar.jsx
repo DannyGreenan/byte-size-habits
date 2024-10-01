@@ -9,7 +9,7 @@ const HeroBar = () => {
             height: "240px",
           }}></div>
 
-        <div className="absolute inset-0 flex justify-between items-end px-4 py-2">
+        <div className="absolute inset-0 flex justify-between items-start px-4 py-2">
           <div className="flex items-center space-x-2 text-gray-800  bg-byteDarkBlue px-4 py-1 rounded-md shadow-2xl border-2 border-base-100">
             {" "}
             <img
