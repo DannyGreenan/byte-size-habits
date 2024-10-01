@@ -16,7 +16,7 @@ const Home = () => {
             <button className="btn glass btn-primary">
               <img src="/memory.png" className="w-10 h-10" alt="Feed" /> Feed
               <progress
-                class="progress progress-success w-56"
+                className="progress progress-success w-56"
                 value="40"
                 max="100"></progress>
             </button>{" "}
@@ -24,7 +24,7 @@ const Home = () => {
               <img src="/battery.png" className="w-10 h-10" alt="Charge" />{" "}
               Charge
               <progress
-                class="progress progress-warning w-56"
+                className="progress progress-warning w-56"
                 value="70"
                 max="100"></progress>
             </button>
