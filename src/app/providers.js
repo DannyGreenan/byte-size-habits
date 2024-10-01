@@ -1,9 +1,15 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import { fetchUser } from "./home/profile/profileAPI";
 
 export const UserContext = createContext();
 
 export function Providers({ children }) {
-  return <UserContext.Provider value={1}>{children}</UserContext.Provider>;
+  const [currentUser, setCurrentUser] = useState("");
+  const [topic, setTopic] = useState("");
+  fetchUser(1, setCurrentUser, setTopic);
+  return (
+    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+  );
 }
