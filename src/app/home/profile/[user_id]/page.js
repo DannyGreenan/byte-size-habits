@@ -1,7 +1,6 @@
 "use client";
 
-import { patchUser } from "@/app/cud/patchUserByID";
-import { supabaseServerClient } from "@/lib/supabaseServerClient";
+import { fetchUser, patchUser } from "../profileAPI";
 import { useState, useEffect } from "react";
 
 const UserProfile = ({ params }) => {
@@ -10,23 +9,7 @@ const UserProfile = ({ params }) => {
   const { user_id } = params;
 
   useEffect(() => {
-    async function fetchUser() {
-      const { data: user, error } = await supabaseServerClient
-        .from("users")
-        .select("*")
-        .eq("user_id", user_id)
-        .single();
-
-      if (error) {
-        console.error("Error fetching user:", error);
-        throw Error("Error loading User");
-      } else {
-        setCurrentUser(user);
-        setTopic(user.goal);
-      }
-    }
-
-    fetchUser();
+    fetchUser(user_id, setCurrentUser, setTopic);
   }, []);
 
   const handleTopicChange = (e) => {
