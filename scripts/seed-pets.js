@@ -1,4 +1,4 @@
-import { supabase } from '../src/lib/supabaseClient.js';
+import { supabase } from '../src/lib/supabaseServerClient.js/index.js';
 
 export async function seedPets() {
 	const pets = [
