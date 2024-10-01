@@ -21,7 +21,7 @@ export default async function UserProfile() {
               <summary className="btn m-1">{user.goal}</summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li>
-                  <a>TypeScript</a>
+                  <a>TypeScripts</a>
                 </li>
                 <li>
                   <a>Next.js</a>
