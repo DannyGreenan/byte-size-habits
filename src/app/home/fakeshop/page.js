@@ -7,16 +7,17 @@ import { UserContext } from "@/app/providers";
 import { patchUser } from "../profile/profileAPI";
 
 export default function AllItems() {
-  let user_id = useContext(UserContext);
+  let user = useContext(UserContext);
 
   const [allItems, setAllItems] = useState([]);
-  const [buyItem, setBuyItem] = useState("");
+
   useEffect(() => {
     fetchItems(setAllItems);
   }, []);
   const handleBuy = (event) => {
-    setBuyItem(event.target.value);
-    patchUser(user_id, { items: event.target.value });
+    const newItem = event.target.value;
+    const currentItems = user.stored_items;
+    patchUser(user.user_id, { stored_items: [...currentItems, newItem] });
   };
 
   return (
