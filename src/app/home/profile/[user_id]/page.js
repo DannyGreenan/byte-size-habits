@@ -22,25 +22,15 @@ const UserProfile = ({ params }) => {
 
   return (
     <div>
-      <section className="relative block" style={{ height: "500px" }}>
-        <div
-          className="bottom-auto top-7 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
-          style={{ height: "80px" }}>
-          <svg
-            className="absolute bottom-0 overflow-hidden"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0">
-            <path
-              className="text-byteOrange fill-current"
-              d="M0,60 C400,100 1200,0 2560,60 L2560,100 L0,100 Z"></path>
-          </svg>
-        </div>
-        <div className="absolute top-0 w-full h-full bg-center bg-cover">
-          <span className="w-full h-full absolute bg-byteOrange"></span>
-        </div>
-      </section>
-      <section className="relative py-16 bg-byteOrange">
+      <section className="relative block" style={{ height: "500px" }}></section>
+      <section
+        className="relative py-16"
+        style={{
+          backgroundImage: `url('/background.jpeg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
         <div className="container mx-auto px-4">
           <div
             className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"

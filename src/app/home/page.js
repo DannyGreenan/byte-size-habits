@@ -23,38 +23,42 @@ const Home = () => {
 
   return (
     <div
-      className="relative py-10 min-h-screen"
+      className="relative min-h-screen"
       style={{
-        backgroundImage: `url('background.jpeg')`,
+        backgroundImage: `url('/background.jpeg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}>
       <section className="relative py-10">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-auto">
           <div className="items-center flex flex-wrap">
             <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
               <div
                 className="relative w-full h-full bg-cover bg-center rounded-lg shadow-lg"
                 style={{
-                  backgroundImage: `url('/char-bg.png')`, // Replace with your background image URL
+                  backgroundImage: `url('/char-bg.png')`,
+                  backgroundSize: "100% 101%",
                 }}>
-                <div className="flex items-center">
-                  <div>
-                    <progress
-                      className="progress progress-warning w-56 h-6"
-                      value="70"
-                      max="100"></progress>
+                <div className="flex items-center justify-center mt-auto">
+                  <div className="bg-byteOrange rounded-xl p-1 w-100 mt-6 h-auto">
+                    <div className="flex items-center">
+                      {" "}
+                      <progress
+                        className="progress progress-warning w-56 h-6"
+                        value="70"
+                        max="100"></progress>
+                      <button className="btn ml-4 hover:bg-yellow-300 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
+                        Charge
+                        <Image src="/battery.png" height={35} width={35} />
+                      </button>
+                    </div>
                   </div>
-                  <button className="btn m-4 hover:bg-yellow-300 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
-                    Charge
-                    <Image src="/battery.png" height={35} width={35} />
-                  </button>
                 </div>
                 <img
                   alt="character image"
                   className="relative max-w-full rounded-lg shadow-lg"
-                  src="/happy.png" // Replace with your image
+                  src="/happy.png"
                 />
               </div>
             </div>
