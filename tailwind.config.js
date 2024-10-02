@@ -14,6 +14,9 @@ module.exports = {
         byteLightBlue: "#b9d2ce",
         byteOrange: "#fdebd5",
       },
+      fontFamily: {
+        nunito: ["var(--nunito-font)", "sans-serif"],
+      },
     },
   },
   plugins: [require("daisyui")],
