@@ -9,7 +9,6 @@ const HeroBar = () => {
             height: "322px",
           }}></div>
 
-        {/* Flex container positioned absolutely over the banner */}
         <div className="absolute top-5 left-0 right-0 flex justify-between px-4 py-2">
           <div
             className="flex items-center space-x-2 text-gray-800 bg-byteDarkBlue px-4 py-1 my-2 rounded-md shadow-2xl border-2  border-byteDarkBlue"
