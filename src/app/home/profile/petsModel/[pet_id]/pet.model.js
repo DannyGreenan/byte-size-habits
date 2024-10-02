@@ -16,4 +16,3 @@ export async function getPet(pet_id) {
 	}
 }
 
-getPet(1)
