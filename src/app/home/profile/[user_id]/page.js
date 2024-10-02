@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchUser, patchUser } from "../profileAPI";
+import { fetchUser, patchUser } from "../../../models/profile.model";
 import { useState, useEffect } from "react";
 
 const UserProfile = ({ params }) => {

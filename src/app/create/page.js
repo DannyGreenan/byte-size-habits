@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addUser } from "../profileAPI";
+import { addUser } from "../models/profile.model";
 import { UserContext } from "@/app/providers";
 
 const CreateProfile = () => {
@@ -35,7 +35,9 @@ const CreateProfile = () => {
       <label htmlFor="create_username">username</label>
       <input id="create_username" type="text" onChange={handleUsername}></input>
       <select onChange={handleGoal} className="select w-full max-w-xs m-6">
-        <option disabled>Pick your Goal</option>
+        <option disabled defaultValue={true}>
+          Pick your Goal
+        </option>
         <option value="Typescript">TypeScript</option>
         <option value="Next.js">Next.js</option>
         <option value="JavaScript">JavaScript</option>
@@ -43,14 +45,13 @@ const CreateProfile = () => {
         <option value="Supabase">Supabase</option>
       </select>
       <label>difficulty</label>
-      <input type="text"></input>
+
       <button
         className="bg-byteDarkBlue active:bg-byteLightBlue uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
         type="button"
         style={{ transition: "all 0.15s ease 0s" }}
         onClick={handleDifficulty}
-        value="Easy"
-      >
+        value="Easy">
         easy (30 minutes)
       </button>
       <button
@@ -58,8 +59,7 @@ const CreateProfile = () => {
         type="button"
         style={{ transition: "all 0.15s ease 0s" }}
         onClick={handleDifficulty}
-        value="Medium"
-      >
+        value="Medium">
         medium (45 minutes)
       </button>
       <button
@@ -67,16 +67,14 @@ const CreateProfile = () => {
         type="button"
         style={{ transition: "all 0.15s ease 0s" }}
         onClick={handleDifficulty}
-        value="hard"
-      >
+        value="hard">
         hard (1 hour)
       </button>
       <button
         type="submit"
         className="bg-byteDarkBlue active:bg-byteLightBlue uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
         style={{ transition: "all 0.15s ease 0s" }}
-        onClick={handleSubmit}
-      >
+        onClick={handleSubmit}>
         Submit
       </button>
     </form>

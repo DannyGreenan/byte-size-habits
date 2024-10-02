@@ -2,7 +2,6 @@ const HeroBar = () => {
   return (
     <section className="hero bg-byteLightBlue py-5">
       <div className="relative w-full max-w-4xl mx-auto">
-        {/* Banner Image */}
         <div
           className="bg-cover bg-center rounded-2xl"
           style={{
@@ -16,6 +15,7 @@ const HeroBar = () => {
             className="flex items-center space-x-2 text-gray-800 bg-byteDarkBlue px-4 py-1 my-2 rounded-md shadow-2xl border-2  border-byteDarkBlue"
             style={{
               backgroundImage: "url('/button-bg.png')",
+
               backgroundSize: "cover",
               backgroundPosition: "center",
               height: "80px",

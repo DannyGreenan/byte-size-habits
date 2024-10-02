@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { fetchItems } from "../shop/itemsAPI";
+import { fetchItems } from "../../models/items.model";
 import Image from "next/image";
 import { UserContext } from "@/app/providers";
-import { patchUser } from "../profile/profileAPI";
+import { patchUser } from "../../models/profile.model";
 
 export default function AllItems() {
   let user = useContext(UserContext);

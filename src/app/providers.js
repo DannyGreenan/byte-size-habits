@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState } from "react";
-import { fetchUser } from "./home/profile/profileAPI";
+import { fetchUser } from "./models/profile.model";
 
 export const UserContext = createContext();
 

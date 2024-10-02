@@ -1,46 +1,16 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import ItemCard from "@/app/components/ItemCard";
-import { supabaseBrowserClient } from "@/lib/supabaseBrowserClient";
+import { fetchItems } from "@/app/models/items.model";
+
 const Shop = () => {
-  const items = [
-    {
-      id: 1,
-      name: "Shoes",
-      price: "100 Coins",
-      image: "/shoes.jpeg",
-    },
-    {
-      id: 2,
-      name: "Keyboard",
-      price: "160 Coins",
-      image: "/keyboard.jpeg",
-    },
-    {
-      id: 3,
-      name: "Hat",
-      price: "200 Coins",
-      image: "/hat.jpeg",
-    },
-    {
-      id: 4,
-      name: "Bag",
-      price: "180 Coins",
-      image: "/bag.jpeg",
-    },
-    {
-      id: 5,
-      name: "Sunglasses",
-      price: "100 Coins",
-      image: "/sunglasses.jpeg",
-    },
-    {
-      id: 6,
-      name: "Gloves",
-      price: "250 Coins",
-      image: "/gloves.jpeg",
-    },
-  ];
+  const [items, setAllItems] = useState([]);
+
+  useEffect(() => {
+    fetchItems(setAllItems);
+  }, []);
 
   return (
     <div>
@@ -63,9 +33,9 @@ const Shop = () => {
             Shop Page
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {items.map((item, index) => (
-              <ItemCard id={index} item={item} />
-            ))}
+            {items.length > 0
+              ? items.map((item, index) => <ItemCard id={index} item={item} />)
+              : null}
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPet, patchPet } from "./pet.model";
+import { getPet, patchPet } from "../../../../models/pet.model";
 
 export default function fetchPet({ params }) {
   const { pet_id } = params;
