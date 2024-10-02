@@ -2,17 +2,25 @@
 
 const CreateProfile = () => {
 
+function handleChange(event) {
+console.log(event.target.value)
+}
+
+function handleSubmit() {
+
+}
+
     return (
-        <form>
-            <label>username</label>
-            <input type='text'></input>
-            <select className="select w-full max-w-xs m-6">
+        <form onSubmit={handleSubmit}>
+            <label htmlFor='create_username'>username</label>
+            <input id='create_username'type='text'></input>
+            <select onChange={handleChange} className="select w-full max-w-xs m-6">
                 <option disabled>Pick your Goal</option>
-                <option value="">TypeScript</option>
-                <option value="">Next.js</option>
-                <option value="">JavaScript</option>
-                <option value="">Python</option>
-                <option value="">Supabase</option>
+                <option value="Typescript">TypeScript</option>
+                <option value="Next.js">Next.js</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Supabase">Supabase</option>
             </select>
             <label>difficulty</label>
             <input type='text'></input>
