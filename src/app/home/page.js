@@ -23,21 +23,18 @@ const Home = () => {
 
   return (
     <div>
-      <section className="relative py-20">
+      <section className="relative py-10">
         <div
-          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          className="bottom-auto top-7 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
           style={{ height: "80px" }}>
           <svg
             className="absolute bottom-0 overflow-hidden"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
             viewBox="0 0 2560 100"
             x="0"
             y="0">
-            <polygon
+            <path
               className="text-byteOrange fill-current"
-              points="2560 0 2560 100 0 100"></polygon>
+              d="M0,60 C400,100 1200,0 2560,60 L2560,100 L0,100 Z"></path>
           </svg>
         </div>
 
