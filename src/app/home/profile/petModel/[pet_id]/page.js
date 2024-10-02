@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPet, patchPet } from "../../../../models/pet.model";
+import { getPet, patchPet, addPet } from "../../../../models/pet.model";
 
 export default function fetchPet({ params }) {
   const { pet_id } = params;
@@ -33,6 +33,11 @@ export default function fetchPet({ params }) {
     patchPet(pet_id, adjust, setDailyHabitStatus, "daily_habit_complete");
   };
 
+  const addNewPet = () => {
+    const newPet = { hunger: 100, energy: 100, daily_habit_complete: false };
+    addPet(newPet);
+  };
+
   if (!pet) return <div>Loading...</div>;
 
   return (
@@ -49,6 +54,8 @@ export default function fetchPet({ params }) {
       {petEnergyIsFull ? <p>I'm too charged</p> : null}
       <br></br>
       <button onClick={dailyHabitHandler}>Toggle daily challange</button>
+      <br></br>
+      <button onClick={addNewPet}>New Pet</button>
     </div>
   );
 }
