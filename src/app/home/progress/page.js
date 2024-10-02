@@ -1,19 +1,13 @@
 const Progress = () => {
   return (
-    <section className="relative py-10">
-      <div
-        className="bottom-auto top-7 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
-        style={{ height: "80px" }}>
-        <svg
-          className="absolute bottom-0 overflow-hidden"
-          viewBox="0 0 2560 100"
-          x="0"
-          y="0">
-          <path
-            className="text-byteOrange fill-current"
-            d="M0,60 C400,100 1200,0 2560,60 L2560,100 L0,100 Z"></path>
-        </svg>
-      </div>
+    <section
+      className="relative py-10"
+      style={{
+        backgroundImage: `url('/background.jpeg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}>
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-white p-6 rounded-lg shadow-md">
