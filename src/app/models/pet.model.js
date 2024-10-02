@@ -29,3 +29,14 @@ export async function patchPet(pet_id, updates, returnFunction, key) {
     returnFunction(updates[key]);
   }
 }
+
+export async function addPet(newPet) {
+  const { data, error } = await supabaseServerClient
+    .from("pets")
+    .upsert([newPet]);
+  if (error) {
+    console.error("Error adding user:", error);
+  } else {
+    console.log("User added successfully:", data);
+  }
+}
