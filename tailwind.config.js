@@ -14,6 +14,7 @@ module.exports = {
         byteLightBlue: "#b9d2ce",
         byteOrange: "#fdebd5",
         byteDark: "#001b2b",
+        byteBackground: "#9badf7",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],

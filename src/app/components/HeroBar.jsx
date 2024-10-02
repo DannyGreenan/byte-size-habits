@@ -1,6 +1,6 @@
 const HeroBar = () => {
   return (
-    <section className="hero bg-byteLightBlue py-5">
+    <section className="hero bg-byteBackground py-5">
       <div className="relative w-full max-w-4xl mx-auto">
         <div
           className="bg-cover bg-center rounded-2xl"
