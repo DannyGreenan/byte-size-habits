@@ -19,14 +19,12 @@ export default function fetchPet({ params }) {
   const hungerHandler = () => {
     if (pet.hunger >= 100) return setPetHungerIsFull(true);
     const adjust = { hunger: pet.hunger + 10 };
-    setPetHunger(pet.hunger + 10);
     patchPet(pet_id, adjust, setPetHunger, "hunger");
   };
 
   const energyHandler = () => {
     if (pet.energy >= 100) return setPetEnergyIsFull(true);
     const adjust = { energy: pet.energy + 10 };
-    setPetEnergy(pet.energy + 10);
     patchPet(pet_id, adjust, setPetEnergy, "energy");
   };
 
@@ -36,8 +34,6 @@ export default function fetchPet({ params }) {
   };
 
   if (!pet) return <div>Loading...</div>;
-
-  /* display error */
 
   return (
     <div>

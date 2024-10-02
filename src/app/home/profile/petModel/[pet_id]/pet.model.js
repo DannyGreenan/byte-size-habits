@@ -25,11 +25,7 @@ export async function patchPet(pet_id, updates, returnFunction, key) {
     console.error("Error updating user:", error);
   } else {
     console.log("Pet updated successfully:", data);
+    console.log(updates[key]);
     returnFunction(updates[key]);
   }
 }
-
-//what is updates?
-// { hunger: 10}
-// { energy: 10}
-// test negatives?
