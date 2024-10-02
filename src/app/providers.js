@@ -6,10 +6,13 @@ import { fetchUser } from "./home/profile/profileAPI";
 export const UserContext = createContext();
 
 export function Providers({ children }) {
-  const [currentUser, setCurrentUser] = useState("");
-  const [topic, setTopic] = useState("");
-  fetchUser(1, setCurrentUser, setTopic);
+  // const [currentUser, setCurrentUser] = useState("");
+  // const [topic, setTopic] = useState("");
+  // fetchUser(1, setCurrentUser, setTopic);
+  const [newUser, setNewUser] = useState({});
   return (
-    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ newUser, setNewUser }}>
+      {children}
+    </UserContext.Provider>
   );
 }

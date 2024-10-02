@@ -28,11 +28,10 @@ export async function patchUser(user_id, updates) {
   }
 }
 
-export async function addUser(newUser) {
+export async function addUser(userPlaceholder) {
   const { data, error } = await supabaseServerClient
     .from("users")
-    .insert([newUser]);
-
+    .upsert([userPlaceholder]);
   if (error) {
     console.error("Error adding user:", error);
   } else {
