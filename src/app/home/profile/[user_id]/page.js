@@ -24,39 +24,23 @@ const UserProfile = ({ params }) => {
     <div>
       <section className="relative block" style={{ height: "500px" }}>
         <div
-          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+          className="bottom-auto top-7 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
           style={{ height: "80px" }}>
           <svg
             className="absolute bottom-0 overflow-hidden"
             viewBox="0 0 2560 100"
             x="0"
             y="0">
-            <polygon
+            <path
               className="text-byteOrange fill-current"
-              points="2560 0 2560 100 0 100"></polygon>
+              d="M0,60 C400,100 1200,0 2560,60 L2560,100 L0,100 Z"></path>
           </svg>
         </div>
         <div className="absolute top-0 w-full h-full bg-center bg-cover">
           <span className="w-full h-full absolute bg-byteOrange"></span>
         </div>
-        <div
-          className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-          style={{ height: "70px" }}>
-          <svg
-            className="absolute bottom-0 overflow-hidden"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0">
-            <polygon
-              className="text-gray-300 fill-current"
-              points="2560 0 2560 100 0 100"></polygon>
-          </svg>
-        </div>
       </section>
-      <section className="relative py-16 bg-byteDarkBlue">
+      <section className="relative py-16 bg-byteOrange">
         <div className="container mx-auto px-4">
           <div
             className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
