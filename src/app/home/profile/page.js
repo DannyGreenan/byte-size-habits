@@ -1,14 +1,25 @@
 "use client";
 
+import { UserContext } from "@/app/UserContext";
 import { patchUser } from "../../models/profile.model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
 
 const UserProfile = () => {
   const [topic, setTopic] = useState("");
+  const { loggedInUser } = useContext(UserContext);
+  const [goal, setGoal] = useState("");
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
-  const handleTopicChange = (e) => {
-    setTopic(e.target.innerText);
-  };
+  useEffect(() => {
+    setSelectedDifficulty(loggedInUser.difficulty);
+  }, []);
+
+  console.log(selectedDifficulty, "selected Diff");
+
+  function handleGoal(event) {
+    setGoal(event.target.value);
+  }
 
   const handleSubmit = () => {
     patchUser(user_id, { goal: topic });
@@ -67,7 +78,7 @@ const UserProfile = () => {
                     </div>
                     <div className="lg:mr-4 p-3 text-center">
                       <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                        3
+                        {loggedInUser.streak ? loggedInUser.streak : 0}
                       </span>
                       <span className="text-sm text-gray-500">
                         Days in a Row
@@ -77,21 +88,9 @@ const UserProfile = () => {
                 </div>
               </div>
               <div className="text-center mt-12">
-                <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                  username
+                <h3 className="text-4xl font-semibold leading-normal text-gray-800 mb-2">
+                  {loggedInUser.username}
                 </h3>
-                <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-                  <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-                  Name
-                </div>
-                <div className="mb-2 text-gray-700 mt-10">
-                  <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
-                  Current Topic/Goal
-                </div>
-                <div className="mb-2 text-gray-700">
-                  <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
-                  Difficulty
-                </div>
               </div>
               <div className="mt-10 py-10 border-t border-gray-300 text-center">
                 <div className="flex flex-wrap justify-center">
@@ -101,37 +100,50 @@ const UserProfile = () => {
                     </p>
                   </div>
 
-                  <select className="select w-full max-w-xs m-6">
-                    <option disabled>Pick your Goal</option>
-                    <option value="">TypeScript</option>
-                    <option value="">Next.js</option>
-                    <option value="">JavaScript</option>
-                    <option value="">Python</option>
-                    <option value="">Supabase</option>
+                  <select
+                    className="select w-full select-lg select-info max-w-xs m-6"
+                    onChange={handleGoal}>
+                    <option disabled defaultValue>
+                      {loggedInUser.goal}
+                    </option>
+                    <option value="Typescript">TypeScript</option>
+                    <option value="Next.js">Next.js</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="Supabase">Supabase</option>
                   </select>
 
-                  <input
-                    type="range"
-                    min={0}
-                    max="100"
-                    value="25"
-                    className="range"
-                    step="25"
-                  />
-                  <div className="flex w-full justify-between px-2 text-xs">
-                    <span>
-                      <p>|</p>
-                      <p>Easy</p>
-                    </span>
-                    <span>
-                      <p>|</p>
-                      <p>Medium</p>
-                    </span>
-                    <span>
-                      <p>|</p>
-                      <p>Hard</p>
-                    </span>
-                  </div>
+                  {selectedDifficulty ? (
+                    <ul>
+                      <li>
+                        <label>Easy</label>
+                        <input
+                          type="radio"
+                          name="radio-2"
+                          className="radio radio-primary"
+                          defaultChecked={selectedDifficulty === "Easy"}
+                        />
+                      </li>
+                      <li>
+                        <label>Medium</label>
+                        <input
+                          type="radio"
+                          name="radio-2"
+                          className="radio radio-primary"
+                          defaultChecked={selectedDifficulty === "Medium"}
+                        />
+                      </li>
+                      <li>
+                        <label>Hard</label>
+                        <input
+                          type="radio"
+                          name="radio-2"
+                          className="radio radio-primary"
+                          defaultChecked={selectedDifficulty === "Hard"}
+                        />
+                      </li>
+                    </ul>
+                  ) : null}
                 </div>
               </div>
             </div>
