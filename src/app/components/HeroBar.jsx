@@ -6,8 +6,6 @@ import { UserContext } from "../UserContext";
 const HeroBar = () => {
   const { loggedInUser } = useContext(UserContext);
 
-  console.log(loggedInUser, "User context");
-
   return (
     <section className="hero bg-byteBackground pt-5">
       <div className="relative w-full max-w-4xl mx-auto">

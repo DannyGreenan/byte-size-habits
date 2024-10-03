@@ -11,10 +11,10 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
 const NavBar = () => {
-  const { SetNewUser } = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const handleLogout = () => {
-    SetNewUser({});
+    setLoggedInUser({});
   };
 
   return (
@@ -33,7 +33,7 @@ const NavBar = () => {
               </Link>
             </div>
             <div className="sidebar-icon">
-              <Link href="/home/profile/1">
+              <Link href="/home/profile">
                 <CgProfile size={30} />
               </Link>
             </div>
@@ -65,7 +65,7 @@ const NavBar = () => {
             <Link href="/home">Home</Link>
           </li>
           <li>
-            <Link href="/home/profile/1">Profile</Link>
+            <Link href="/home/profile">Profile</Link>
           </li>
           <li>
             <Link href="/home/progress">Progress</Link>

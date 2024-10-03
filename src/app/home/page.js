@@ -48,9 +48,14 @@ const Home = () => {
                         className="progress progress-warning w-56 h-6"
                         value="70"
                         max="100"></progress>
-                      <button className="btn ml-4 hover:bg-yellow-300 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
+                      <button className="btn ml-4 h-auto w-auto hover:bg-yellow-300 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
                         Charge
-                        <Image src="/battery.png" height={35} width={35} />
+                        <Image
+                          src="/battery.png"
+                          height={35}
+                          width={35}
+                          alt="battery-image"
+                        />
                       </button>
                     </div>
                   </div>
@@ -117,20 +122,7 @@ const Home = () => {
                 </div>
                 <ul className="list-none mt-6">
                   <li className="py-2"></li>
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <progress
-                          className="progress progress-success w-56 h-6"
-                          value="40"
-                          max="100"></progress>
-                      </div>
-                      <button className="btn m-4 hover:bg-green-600 hover:text-gray-900 hover:scale-105 transition-transform duration-300">
-                        Feed
-                        <Image src="/memory.png" height={35} width={35} />
-                      </button>
-                    </div>
-                  </li>
+                  <li className="py-2"></li>
                   <li className="py-2">
                     <div className="flex items-center"></div>
                   </li>
