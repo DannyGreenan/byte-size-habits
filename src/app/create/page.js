@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addUser } from "../models/profile.model";
-import { UserContext } from "@/app/providers";
+import { UserContext } from "@/app/UserContext";
 import HeroBar from "../components/HeroBar";
 
 const CreateProfile = () => {
