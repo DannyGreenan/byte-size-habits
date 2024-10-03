@@ -1,21 +1,33 @@
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const EnergyNotification = ({ energy }) => {
-	const [notification, setNotification] = useState('');
-
 	useEffect(() => {
-		if (energy <= 30) {
-			setNotification("Warning: Pet's energy is below 30%");
-		} else if (energy <= 50) {
-			setNotification("Alert: Pet's energy is below 50%");
-		} else if (energy <= 70) {
-			setNotification("Notice: Pet's energy is below 70%");
-		} else {
-			setNotification('');
+		if (energy <= 70 && energy > 50) {
+			toast.info(
+				"Notice: Pet's energy is has demonstrated a reduction! Below 70%",
+				{
+					position: 'bottom-right',
+				}
+			);
+		} else if (energy <= 50 && energy > 30) {
+			toast.warn("Alert: Pet's energy is dropped considerably! Below 50%", {
+				position: 'bottom-right',
+			});
+		} else if (energy <= 30) {
+			toast.error("Warning: Pet's energy is dropped considerably! Below 50%", {
+				position: 'bottom-right',
+			});
 		}
 	}, [energy]);
 
-	return notification ? <div>{notification}</div> : null;
+	return (
+		<div>
+			<ToastContainer />
+		</div>
+	);
 };
 
 export default EnergyNotification;
