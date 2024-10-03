@@ -13,6 +13,14 @@ module.exports = {
         byteDarkBlue: "#86aac2",
         byteLightBlue: "#b9d2ce",
         byteOrange: "#fdebd5",
+        byteDark: "#001b2b",
+        byteBackground: "#9badf7",
+      },
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif"],
+      },
+      fontWeight: {
+        extrabold: 800,
       },
       keyframes: {
         hide: {

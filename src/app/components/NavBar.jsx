@@ -1,41 +1,52 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { TiShoppingCart } from "react-icons/ti";
+import { FaHome } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { GiProgression } from "react-icons/gi";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 const NavBar = () => {
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    setLoggedInUser({});
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} className="btn btn-ghost lg:hidden">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src="/logo.png" />
-              </div>
-            </div>
+            <RxHamburgerMenu size={30} />
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li>
-              <Link href="/home">Home</Link>
-            </li>
-            <li>
-              <Link href="/home/profile">Profile</Link>
-              <ul className="p-2">
-                <li>
-                  <Link href="/home/profile">Edit Profile</Link>
-                </li>
-                <li>
-                  <a>View Profile</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link href="/home/progress">Progress</Link>
-            </li>
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-30 p-2 shadow">
+            <div className="sidebar-icon">
+              <Link href="/home">
+                <FaHome size={30} />
+              </Link>
+            </div>
+            <div className="sidebar-icon">
+              <Link href="/home/profile">
+                <CgProfile size={30} />
+              </Link>
+            </div>
+            <div className="sidebar-icon">
+              <Link href="/home/progress">
+                <GiProgression size={30} />
+              </Link>
+            </div>
+            <div className="sidebar-icon">
+              <Link href="/home/shop">
+                <TiShoppingCart size={30} />
+              </Link>
+            </div>
           </ul>
         </div>
         <Link href="/home" className="btn btn-ghost text-xl">
@@ -59,11 +70,19 @@ const NavBar = () => {
           <li>
             <Link href="/home/progress">Progress</Link>
           </li>
+          <li>
+            <Link href="/" onClick={handleLogout}>
+              Logout
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn" href="/home/shop">
-          Shop
+        <Link href="/home/shop" className="hidden lg:block m-4">
+          ItemShop
+          <div className="lg:hidden sidebar-icon">
+            <TiShoppingCart />
+          </div>
         </Link>
       </div>
     </div>

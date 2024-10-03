@@ -1,8 +1,40 @@
-import { supabaseBrowserClient } from "@/lib/supabaseBrowserClient";
-const Shop = () => {
-  //   let { data: users } = await supabaseBrowserClient.from("users").select();
+"use client";
 
-  return <h2>Shop Page</h2>;
+import { useState, useEffect } from "react";
+
+import ItemCard from "@/app/components/ItemCard";
+import { fetchItems } from "@/app/models/items.model";
+
+const Shop = () => {
+  const [items, setAllItems] = useState([]);
+
+  useEffect(() => {
+    fetchItems(setAllItems);
+  }, []);
+
+  return (
+    <div>
+      <section
+        className="relative py-10"
+        style={{
+          backgroundImage: `url('/background.jpeg')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
+        <div className="container mx-auto p-6">
+          <h1 className="font-nunito text-4xl font-bold text-center text-white mb-6">
+            Shop Page
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {items.length > 0
+              ? items.map((item, index) => <ItemCard id={index} item={item} />)
+              : null}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default Shop;
