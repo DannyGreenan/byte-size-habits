@@ -28,14 +28,6 @@ const data = {
 };
 const options = {
   scales: {
-    r: {
-      ticks: {
-        backdropPadding: {
-          x: 10,
-          y: 4,
-        },
-      },
-    },
     y: {
       title: {
         display: true,
@@ -55,7 +47,7 @@ const options = {
 };
 function LineChart() {
   return (
-    <div style={{ width: "70%", height: "50%", margin: 0 }}>
+    <div style={{ width: "500px", height: "500px" }}>
       <h1>Weekly Progress</h1>
       <Line data={data} options={options} />
     </div>

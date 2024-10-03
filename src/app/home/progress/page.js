@@ -1,5 +1,7 @@
 "use client";
 
+import LineChart from "./linechart";
+
 const Progress = () => {
   return (
     <section
@@ -25,7 +27,9 @@ const Progress = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-bold mb-4">Progress Graph</h2>
             <div className="h-64 bg-gray-100 flex justify-center items-center">
-              <p>Graph goes here, Child Component ?</p>
+              <p>
+                <LineChart />
+              </p>
             </div>
           </div>
         </div>
