@@ -1,25 +1,29 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addUser } from "../models/profile.model";
 import { UserContext } from "@/app/UserContext";
 
 const CreateProfile = ({ setCreate }) => {
   const { newUser, setNewUser } = useContext(UserContext);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const [goal, setGoal] = useState("");
+
   const userPlaceholder = {};
 
   function handleGoal(event) {
-    userPlaceholder.goal = event.target.value;
+    setGoal(event.target.value);
     console.log(userPlaceholder);
   }
   function handleUsername(event) {
-    userPlaceholder.username = event.target.value;
+    setNewUsername(event.target.value);
     console.log(userPlaceholder);
   }
 
   function handleDifficulty(event) {
-    userPlaceholder.difficulty = event.target.value;
+    userPlaceholder.difficulty = setSelectedDifficulty(event.target.value);
     console.log(userPlaceholder);
   }
   const router = useRouter();
@@ -91,21 +95,27 @@ const CreateProfile = ({ setCreate }) => {
             </label>
             <div className="flex justify-between">
               <button
-                className="btn btn-outline btn-primary m-1 w-1/3 btn-success"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Easy" ? "btn-success" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
                 value="Easy">
                 Easy (30 min)
               </button>
               <button
-                className="btn btn-outline btn-primary m-1 w-1/3 btn-warning"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Medium" ? "btn-warning" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
                 value="Medium">
                 Med (45 min)
               </button>
               <button
-                className="btn btn-outline w-1/3 m-1 btn-error"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Hard" ? "btn-error" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
                 value="Hard">
