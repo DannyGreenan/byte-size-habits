@@ -6,7 +6,7 @@ const EnergyNotification = ({ energy }) => {
 	useEffect(() => {
 		if (energy <= 30) {
 			setNotification("Warning: Pet's energy is below 30%");
-		} else if (energyLevel <= 50) {
+		} else if (energy <= 50) {
 			setNotification("Alert: Pet's energy is below 50%");
 		} else if (energy <= 70) {
 			setNotification("Notice: Pet's energy is below 70%");
