@@ -47,7 +47,7 @@ const options = {
 };
 function LineChart() {
   return (
-    <div style={{ width: "500px", height: "500px" }}>
+    <div style={{ width: "500px", height: "300px" }}>
       <h1>Weekly Progress</h1>
       <Line data={data} options={options} />
     </div>
