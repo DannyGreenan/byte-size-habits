@@ -25,7 +25,7 @@ export default function fetchPet({ params }) {
 
 	const energyHandler = () => {
 		if (pet.energy >= 100) return setPetEnergyIsFull(true);
-		const adjust = { energy: pet.energy + 50 };
+		const adjust = { energy: pet.energy + 10 };
 		patchPet(pet_id, adjust, setPetEnergy, 'energy');
 	};
 
