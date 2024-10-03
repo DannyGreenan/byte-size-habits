@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import InstructionPopup from '../components/InstructionsPopup';
+import InstructionsPopup from '../components/InstructionsPopup';
 
 const Home = () => {
 	const [seconds, setSeconds] = useState(60);
@@ -136,7 +136,7 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
-			<InstructionPopup/>
+			<InstructionsPopup/>
 		</div>
 	);
 };

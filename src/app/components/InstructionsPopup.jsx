@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-const InstructionPopup = () => {
+const InstructionsPopup = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
@@ -10,7 +10,11 @@ const InstructionPopup = () => {
 		}
 	}, []);
 
-	const openModal = () => setIsOpen(true);
+	const openModal = () => {
+		setIsOpen(true);
+		console.log('Modal state:', isOpen);
+	};
+
 	const closeModal = () => setIsOpen(false);
 
 	return (
@@ -25,10 +29,10 @@ const InstructionPopup = () => {
 			>
 				<h2>Instructions</h2>
 				<p>Here are some important instruction for the user...</p>
-				<button> onClick={closeModal}</button>
+				<button onClick={closeModal}>Press to Close</button>
 			</Modal>
 		</div>
 	);
 };
 
-export default InstructionPopup;
+export default InstructionsPopup;
