@@ -1,43 +1,42 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addUser } from "../models/profile.model";
-import { UserContext } from "@/app/providers";
-import HeroBar from "../components/HeroBar";
-import { addPet } from "../models/pet.model";
+import { UserContext } from "@/app/UserContext";
 
-const CreateProfile = () => {
+const CreateProfile = ({ setCreate }) => {
   const { newUser, setNewUser } = useContext(UserContext);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [newUsername, setNewUsername] = useState("");
+  const [goal, setGoal] = useState("");
+
   const userPlaceholder = {};
 
   function handleGoal(event) {
-    userPlaceholder.goal = event.target.value;
+    setGoal(event.target.value);
     console.log(userPlaceholder);
   }
   function handleUsername(event) {
-    userPlaceholder.username = event.target.value;
+    setNewUsername(event.target.value);
     console.log(userPlaceholder);
   }
 
   function handleDifficulty(event) {
-    userPlaceholder.difficulty = event.target.value;
+    userPlaceholder.difficulty = setSelectedDifficulty(event.target.value);
     console.log(userPlaceholder);
   }
   const router = useRouter();
   async function handleSubmit(event) {
     event.preventDefault();
-    const newPetStats = {
-      hunger: 100,
-      energy: 100,
-      daily_habit_complete: false,
-    };
-    const newPet = await addPet(newPetStats);
-    userPlaceholder.pet_id = newPet.pet_id;
     const actualUser = await addUser(userPlaceholder);
     setNewUser(actualUser);
     return router.replace("/home");
   }
+
+  const handleCreateClick = () => {
+    setCreate(false);
+  };
 
   return (
     <div
@@ -46,13 +45,11 @@ const CreateProfile = () => {
         backgroundImage: `url('/background.jpeg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-      }}
-    >
+      }}>
       <div className="w-full md:w-1/2 flex justify-center">
         <form
           onSubmit={handleSubmit}
-          className="p-8 bg-base-200 rounded-lg shadow-lg space-y-6 w-full max-w-md h-full bg-opacity-80 backdrop-blur-lg"
-        >
+          className="p-8 bg-base-200 rounded-lg shadow-lg space-y-6 w-full max-w-md h-full bg-opacity-80 backdrop-blur-lg">
           <div
             className="w-full h-32 bg-no-repeat bg-center rounded-t-lg"
             style={{
@@ -60,8 +57,7 @@ const CreateProfile = () => {
               backgroundSize: "cover",
               height: "35vh",
               borderRadius: "0.5rem",
-            }}
-          ></div>
+            }}></div>
 
           <div className="form-control w-full">
             <label htmlFor="create_username" className="label">
@@ -82,8 +78,7 @@ const CreateProfile = () => {
             </label>
             <select
               onChange={handleGoal}
-              className="select select-bordered w-full"
-            >
+              className="select select-bordered w-full">
               <option disabled defaultValue>
                 Pick your Goal
               </option>
@@ -100,33 +95,42 @@ const CreateProfile = () => {
             </label>
             <div className="flex justify-between">
               <button
-                className="btn btn-outline btn-primary m-1 w-1/3 btn-success"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Easy" ? "btn-success" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Easy"
-              >
+                value="Easy">
                 Easy (30 min)
               </button>
               <button
-                className="btn btn-outline btn-primary m-1 w-1/3 btn-warning"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Medium" ? "btn-warning" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Medium"
-              >
+                value="Medium">
                 Med (45 min)
               </button>
               <button
-                className="btn btn-outline w-1/3 m-1 btn-error"
+                className={`btn m-1 w-1/3 ${
+                  selectedDifficulty === "Hard" ? "btn-error" : "btn-ghost"
+                }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Hard"
-              >
+                value="Hard">
                 Hard (1 hour)
               </button>
             </div>
           </div>
           <button type="submit" className="btn btn-outline btn-accent w-full">
             Submit
+          </button>
+          <button
+            type="button"
+            className="btn btn-outline btn-accent w-full"
+            onClick={handleCreateClick}>
+            Back to Login
           </button>
         </form>
       </div>

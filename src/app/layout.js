@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./providers";
+import { UserProvider } from "./UserContext";
 import { Nunito } from "next/font/google";
 
 const nunito = Nunito({
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <Providers>{children}</Providers>
+        <UserProvider>{children}</UserProvider>
       </body>
     </html>
   );

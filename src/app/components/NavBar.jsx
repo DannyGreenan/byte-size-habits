@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -5,8 +7,16 @@ import { TiShoppingCart } from "react-icons/ti";
 import { FaHome } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { GiProgression } from "react-icons/gi";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 const NavBar = () => {
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    setLoggedInUser({});
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -23,7 +33,7 @@ const NavBar = () => {
               </Link>
             </div>
             <div className="sidebar-icon">
-              <Link href="/home/profile/1">
+              <Link href="/home/profile">
                 <CgProfile size={30} />
               </Link>
             </div>
@@ -55,10 +65,15 @@ const NavBar = () => {
             <Link href="/home">Home</Link>
           </li>
           <li>
-            <Link href="/home/profile/1">Profile</Link>
+            <Link href="/home/profile">Profile</Link>
           </li>
           <li>
             <Link href="/home/progress">Progress</Link>
+          </li>
+          <li>
+            <Link href="/" onClick={handleLogout}>
+              Logout
+            </Link>
           </li>
         </ul>
       </div>
