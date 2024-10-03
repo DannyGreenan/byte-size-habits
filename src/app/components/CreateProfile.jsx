@@ -1,12 +1,11 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { addUser } from "../models/profile.model";
 import { UserContext } from "@/app/UserContext";
-import HeroBar from "../components/HeroBar";
 
-const CreateProfile = () => {
+const CreateProfile = ({ setCreate }) => {
   const { newUser, setNewUser } = useContext(UserContext);
   const userPlaceholder = {};
 
@@ -30,6 +29,10 @@ const CreateProfile = () => {
     setNewUser(actualUser);
     return router.replace("/home");
   }
+
+  const handleCreateClick = () => {
+    setCreate(false);
+  };
 
   return (
     <div
@@ -112,6 +115,12 @@ const CreateProfile = () => {
           </div>
           <button type="submit" className="btn btn-outline btn-accent w-full">
             Submit
+          </button>
+          <button
+            type="button"
+            className="btn btn-outline btn-accent w-full"
+            onClick={handleCreateClick}>
+            Back to Login
           </button>
         </form>
       </div>

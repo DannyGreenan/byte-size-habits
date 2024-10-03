@@ -6,26 +6,18 @@ import { useRouter } from "next/navigation";
 export const UserContext = createContext({});
 
 export function UserProvider({ children }) {
-  const [newUser, setNewUser] = useState({});
-  const [isMounted, setIsMounted] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState({});
+
   const router = useRouter();
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isMounted && Object.keys(newUser).length === 0) {
+    if (Object.keys(loggedInUser).length === 0) {
       router.push("/");
     }
-  }, [newUser, router, isMounted]);
-
-  if (!isMounted) {
-    return null;
-  }
+  }, [loggedInUser, router]);
 
   return (
-    <UserContext.Provider value={{ newUser, setNewUser }}>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,4 +1,13 @@
+"use client";
+
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
+
 const HeroBar = () => {
+  const { loggedInUser } = useContext(UserContext);
+
+  console.log(loggedInUser, "User context");
+
   return (
     <section className="hero bg-byteBackground pt-5">
       <div className="relative w-full max-w-4xl mx-auto">
@@ -25,7 +34,7 @@ const HeroBar = () => {
               alt="Small Character"
               className="w-16 h-16 rounded-full border-2 border-white shadow-lg"
             />
-            <span className="text-lg font-bold">Username</span>
+            <span className="text-lg font-bold">{loggedInUser.username}</span>
           </div>
 
           <div
@@ -37,7 +46,7 @@ const HeroBar = () => {
               height: "80px",
               width: "auto",
             }}>
-            <span className="text-lg font-bold">Coins</span>
+            <span className="text-lg font-bold">{loggedInUser.currency}</span>
             <img
               src="/coins.png"
               alt="Small Character"

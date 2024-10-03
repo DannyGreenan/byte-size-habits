@@ -1,17 +1,16 @@
 import { supabaseServerClient } from "@/lib/supabaseServerClient";
 
-export async function fetchUser(user_id, setCurrentUser, setTopic) {
+export async function fetchUser(username) {
   const { data: user, error } = await supabaseServerClient
     .from("users")
     .select("*")
-    .eq("user_id", user_id)
+    .eq("username", username)
     .single();
   if (error) {
     console.error("Error fetching user:", error);
     throw Error("Error loading User");
   } else {
-    setCurrentUser(user);
-    setTopic(user.goal);
+    return user;
   }
 }
 
