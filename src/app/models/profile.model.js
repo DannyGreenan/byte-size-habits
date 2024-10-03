@@ -14,6 +14,18 @@ export async function fetchUser(username) {
   }
 }
 
+export async function fetchAllUsers() {
+  const { data: users, error } = await supabaseServerClient
+    .from("users")
+    .select("*");
+  if (error) {
+    console.error("Error fetching users:", error);
+    throw Error("Error loading Users");
+  } else {
+    return users;
+  }
+}
+
 export async function patchUser(user_id, updates) {
   const { data, error } = await supabaseServerClient
     .from("users")
@@ -30,11 +42,13 @@ export async function patchUser(user_id, updates) {
 export async function addUser(userPlaceholder) {
   const { data, error } = await supabaseServerClient
     .from("users")
-    .upsert([userPlaceholder]);
+    .upsert([userPlaceholder])
+    .select();
   if (error) {
     console.error("Error adding user:", error);
   } else {
     console.log("User added successfully:", data);
+    return data[0];
   }
 }
 

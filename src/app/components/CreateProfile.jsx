@@ -2,37 +2,73 @@
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addUser } from "../models/profile.model";
+import { addUser, fetchAllUsers, fetchUser } from "../models/profile.model";
 import { UserContext } from "@/app/UserContext";
+import { addPet } from "../models/pet.model";
 
 const CreateProfile = ({ setCreate }) => {
-  const { newUser, setNewUser } = useContext(UserContext);
+  const { setLoggedInUser } = useContext(UserContext);
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [goal, setGoal] = useState("");
 
-  const userPlaceholder = {};
+  const [createError, setCreateError] = useState(false);
 
   function handleGoal(event) {
     setGoal(event.target.value);
-    console.log(userPlaceholder);
   }
   function handleUsername(event) {
+    setCreateError(false);
     setNewUsername(event.target.value);
-    console.log(userPlaceholder);
+  }
+  function handleDifficulty(event) {
+    setSelectedDifficulty(event.target.value);
   }
 
-  function handleDifficulty(event) {
-    userPlaceholder.difficulty = setSelectedDifficulty(event.target.value);
-    console.log(userPlaceholder);
-  }
   const router = useRouter();
-  async function handleSubmit(event) {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const actualUser = await addUser(userPlaceholder);
-    setNewUser(actualUser);
-    return router.replace("/home");
-  }
+    setCreateError(false);
+    const userPlaceholder = {
+      goal: goal,
+      username: newUsername,
+      difficulty: selectedDifficulty,
+    };
+
+    const newPetStats = {
+      hunger: 100,
+      energy: 100,
+      daily_habit_complete: false,
+    };
+
+    fetchAllUsers()
+      .then((allUsers) => {
+        return allUsers.filter((user) => user.username === newUsername);
+      })
+      .then((foundUsers) => {
+        console.log(foundUsers, "found user");
+        if (foundUsers.length === 0) {
+          console.log("adding new pet");
+          return addPet(newPetStats);
+        } else {
+          setCreateError(true);
+        }
+      })
+      .then((pet) => {
+        userPlaceholder.pet_id = pet.pet_id;
+        return addUser(userPlaceholder);
+      })
+
+      .then((user) => {
+        console.log(user, "I RAN !");
+        setLoggedInUser(user);
+        router.push("/home");
+      })
+      .catch((error) => {
+        setCreateError(true);
+      });
+  };
 
   const handleCreateClick = () => {
     setCreate(false);
@@ -61,8 +97,11 @@ const CreateProfile = ({ setCreate }) => {
 
           <div className="form-control w-full">
             <label htmlFor="create_username" className="label">
-              <span className="label-text font-nunito font-extrabold">
-                Username
+              <span
+                className={`label-text font-nunito font-extrabold ${
+                  createError ? "text-red-400" : ""
+                }`}>
+                Username {createError ? "Taken" : ""}
               </span>
             </label>
             <input
@@ -123,7 +162,11 @@ const CreateProfile = ({ setCreate }) => {
               </button>
             </div>
           </div>
-          <button type="submit" className="btn btn-outline btn-accent w-full">
+          <button
+            type="submit"
+            className={`btn btn-outline ${
+              createError ? "btn-error" : ""
+            } btn-accent w-full`}>
             Submit
           </button>
           <button
