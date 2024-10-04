@@ -7,27 +7,35 @@ import { useContext } from "react";
 
 const UserProfile = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const [editLoading, setEditLoading] = useState(false);
+  const [editedMsg, setEditedMsg] = useState(false);
   const [goal, setGoal] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
   useEffect(() => {
     setSelectedDifficulty(loggedInUser.difficulty);
+    setGoal(loggedInUser.goal);
   }, []);
 
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
+    setEditedMsg(false);
   };
 
   function handleGoal(event) {
     setGoal(event.target.value);
+    setEditedMsg(false);
   }
 
   const handleSubmit = () => {
+    setEditLoading(true);
     patchUser(loggedInUser.user_id, {
       goal,
       difficulty: selectedDifficulty,
     }).then((user) => {
       setLoggedInUser(user);
+      setEditLoading(false);
+      setEditedMsg(true);
     });
   };
 
@@ -67,23 +75,28 @@ const UserProfile = () => {
                             type="button"
                             style={{ transition: "all 0.15s ease 0s" }}
                             onClick={handleSubmit}>
-                            Save Edits
+                            {editLoading ? (
+                              <span className="loading loading-dots loading-sm"></span>
+                            ) : (
+                              "Save Edits"
+                            )}
                           </button>
+                          <p>{editedMsg ? "Account edited" : null}</p>
                         </div>
                       </div>
                       <div className="w-full lg:w-4/12 px-4 lg:order-1">
                         <div className="flex justify-center py-4 lg:pt-4 pt-8">
                           <div className="mr-4 p-3 text-center">
                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                              22
+                              {loggedInUser.Github}
                             </span>
                             <span className="text-sm text-gray-500">
-                              Commits
+                              Git Commits
                             </span>
                           </div>
                           <div className="mr-4 p-3 text-center">
                             <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                              10
+                              {loggedInUser.Codewars}
                             </span>
                             <span className="text-sm text-gray-500">
                               Codewars
@@ -124,8 +137,8 @@ const UserProfile = () => {
                         <select
                           className="select w-full select-lg select-info max-w-xs"
                           onChange={handleGoal}>
-                          <option value={loggedInUser.goal} defaultValue>
-                            {loggedInUser.goal}
+                          <option value={goal} defaultValue>
+                            {goal ? goal : "Goal"}
                           </option>
                           <option value="Typescript">TypeScript</option>
                           <option value="Next.js">Next.js</option>
