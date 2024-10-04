@@ -32,7 +32,7 @@ const Home = () => {
 				backgroundRepeat: 'no-repeat',
 			}}
 		>
-			<section className='relative py-10'>
+			<section className='relative py-10 text-black'>
 				<div className='container mx-auto px-auto'>
 					<div className='items-center flex flex-wrap'>
 						<div className='w-full md:w-4/12 ml-auto mr-auto px-4'>
@@ -79,7 +79,8 @@ const Home = () => {
 										alt='Small Character'
 										className='rounded-full border-2 border-white shadow-lg'
 									/>
-									Username
+
+								<InstructionsPopup />
 								</div>
 								<div className='chat chat-start'>
 									<div className='chat-image avatar'>
@@ -136,7 +137,6 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
-			<InstructionsPopup/>
 		</div>
 	);
 };
