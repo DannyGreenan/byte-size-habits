@@ -5,7 +5,7 @@ import { UserContext } from "../UserContext";
 import { patchUser } from "../models/profile.model";
 
 const HomePage = () => {
-    const {loggedInUser} = useContext(UserContext);
+    const {loggedInUser, setLoggedInUser} = useContext(UserContext);
     const [hasCoded, setHasCoded] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -14,7 +14,9 @@ const handleClick = (event) => {
     if (event.target.value === 'yes') {
         setHasCoded(true);
         patchUser(loggedInUser.user_id, {progress: loggedInUser.progress + loggedInUser.difficulty_time, currency: loggedInUser.currency + 20, streak: loggedInUser.streak + 1})
-        // fetchUser(loggedInUser.username)
+        .then((user)=> {
+            setLoggedInUser(user);
+        })
     } else {
         setHasCoded(false);
     }
