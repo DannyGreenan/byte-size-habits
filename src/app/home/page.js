@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import HomePage from "../components/HomePage";
 
 const Home = () => {
   const [seconds, setSeconds] = useState(60);
@@ -77,7 +78,7 @@ const Home = () => {
                   />
                   Username
                 </div>
-                <div className="chat chat-start">
+                {/* <div className="chat chat-start">
                   <div className="chat-image avatar">
                     <div className="w-10 rounded-full">
                       <img
@@ -103,7 +104,8 @@ const Home = () => {
                     Ready to start a timer?
                     <button className="btn btn-primary mx-2">Yes!</button>
                   </div>
-                </div>
+                </div> */}
+                <HomePage/>
                 <div className="m-5">
                   <div className="grid grid-flow-col gap-5 text-center auto-cols-max">
                     <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
