@@ -4,6 +4,8 @@ import { UserContext } from "@/app/UserContext";
 import { patchUser } from "../../models/profile.model";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
+import ItemBag from "@/app/components/ItemsBag"
+
 
 const UserProfile = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -149,60 +151,60 @@ const UserProfile = () => {
                       </div>
                     </div>
 
-                    <div className="mockup-browser bg-byteOrange border w-full lg:w-1/2">
-                      <div className="mockup-browser-toolbar">
-                        <div className="input">Edit Difficulty</div>
-                      </div>
-                      <div className="bg-white px-4 py-6">
-                        {selectedDifficulty ? (
-                          <ul className="space-y-4">
-                            <li>
-                              <input
-                                type="radio"
-                                name="radio-2"
-                                value="Easy"
-                                className="radio radio-primary"
-                                onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Easy"}
-                              />
-                              <label className="mr-4"> Easy</label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="radio-2"
-                                value="Medium"
-                                className="radio radio-primary"
-                                onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Medium"}
-                              />
-                              <label className="mr-4"> Medium</label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="radio-2"
-                                value="Hard"
-                                className="radio radio-primary"
-                                onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Hard"}
-                              />
+										<div className='mockup-browser bg-byteOrange border w-full lg:w-1/2'>
+											<div className='mockup-browser-toolbar'>
+												<div className='input'>Edit Difficulty</div>
+											</div>
+											<div className='bg-white px-4 py-6'>
+												{selectedDifficulty ? (
+													<ul className='space-y-4'>
+														<li>
+															<input
+																type='radio'
+																name='radio-2'
+																value='Easy'
+																className='radio radio-primary'
+																onClick={handleDifficultyChange}
+																defaultChecked={selectedDifficulty === 'Easy'}
+															/>
+															<label className='mr-4'> Easy</label>
+														</li>
+														<li>
+															<input
+																type='radio'
+																name='radio-2'
+																value='Medium'
+																className='radio radio-primary'
+																onClick={handleDifficultyChange}
+																defaultChecked={selectedDifficulty === 'Medium'}
+															/>
+															<label className='mr-4'> Medium</label>
+														</li>
+														<li>
+															<input
+																type='radio'
+																name='radio-2'
+																value='Hard'
+																className='radio radio-primary'
+																onClick={handleDifficultyChange}
+																defaultChecked={selectedDifficulty === 'Hard'}
+															/>
 
-                              <label className="mr-4"> Hard</label>
-                            </li>
-                          </ul>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+															<label className='mr-4'> Hard</label>
+														</li>
+													</ul>
+												) : null}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	);
 };
 
 export default UserProfile;

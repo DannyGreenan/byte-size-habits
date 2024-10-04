@@ -1,16 +1,21 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import ItemCard from "@/app/components/ItemCard";
-import { fetchItems } from "@/app/models/items.model";
+import ItemCard from '@/app/components/ItemCard';
+import { fetchItems } from '@/app/models/items.model';
 
 const Shop = () => {
-  const [items, setAllItems] = useState([]);
+	const [items, setAllItems] = useState([]);
+	const [bag, setBag] = useState([]);
 
-  useEffect(() => {
-    fetchItems(setAllItems);
-  }, []);
+	useEffect(() => {
+		fetchItems(setAllItems);
+	}, []);
+
+  const handlePurchase = async() => {
+
+  }
 
   return (
     <div>
