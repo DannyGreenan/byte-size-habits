@@ -80,7 +80,7 @@ const Home = () => {
 										className='rounded-full border-2 border-white shadow-lg'
 									/>
 
-								<InstructionsPopup />
+								<InstructionsPopup modalInstruction="Here are the home page instruction, change the instructions text according to your need"/>
 								</div>
 								<div className='chat chat-start'>
 									<div className='chat-image avatar'>

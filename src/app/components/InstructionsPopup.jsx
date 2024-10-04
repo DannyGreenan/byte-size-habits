@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
-const InstructionsPopup = () => {
+const InstructionsPopup = ({modalInstruction}) => {
 	const [isOpen, setIsOpen] = useState(false);
+
+	const suitableInstruction = modalInstruction;
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
@@ -28,7 +30,7 @@ const InstructionsPopup = () => {
 				overlayClassName='fixed inset-0 bg-black bg-opacity-75 z-50'
 			>
 				<h2>Instructions</h2>
-				<p>Here are some important instruction for the user...</p>
+				<p>{suitableInstruction}</p>
 				<button onClick={closeModal}>Press to Close</button>
 			</Modal>
 		</div>
