@@ -28,7 +28,11 @@ const Shop = () => {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {items.length > 0
-              ? items.map((item, index) => <ItemCard id={index} item={item} />)
+              ? items.map((item, index) => (
+                  <div className=" flex justify-center px-4 py-16">
+                    <ItemCard id={index} item={item} />
+                  </div>
+                ))
               : null}
           </div>
         </div>

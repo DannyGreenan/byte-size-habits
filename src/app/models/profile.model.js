@@ -30,12 +30,14 @@ export async function patchUser(user_id, updates) {
   const { data, error } = await supabaseServerClient
     .from("users")
     .update(updates)
-    .eq("user_id", user_id);
+    .eq("user_id", user_id)
+    .select();
 
   if (error) {
     console.error("Error updating user:", error);
   } else {
     console.log("User updated successfully:", data);
+    return data[0];
   }
 }
 
@@ -44,6 +46,7 @@ export async function addUser(userPlaceholder) {
     .from("users")
     .upsert([userPlaceholder])
     .select();
+
   if (error) {
     console.error("Error adding user:", error);
   } else {
