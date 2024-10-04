@@ -31,7 +31,7 @@ const InstructionsPopup = ({modalInstruction}) => {
 			>
 				<h2>Instructions</h2>
 				<p>{suitableInstruction}</p>
-				<button onClick={closeModal}>Press to Close</button>
+				<button onClick={closeModal}>Press Outside this Box to Close.</button>
 			</Modal>
 		</div>
 	);
