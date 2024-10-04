@@ -54,7 +54,8 @@ export default function EnergyBar() {
   return (
     <>
       {energyError ? <p>McByteSize is already fully charged!!</p> : null}
-      <div className="flex items-center">
+      {energy === 0 ? <p>Please charge me... I'm out of juice!!</p> : null}
+      <div className="flex items-center justify-center">
         <div>
           {energy === null ? (
             <span>Loading</span>
