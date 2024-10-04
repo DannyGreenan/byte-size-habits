@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 
 const UserProfile = () => {
-  const { loggedInUser } = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const [goal, setGoal] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
 
@@ -23,7 +23,12 @@ const UserProfile = () => {
   }
 
   const handleSubmit = () => {
-    patchUser(loggedInUser.user_id, { goal, difficulty: selectedDifficulty });
+    patchUser(loggedInUser.user_id, {
+      goal,
+      difficulty: selectedDifficulty,
+    }).then((user) => {
+      setLoggedInUser(user);
+    });
   };
 
   return (
@@ -119,7 +124,7 @@ const UserProfile = () => {
                         <select
                           className="select w-full select-lg select-info max-w-xs"
                           onChange={handleGoal}>
-                          <option disabled defaultValue>
+                          <option value={loggedInUser.goal} defaultValue>
                             {loggedInUser.goal}
                           </option>
                           <option value="Typescript">TypeScript</option>
@@ -139,7 +144,6 @@ const UserProfile = () => {
                         {selectedDifficulty ? (
                           <ul className="space-y-4">
                             <li>
-                              <label className="mr-4">Easy</label>
                               <input
                                 type="radio"
                                 name="radio-2"
@@ -148,9 +152,9 @@ const UserProfile = () => {
                                 onClick={handleDifficultyChange}
                                 defaultChecked={selectedDifficulty === "Easy"}
                               />
+                              <label className="mr-4"> Easy</label>
                             </li>
                             <li>
-                              <label className="mr-4">Medium</label>
                               <input
                                 type="radio"
                                 name="radio-2"
@@ -159,9 +163,9 @@ const UserProfile = () => {
                                 onClick={handleDifficultyChange}
                                 defaultChecked={selectedDifficulty === "Medium"}
                               />
+                              <label className="mr-4"> Medium</label>
                             </li>
                             <li>
-                              <label className="mr-4">Hard</label>
                               <input
                                 type="radio"
                                 name="radio-2"
@@ -170,6 +174,8 @@ const UserProfile = () => {
                                 onClick={handleDifficultyChange}
                                 defaultChecked={selectedDifficulty === "Hard"}
                               />
+
+                              <label className="mr-4"> Hard</label>
                             </li>
                           </ul>
                         ) : null}
