@@ -1,4 +1,4 @@
-import { supabase } from "../src/lib/supabaseServerClient.js";
+import { supabaseServerClient } from "../src/lib/supabaseServerClient.js";
 
 export async function seedShop() {
   const shopItems = [
@@ -34,7 +34,7 @@ export async function seedShop() {
     },
   ];
 
-  const { error } = await supabase.from("shop").insert(shopItems);
+  const { error } = await supabaseServerClient.from("shop").insert(shopItems);
   if (error) {
     console.error("Seeding Shop Error:", error);
   } else {
