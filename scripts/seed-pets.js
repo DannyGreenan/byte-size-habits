@@ -1,4 +1,4 @@
-import { supabase } from "../src/lib/supabaseServerClient.js";
+import { supabaseServerClient } from "../src/lib/supabaseServerClient.js";
 
 export async function seedPets() {
   const pets = [
@@ -7,7 +7,7 @@ export async function seedPets() {
     { hunger: 90, energy: 40, daily_habit_complete: true },
   ];
 
-  const { error } = await supabase.from("pets").insert(pets);
+  const { error } = await supabaseServerClient.from("pets").insert(pets);
   if (error) {
     console.error("Seeding Pets Error:", error);
   } else {
