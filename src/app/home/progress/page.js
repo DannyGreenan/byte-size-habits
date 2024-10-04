@@ -1,6 +1,6 @@
 "use client";
 
-import LineChart from "./linechart";
+import LineChart from "../../components/linechart";
 
 const Progress = () => {
   return (
@@ -11,7 +11,8 @@ const Progress = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-      }}>
+      }}
+    >
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-white p-6 rounded-lg shadow-md">
