@@ -2,15 +2,15 @@
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addUser, fetchAllUsers, fetchUser } from "../models/profile.model";
+import { addUser, fetchAllUsers } from "../models/profile.model";
 import { UserContext } from "@/app/UserContext";
 import { addPet } from "../models/pet.model";
 
 const CreateProfile = ({ setCreate }) => {
   const { setLoggedInUser } = useContext(UserContext);
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [selectedDifficulty, setSelectedDifficulty] = useState(30);
   const [newUsername, setNewUsername] = useState("");
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState("TypeScript");
 
   const [createError, setCreateError] = useState(false);
 
@@ -33,7 +33,9 @@ const CreateProfile = ({ setCreate }) => {
     const userPlaceholder = {
       goal: goal,
       username: newUsername,
-      difficulty: selectedDifficulty,
+      difficulty_time: selectedDifficulty,
+      last_activity: Date.now(),
+      stored_items: [],
     };
 
     const newPetStats = {
@@ -47,9 +49,7 @@ const CreateProfile = ({ setCreate }) => {
         return allUsers.filter((user) => user.username === newUsername);
       })
       .then((foundUsers) => {
-        console.log(foundUsers, "found user");
-        if (foundUsers.length === 0) {
-          console.log("adding new pet");
+        if (foundUsers.length !== 1) {
           return addPet(newPetStats);
         } else {
           setCreateError(true);
@@ -59,9 +59,7 @@ const CreateProfile = ({ setCreate }) => {
         userPlaceholder.pet_id = pet.pet_id;
         return addUser(userPlaceholder);
       })
-
       .then((user) => {
-        console.log(user, "I RAN !");
         setLoggedInUser(user);
         router.push("/home");
       })
@@ -109,6 +107,7 @@ const CreateProfile = ({ setCreate }) => {
               type="text"
               onChange={handleUsername}
               className="input input-bordered w-full"
+              required
             />
           </div>
           <div className="form-control w-full">
@@ -135,29 +134,29 @@ const CreateProfile = ({ setCreate }) => {
             <div className="flex justify-between">
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === "Easy" ? "btn-success" : "btn-ghost"
+                  selectedDifficulty === 30 ? "btn-success" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Easy">
+                value={30}>
                 Easy (30 min)
               </button>
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === "Medium" ? "btn-warning" : "btn-ghost"
+                  selectedDifficulty === 45 ? "btn-warning" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Medium">
+                value={45}>
                 Med (45 min)
               </button>
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === "Hard" ? "btn-error" : "btn-ghost"
+                  selectedDifficulty === 60 ? "btn-error" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}
-                value="Hard">
+                value={60}>
                 Hard (1 hour)
               </button>
             </div>

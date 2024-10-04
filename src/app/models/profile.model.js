@@ -44,6 +44,7 @@ export async function addUser(userPlaceholder) {
     .from("users")
     .upsert([userPlaceholder])
     .select();
+
   if (error) {
     console.error("Error adding user:", error);
   } else {
