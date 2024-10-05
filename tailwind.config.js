@@ -10,11 +10,11 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        byteDarkBlue: "#86aac2",
-        byteLightBlue: "#b9d2ce",
-        byteOrange: "#fdebd5",
-        byteDark: "#001b2b",
-        byteBackground: "#9badf7",
+        byteDarkBlue: "#116466",
+        byteLightBlue: "#d1e8e2",
+        byteOrange: "#ffcb9a",
+        byteDark: "#2c3531",
+        byteBackground: "#d1e8e2",
       },
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
