@@ -5,7 +5,7 @@ import { UserContext } from "../UserContext";
 import { patchUser } from "../models/profile.model";
 import { patchPet } from "../models/pet.model";
 
-const HomePage = () => {
+const HomePage = ({setEnergy, setPet}) => {
     const {loggedInUser, setLoggedInUser} = useContext(UserContext);
     const [hasCoded, setHasCoded] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +25,7 @@ const HomePage = () => {
         }
       }, 1000);
   
-      // 
+
       if(minutes === 0 && seconds === 0) {
           console.log("timer has finished");
             setHasCoded(true);
@@ -35,6 +35,11 @@ const HomePage = () => {
               localStorage.setItem("user", userStringified);
                 setLoggedInUser(user);
                 patchPet(user.pet_id, {energy: 100})
+                .then(patchedPet => {
+                  setEnergy(100)
+                  setPet(patchedPet)
+                })
+                
             })
       } else {
         setHasCoded(false);  
@@ -45,13 +50,23 @@ const HomePage = () => {
 const haveYouCodedHandler = (event) => {
     if (event.target.value === 'yes') {
         setHasCoded(true);
-        patchUser(loggedInUser.user_id, {progress: loggedInUser.progress + loggedInUser.difficulty_time, currency: loggedInUser.currency + 20, streak: loggedInUser.streak + 1})
+        const userUpdate = {
+          progress: loggedInUser.progress + loggedInUser.difficulty_time, 
+          currency: loggedInUser.currency + 20, 
+          streak: loggedInUser.streak + 1,
+          last_activity: Date.now()
+        }
+        patchUser(loggedInUser.user_id, userUpdate)
         .then((user)=> {
           const userStringified = JSON.stringify(loggedInUser)
-          console.log(userStringified);
           localStorage.setItem("user", userStringified);
-            setLoggedInUser(user);
-            patchPet(user.pet_id, {energy: 100})
+          setLoggedInUser(user);
+          patchPet(user.pet_id, {energy: 100})
+          .then(patchedPet => {
+            setEnergy(100)
+                  setPet(patchedPet)
+          })
+          
         })
     } else {
         setHasCoded(false);
@@ -67,8 +82,6 @@ const handleTimer = (event) => {
     setRunTimer(true)
   }
 }
-// console.log(loggedInUser)
-
 
   return (
     <>

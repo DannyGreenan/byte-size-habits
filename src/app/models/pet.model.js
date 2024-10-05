@@ -1,6 +1,6 @@
 import { supabaseServerClient } from "@/lib/supabaseServerClient";
 
-export async function getPet(pet_id, setPet) {
+export async function getPet(pet_id, setPet = null) {
   const { data, error } = await supabaseServerClient
     .from("pets")
     .select("*")
@@ -11,7 +11,8 @@ export async function getPet(pet_id, setPet) {
     console.error("Error fetching pet:", error);
     return null;
   } else {
-    setPet(data);
+    if (setPet) setPet(data);
+    return data;
   }
 }
 
@@ -19,13 +20,15 @@ export async function patchPet(pet_id, updates, returnFunction, key) {
   const { data, error } = await supabaseServerClient
     .from("pets")
     .update(updates)
-    .eq("pet_id", pet_id);
+    .eq("pet_id", pet_id)
+    .select();
 
   if (error) {
     console.error("Error updating user:", error);
   } else {
     console.log("Pet updated successfully:", data);
-    returnFunction(updates[key]);
+    if (key) returnFunction(updates[key]);
+    return data[0];
   }
 }
 
