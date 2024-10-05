@@ -25,6 +25,8 @@ const ItemCard = ({ item, index }) => {
     patchUser(loggedInUser.user_id, {
       stored_items: [...currentItems, newItem],
     }).then((user) => {
+      const userStringified = JSON.stringify(user)
+      localStorage.setItem("user", userStringified);
       setLoggedInUser(user);
       setItemPurchased(true);
     });

@@ -31,6 +31,8 @@ const HomePage = () => {
             setHasCoded(true);
             patchUser(loggedInUser.user_id, {progress: loggedInUser.progress + loggedInUser.difficulty_time, currency: loggedInUser.currency + 20, streak: loggedInUser.streak + 1})
             .then((user)=> {
+              const userStringified = JSON.stringify(loggedInUser)
+              localStorage.setItem("user", userStringified);
                 setLoggedInUser(user);
                 patchPet(user.pet_id, {energy: 100})
             })
@@ -45,6 +47,9 @@ const haveYouCodedHandler = (event) => {
         setHasCoded(true);
         patchUser(loggedInUser.user_id, {progress: loggedInUser.progress + loggedInUser.difficulty_time, currency: loggedInUser.currency + 20, streak: loggedInUser.streak + 1})
         .then((user)=> {
+          const userStringified = JSON.stringify(loggedInUser)
+          console.log(userStringified);
+          localStorage.setItem("user", userStringified);
             setLoggedInUser(user);
             patchPet(user.pet_id, {energy: 100})
         })

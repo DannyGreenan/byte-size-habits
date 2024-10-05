@@ -60,6 +60,8 @@ const CreateProfile = ({ setCreate }) => {
         return addUser(userPlaceholder);
       })
       .then((user) => {
+        const userStringified = JSON.stringify(user)
+        localStorage.setItem("user", userStringified);
         setLoggedInUser(user);
         router.push("/home");
       })

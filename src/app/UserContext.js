@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation";
 export const UserContext = createContext({});
 
 export function UserProvider({ children }) {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const savedUserStr = localStorage.getItem("user");
+  const savedUser = savedUserStr ? JSON.parse(savedUserStr) : {};
+  const [loggedInUser, setLoggedInUser] = useState(savedUser);
 
   const router = useRouter();
 

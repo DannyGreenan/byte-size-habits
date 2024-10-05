@@ -14,6 +14,8 @@ const NavBar = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const handleLogout = () => {
+    const userStringified = JSON.stringify({})
+    localStorage.setItem("user", userStringified);
     setLoggedInUser({});
   };
 

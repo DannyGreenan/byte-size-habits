@@ -28,6 +28,8 @@ export default function Login() {
     setLoginError(false);
     fetchUser(input)
       .then((user) => {
+        const userStringified = JSON.stringify(user);
+        localStorage.setItem("user", userStringified);
         setLoggedInUser(user);
         router.push("/home");
       })
@@ -45,11 +47,13 @@ export default function Login() {
             backgroundImage: `url('/background.jpeg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-          }}>
+          }}
+        >
           <div className="w-full md:w-1/2 flex justify-center">
             <form
               onSubmit={handleSubmit}
-              className="p-8 bg-base-200 rounded-lg shadow-lg space-y-6 w-full max-w-md h-full bg-opacity-80 backdrop-blur-lg">
+              className="p-8 bg-base-200 rounded-lg shadow-lg space-y-6 w-full max-w-md h-full bg-opacity-80 backdrop-blur-lg"
+            >
               <div
                 className="w-full h-32 bg-no-repeat bg-center rounded-t-lg"
                 style={{
@@ -57,16 +61,14 @@ export default function Login() {
                   backgroundSize: "cover",
                   height: "35vh",
                   borderRadius: "0.5rem",
-                }}></div>
+                }}
+              ></div>
 
               <div className="form-control w-full">
                 <label htmlFor="enter_username" className="label">
                   <span
-                    className={`label-text ${
-                      loginError ? "text-red-400" : ""
-                    }`}>{`Username ${
-                    loginError ? "does not exist" : ""
-                  }`}</span>
+                    className={`label-text ${loginError ? "text-red-400" : ""}`}
+                  >{`Username ${loginError ? "does not exist" : ""}`}</span>
                 </label>
                 <input
                   id="enter_username"
@@ -80,13 +82,15 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="btn btn-outline btn-accent w-full">
+                className="btn btn-outline btn-accent w-full"
+              >
                 Login
               </button>
               <button
                 type="button"
                 className="btn btn-outline btn-accent w-full"
-                onClick={handleCreateClick}>
+                onClick={handleCreateClick}
+              >
                 Create Profile
               </button>
             </form>
