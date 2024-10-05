@@ -4,15 +4,7 @@ import LineChart from "../../components/linechart";
 
 const Progress = () => {
   return (
-    <section
-      className="relative py-10"
-      style={{
-        backgroundImage: `url('/background.jpeg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section className="relative py-10">
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="bg-white p-6 rounded-lg shadow-md">

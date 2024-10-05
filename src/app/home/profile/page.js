@@ -4,8 +4,7 @@ import { UserContext } from "@/app/UserContext";
 import { patchUser } from "../../models/profile.model";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import ItemBag from "@/app/components/ItemsBag"
-
+import ItemBag from "@/app/components/ItemsBag";
 
 const UserProfile = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -43,19 +42,12 @@ const UserProfile = () => {
 
   return (
     <div>
-      <section className="relative block"></section>
-      <section
-        className="relative py-16"
-        style={{
-          backgroundImage: `url('/background.jpeg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}>
+      <section className="relative block "></section>
+      <section className="relative py-16">
         <div className="container mx-auto px-10 py-6">
-          <div className="mockup-browser bg-byteOrange border w-full mb-6 shadow-xl">
+          <div className="mockup-browser bg-base-100 border w-full mb-6 shadow-xl">
             <div className="mockup-browser-toolbar content-start"></div>
-            <div className="bg-white px-6 py-10">
+            <div className="bg-gray-100 px-6 py-10">
               <div className="">
                 <div className="">
                   <div>
@@ -131,11 +123,11 @@ const UserProfile = () => {
               <div>
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-9/12 px-4 flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 justify-center">
-                    <div className="mockup-browser bg-byteOrange border w-full lg:w-1/2">
+                    <div className="mockup-browser bg-base-100 border w-full lg:w-1/2">
                       <div className="mockup-browser-toolbar">
                         <div className="input">Edit Goal</div>
                       </div>
-                      <div className="bg-white px-4 py-6">
+                      <div className="bg-gray-100 px-4 py-6">
                         <select
                           className="select w-full select-lg select-info max-w-xs"
                           onChange={handleGoal}>
@@ -151,60 +143,60 @@ const UserProfile = () => {
                       </div>
                     </div>
 
-										<div className='mockup-browser bg-byteOrange border w-full lg:w-1/2'>
-											<div className='mockup-browser-toolbar'>
-												<div className='input'>Edit Difficulty</div>
-											</div>
-											<div className='bg-white px-4 py-6'>
-												{selectedDifficulty ? (
-													<ul className='space-y-4'>
-														<li>
-															<input
-																type='radio'
-																name='radio-2'
-																value='Easy'
-																className='radio radio-primary'
-																onClick={handleDifficultyChange}
-																defaultChecked={selectedDifficulty === 'Easy'}
-															/>
-															<label className='mr-4'> Easy</label>
-														</li>
-														<li>
-															<input
-																type='radio'
-																name='radio-2'
-																value='Medium'
-																className='radio radio-primary'
-																onClick={handleDifficultyChange}
-																defaultChecked={selectedDifficulty === 'Medium'}
-															/>
-															<label className='mr-4'> Medium</label>
-														</li>
-														<li>
-															<input
-																type='radio'
-																name='radio-2'
-																value='Hard'
-																className='radio radio-primary'
-																onClick={handleDifficultyChange}
-																defaultChecked={selectedDifficulty === 'Hard'}
-															/>
+                    <div className="mockup-browser bg-base-100 border w-full lg:w-1/2">
+                      <div className="mockup-browser-toolbar">
+                        <div className="input">Edit Difficulty</div>
+                      </div>
+                      <div className="bg-gray-100 px-4 py-6">
+                        {selectedDifficulty ? (
+                          <ul className="space-y-4">
+                            <li>
+                              <input
+                                type="radio"
+                                name="radio-2"
+                                value="Easy"
+                                className="radio radio-primary"
+                                onClick={handleDifficultyChange}
+                                defaultChecked={selectedDifficulty === "Easy"}
+                              />
+                              <label className="mr-4"> Easy</label>
+                            </li>
+                            <li>
+                              <input
+                                type="radio"
+                                name="radio-2"
+                                value="Medium"
+                                className="radio radio-primary"
+                                onClick={handleDifficultyChange}
+                                defaultChecked={selectedDifficulty === "Medium"}
+                              />
+                              <label className="mr-4"> Medium</label>
+                            </li>
+                            <li>
+                              <input
+                                type="radio"
+                                name="radio-2"
+                                value="Hard"
+                                className="radio radio-primary"
+                                onClick={handleDifficultyChange}
+                                defaultChecked={selectedDifficulty === "Hard"}
+                              />
 
-															<label className='mr-4'> Hard</label>
-														</li>
-													</ul>
-												) : null}
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-	);
+                              <label className="mr-4"> Hard</label>
+                            </li>
+                          </ul>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
 export default UserProfile;

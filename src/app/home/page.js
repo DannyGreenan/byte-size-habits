@@ -10,15 +10,7 @@ const Home = () => {
   const [pet, setPet] = useState(null);
 
   return (
-    <div
-      className="relative min-h-screen"
-      style={{
-        backgroundImage: `url('/background.jpeg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <div>
       <section className="relative py-10 text-black">
         <div className="container mx-auto px-auto">
           <div className="items-center flex flex-wrap">
@@ -28,8 +20,7 @@ const Home = () => {
                 style={{
                   backgroundImage: `url('/char-bg.png')`,
                   backgroundSize: "100% 101%",
-                }}
-              >
+                }}>
                 <div className="flex items-center justify-center mt-auto">
                   <div className="bg-byteOrange rounded-xl p-1 w-100 mt-6 h-auto">
                     <EnergyBar
