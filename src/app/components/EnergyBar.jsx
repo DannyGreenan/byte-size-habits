@@ -6,72 +6,80 @@ import { getPet, patchPet } from "@/app/models/pet.model";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
-export default function EnergyBar() {
-  const [timerTriggered, setTimerTriggered] = useState(false);
-  const [energy, setEnergy] = useState(null);
-  const [energyError, setEnergyError] = useState(false);
-  const [lastActivity, setLastActivity] = useState(null);
+export default function EnergyBar({energy, setEnergy, pet, setPet}) {
+  const [check, setCheck] = useState(0)
 
-  const { loggedInUser } = useContext(UserContext);
-
-  const [pet, setPet] = useState(null);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   useEffect(() => {
-    getPet(loggedInUser.pet_id, setPet);
+    getPet(loggedInUser.pet_id)
+    .then((patchedPet) => {
+      setPet(patchedPet)
+      setEnergy(patchedPet.energy)
+      updateEnergy(patchedPet)
+    })
   }, []);
 
-  useEffect(() => {
+  const updateEnergy = (oldPet = null) => {
     const currentTime = Date.now();
-    let currentEnergy = 0;
-    if (loggedInUser) setLastActivity(loggedInUser.last_activity);
-    if (loggedInUser && pet && lastActivity && !timerTriggered) {
-      if (!energy) currentEnergy = pet.energy;
-      setTimerTriggered(true);
-      const timeDifferenceInMinutes = (currentTime - lastActivity) / 1000 / 60;
-      if (timeDifferenceInMinutes > 0) {
-        setEnergyError(false);
-        const minutesElapsed = Math.floor(timeDifferenceInMinutes);
+    if (loggedInUser.user_id && (pet || oldPet)) {
+      if(oldPet) pet = oldPet
+      const timeDifferenceInMinutes = (currentTime - loggedInUser.last_activity) / 1000 / 60;
+      const minutesElapsed = Math.floor(timeDifferenceInMinutes);
+      if (minutesElapsed > 0) {
         const newEnergyLevel =
-          currentEnergy - minutesElapsed >= 0
-            ? currentEnergy - minutesElapsed
+          pet.energy - minutesElapsed >= 0
+            ? pet.energy - minutesElapsed
             : 0;
-        patchPet(pet.pet_id, { energy: newEnergyLevel }, setEnergy, "energy");
-        patchUser(loggedInUser, { last_activity: currentTime });
+        patchUser(loggedInUser.user_id, { last_activity: currentTime })
+        .then((user)=>{
+          const userStringified = JSON.stringify(user)
+          localStorage.setItem("user", userStringified);
+          setLoggedInUser(user);
+          return patchPet(pet.pet_id, { energy: newEnergyLevel })
+        })
+        .then((patchedPet) => {
+          setPet(patchedPet)
+          setEnergy(patchedPet.energy)
+        })
       }
-    } else if (loggedInUser && pet && lastActivity && timerTriggered) {
-      setTimeout(() => {
-        setEnergyError(false);
-        if (energy === null) return;
-        const newEnergyLevel = energy - 1 >= 0 ? energy - 1 : 0;
-        patchPet(pet.pet_id, { energy: newEnergyLevel }, setEnergy, "energy");
-        patchUser(loggedInUser, { last_activity: currentTime });
-        setLastActivity(currentTime);
-      }, 10000);
     }
-    console.log("Current Energy", energy);
-  }, [energy, pet, loggedInUser]);
+    setCheck(check + 1)
+  }
+
+  useEffect(() => {
+    if(!check) {
+      updateEnergy()
+    } else {
+      const id = setInterval(updateEnergy, 10000);
+      return () => clearInterval(id)
+    }
+  }, [check, pet]);
 
   return (
     <>
-      {energyError ? <p>McByteSize is already fully charged!!</p> : null}
-      {energy === 0 ? <p>Please charge me... I'm out of juice!!</p> : null}
+      <div className="flex justify-between">
+        <h3>Energy:</h3>
+        <span>{energy}%</span>
+      </div>
       <div className="flex items-center justify-center">
         <div>
           {energy === null ? (
             <span>Loading</span>
           ) : (
             <progress
-              className={`progress ${energy < 25 ? "progress-error" : ""} ${
-                energy > 25 && energy < 60
-                  ? "progress-warning"
-                  : "progress-success"
-              } w-56 h-6`}
-              value={energy}
-              max="100"
+            className={`progress ${energy < 25 ? "progress-error" : ""} ${
+              energy > 25 && energy < 60
+              ? "progress-warning"
+              : "progress-success"
+            } w-56 h-6`}
+            value={energy}
+            max="100"
             ></progress>
           )}
         </div>
       </div>
+          {energy === 0 ? <p className="label-text font-extrabold text-red-600">Please charge me... I'm out of juice!!</p> : null}
     </>
   );
 }

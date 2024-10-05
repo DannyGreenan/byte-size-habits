@@ -3,8 +3,12 @@ import Image from "next/image";
 import InstructionsPopup from "../components/InstructionsPopup";
 import HomePage from "../components/HomePage";
 import EnergyBar from "../components/EnergyBar";
+import { useState } from "react/";
 
 const Home = () => {
+  const [energy, setEnergy] = useState(null);
+  const [pet, setPet] = useState(null);
+
   return (
     <div
       className="relative min-h-screen"
@@ -28,7 +32,12 @@ const Home = () => {
               >
                 <div className="flex items-center justify-center mt-auto">
                   <div className="bg-byteOrange rounded-xl p-1 w-100 mt-6 h-auto">
-                    <EnergyBar />
+                    <EnergyBar
+                      energy={energy}
+                      setEnergy={setEnergy}
+                      pet={pet}
+                      setPet={setPet}
+                    />
                   </div>
                 </div>
                 <img
@@ -49,7 +58,7 @@ const Home = () => {
 
                   <InstructionsPopup modalInstruction="Here is the home page instruction, change the instructions text according to your need!" />
                 </div>
-                <HomePage />
+                <HomePage setEnergy={setEnergy} setPet={setPet} />
                 <ul className="list-none mt-6">
                   <li className="py-2"></li>
                   <li className="py-2"></li>
