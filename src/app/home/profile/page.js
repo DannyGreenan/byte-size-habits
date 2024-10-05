@@ -42,7 +42,6 @@ const UserProfile = () => {
 
   return (
     <div>
-      <section className="relative block "></section>
       <section className="relative py-16">
         <div className="container mx-auto px-10 py-6">
           <div className="mockup-browser bg-base-100 border w-full mb-6 shadow-xl">
