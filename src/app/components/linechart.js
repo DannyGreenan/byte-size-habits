@@ -1,18 +1,15 @@
 "use client";
 import dynamic from "next/dynamic";
 import "chart.js/auto";
-// import { Chart } from "react-chartjs-2";
+
 import { Chart } from "chart.js";
-import { useContext, useEffect } from "react";
-import { fetchUser } from "@/app/models/profile.model";
+import { useContext } from "react";
+
 import { UserContext } from "@/app/UserContext";
 
 const Line = dynamic(() => import("react-chartjs-2").then((mod) => mod.Line), {
   ssr: false,
 });
-
-// var img = new Image(30, 30);
-// img.src = "https://www.flaticon.com/free-icon/monitor_2721249";
 
 Chart.defaults.elements.line.lineWidth = 8;
 
@@ -34,7 +31,7 @@ function LineChart() {
         data: times,
         borderColor: "#88A2F2",
         tension: 0.4,
-        pointStyle: "rectRounded",
+        pointStyle: "triangle",
       },
     ],
   };
@@ -65,10 +62,13 @@ function LineChart() {
     pointBackgroundColor: "#7991D9",
   };
   return (
-    <div style={{ width: "500px", height: "300px" }}>
-      <h1>Weekly Progress</h1>
-      <Line data={data} options={options} />
-    </div>
+    <>
+      <canvas id="canvas"></canvas>
+      <div style={{ width: "500px", height: "300px" }}>
+        <h1>Weekly Progress</h1>
+        <Line data={data} options={options} />
+      </div>
+    </>
   );
 }
 
