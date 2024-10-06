@@ -8,6 +8,7 @@ import { useState } from "react/";
 const Home = () => {
   const [energy, setEnergy] = useState(null);
   const [pet, setPet] = useState(null);
+  const [emotion, setEmotion] = useState("happy");
 
   return (
     <div>
@@ -16,7 +17,7 @@ const Home = () => {
           <div className="w-full md:w-5/12 px-4 flex flex-col items-center mb-6">
             <div className="mockup-window bg-base-200 border">
               <div className="flex flex-col bg-gray-100 items-center justify-center p-6">
-                <div className="bg-byteOrange rounded-xl p-1 w-full h-auto">
+                <div className="bg-base-200 text-white rounded-xl p-4 w-full h-auto">
                   <EnergyBar
                     energy={energy}
                     setEnergy={setEnergy}
@@ -27,7 +28,7 @@ const Home = () => {
                 <img
                   alt="character image"
                   className="relative max-w-full rounded-lg shadow-lg mt-4"
-                  src="/happy.png"
+                  src={`/${emotion}.png`}
                 />
                 <label
                   htmlFor="my-drawer"
@@ -50,7 +51,11 @@ const Home = () => {
                 <div className="w-full">
                   <div className="mockup-window bg-base-200 border">
                     <div className="flex flex-col bg-gray-100 items-center justify-center p-4">
-                      <HomePage setEnergy={setEnergy} setPet={setPet} />
+                      <HomePage
+                        setEnergy={setEnergy}
+                        setPet={setPet}
+                        setEmotion={setEmotion}
+                      />
                     </div>
                   </div>
                 </div>
