@@ -12,13 +12,15 @@ export default function EnergyBar({energy, setEnergy, pet, setPet}) {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   useEffect(() => {
+    console.log(loggedInUser);
+    if(Object.keys(loggedInUser).length === 0) return
     getPet(loggedInUser.pet_id)
     .then((patchedPet) => {
       setPet(patchedPet)
       setEnergy(patchedPet.energy)
       updateEnergy(patchedPet)
     })
-  }, []);
+  }, [loggedInUser]);
 
   const updateEnergy = (oldPet = null) => {
     const currentTime = Date.now();
