@@ -20,7 +20,6 @@ function LineChart() {
   const days = [];
   const times = [];
   const { loggedInUser } = useContext(UserContext);
-  console.log(loggedInUser);
   if (Object.keys(loggedInUser).length === 0) return;
   const userProgress = loggedInUser.progress;
   for (let i = 0; i < userProgress.length; i++) {

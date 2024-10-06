@@ -14,13 +14,13 @@ const NavBar = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const handleLogout = () => {
-    const userStringified = JSON.stringify({})
+    const userStringified = JSON.stringify({});
     localStorage.setItem("user", userStringified);
     setLoggedInUser({});
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-200">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} className="btn btn-ghost lg:hidden">

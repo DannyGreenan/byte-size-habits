@@ -10,12 +10,13 @@ const ItemCard = ({ item, index }) => {
   const [itemPurchased, setItemPurchased] = useState(false);
 
   useEffect(() => {
-    const foundItem = loggedInUser.stored_items.filter(
-      (value) => value === item.description
-    );
-
-    if (foundItem.length === 1) {
-      setItemPurchased(true);
+    if (loggedInUser.stored_items.length > 0) {
+      const foundItem = loggedInUser.stored_items.filter(
+        (value) => value === item.description
+      );
+      if (foundItem.length === 1) {
+        setItemPurchased(true);
+      }
     }
   }, []);
 
@@ -25,7 +26,7 @@ const ItemCard = ({ item, index }) => {
     patchUser(loggedInUser.user_id, {
       stored_items: [...currentItems, newItem],
     }).then((user) => {
-      const userStringified = JSON.stringify(user)
+      const userStringified = JSON.stringify(user);
       localStorage.setItem("user", userStringified);
       setLoggedInUser(user);
       setItemPurchased(true);
@@ -35,11 +36,11 @@ const ItemCard = ({ item, index }) => {
   return (
     <div
       id={index}
-      className="mockup-browser bg-byteOrange border font-nunito font-extrabold text-byteDark">
+      className="mockup-browser bg-base-100 border font-nunito font-extrabold text-byteDark">
       <div className="mockup-browser-toolbar">
         <div className="input text-white">{`/${item.description}`}</div>
       </div>
-      <figure className="flex flex-col lg:flex-row items-center bg-white py-4 px-6">
+      <figure className="flex flex-col lg:flex-row items-center bg-gray-100 py-4 px-6">
         <div className={`relative ${itemPurchased ? "opacity-25" : ""}`}>
           <Image
             src={item.image}
