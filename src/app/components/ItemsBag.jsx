@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../UserContext'
+
 
 const ItemBag = () => {
 	const { loggedInUser } = useContext(UserContext);
@@ -12,20 +14,27 @@ const ItemBag = () => {
 
 	return (
 		<div className='p-4 bg-gray-200 rounded-lg'>
-			<h2 className='text-2xl font-bold mb-4'>Your Item Bag</h2>
+			<h2 className='text-2xl font-bold mb-4'>Your Items Bag</h2>
 			{storedItems.length > 0 ? (
-				<ul>
-					{storedItems.map((item, index) => (
-						<li key={index} className='mb-2'>
-							{item}
-						</li>
-					))}
-				</ul>
+				<div>
+					<img src='/fullbackbag.jpeg' alt='Bag with items' className='mb-4' />
+					<ul>
+						{storedItems.map((item, index) => (
+							<li key={index} className='mb-2'>
+								{item}
+							</li>
+						))}
+					</ul>
+				</div>
 			) : (
-				<p>Your bag is empty</p>
+				<div>
+					<img src='/emptybackbag.jpeg' alt='Empty bag' className='mb-4' />
+					<p>Your bag is empty</p>
+				</div>
 			)}
 		</div>
 	);
+
 };
 
 export default ItemBag;
