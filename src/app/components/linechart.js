@@ -6,6 +6,7 @@ import { Chart } from "chart.js";
 import { useContext } from "react";
 
 import { UserContext } from "@/app/UserContext";
+import { FaGalacticSenate } from "react-icons/fa";
 
 const Line = dynamic(() => import("react-chartjs-2").then((mod) => mod.Line), {
   ssr: false,
@@ -32,7 +33,13 @@ function LineChart() {
         data: times,
         borderColor: "#88A2F2",
         tension: 0.4,
-        pointStyle: "triangle",
+        pointStyle: "circle",
+        fillColor: "rgba(151,187,205,0.5)",
+        strokeColor: "rgba(151,187,205,0.5)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
       },
     ],
   };
@@ -46,6 +53,10 @@ function LineChart() {
         display: true,
         min: 10,
         color: "gray-800",
+
+        grid: {
+          display: false,
+        },
       },
       x: {
         title: {
@@ -54,18 +65,27 @@ function LineChart() {
         },
         display: true,
         color: "#88A2F2",
+
+        grid: {
+          display: false,
+        },
       },
     },
-    fill: "byteBackground",
+    border: {
+      display: true,
+      borderWidth: 10,
+    },
+    fill: true,
+
     borderColor: "#88A2F2",
-    pointBorderColor: "#A7C0F2",
-    pointRadius: 6,
+    backgroundColor: "rgb(190, 204, 250)",
+    pointRadius: 8,
     pointBackgroundColor: "#7991D9",
+    borderWidth: 6,
   };
   return (
     <>
-      <canvas id="canvas"></canvas>
-      <div style={{ width: "500px", height: "300px" }}>
+      <div style={{ width: "600px", height: "400px" }}>
         <h1>Weekly Progress</h1>
         <Line data={data} options={options} />
       </div>
