@@ -10,12 +10,13 @@ const ItemCard = ({ item, index }) => {
   const [itemPurchased, setItemPurchased] = useState(false);
 
   useEffect(() => {
-    const foundItem = loggedInUser.stored_items.filter(
-      (value) => value === item.description
-    );
-
-    if (foundItem.length === 1) {
-      setItemPurchased(true);
+    if (loggedInUser.stored_items.length > 0) {
+      const foundItem = loggedInUser.stored_items.filter(
+        (value) => value === item.description
+      );
+      if (foundItem.length === 1) {
+        setItemPurchased(true);
+      }
     }
   }, []);
 
