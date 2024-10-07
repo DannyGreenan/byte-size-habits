@@ -14,6 +14,10 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
   const [minutes, setMinutes] = useState(0);
   const [runTimer, setRunTimer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const getCurrencyAmount = (difficultyTime, timerOn = false) => {
+    return timerOn ? difficultyTime : difficultyTime - 10
+  }
 
   useEffect(() => {
     if(!runTimer) return
@@ -34,15 +38,18 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       setTaskComplete(true)
       setRunTimer(false)
 
+      const newDate = new Date()
+      const dateSrt  = newDate.toISOString();
+      const progressDate = dateSrt.slice(0,10);
       const newProgress = {
-        date: new Date(),
+        date: progressDate,
         time: loggedInUser.difficulty
       }
       const totalProgress = loggedInUser.progress
       totalProgress.push(newProgress)
       const userUpdate = {
         progress: totalProgress,
-        currency: loggedInUser.currency + 20,
+        currency: loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty, true),
         streak: loggedInUser.streak + 1,
         last_activity: Date.now(),
       };
@@ -77,15 +84,24 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       setHasCoded(true);
       setTaskComplete(true)
 
+      const newDate = new Date()
+      const dateSrt  = newDate.toISOString();
+      const progressDate = dateSrt.slice(0,10);
+
+      // if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
       const newProgress = {
-        date: new Date(),
+        date: progressDate,
         time: loggedInUser.difficulty
       }
+      // else = loggedInUser.difficulty
+
+
+      console.log("------>",loggedInUser);
       const totalProgress = loggedInUser.progress
       totalProgress.push(newProgress)
       const userUpdate = {
         progress: totalProgress,
-        currency: loggedInUser.currency + 20,
+        currency: loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
         streak: loggedInUser.streak + 1,
         last_activity: Date.now(),
       };
@@ -118,8 +134,8 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
   const handleTimer = (event) => {
     if (event.target.value === "yes") {
       setEmotion("love");
-      setMinutes(loggedInUser.difficulty - 1 - 29);
-      setSeconds(59 - 55);
+      setMinutes(loggedInUser.difficulty - 1 - 29); //-----------------------------------------
+      setSeconds(59 - 55); //-----------------------------------------
       setRunTimer(true);
     } else {
       setEmotion("cry");
@@ -128,7 +144,7 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 
   return (
     <>
-      <div className="chat chat-start flex items-center">
+      {!taskComplete ? <div className="chat chat-start flex items-center">
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
             <img alt="Tailwind CSS chat bubble component" src="/happy.png" />
@@ -154,7 +170,17 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
             </div>
           ) : null}
         </div>
-      </div>
+      </div> : <div className="chat chat-start flex items-center">
+        <div className="chat-image avatar">
+          <div className="w-10 rounded-full">
+            <img alt="Tailwind CSS chat bubble component" src="/happy.png" />
+          </div>
+        </div>
+
+        <div className="chat-bubble flex items-center">
+          You already coded today!! :D
+        </div>
+      </div>}
 
       {taskComplete ? (
               <div className="chat chat-start flex items-center">
