@@ -4,6 +4,7 @@ import InstructionsPopup from "../components/InstructionsPopup";
 import HomePage from "../components/HomePage";
 import EnergyBar from "../components/EnergyBar";
 import { useState } from "react/";
+import ItemBag from "../components/ItemsBag";
 
 const Home = () => {
   const [energy, setEnergy] = useState(null);
@@ -12,10 +13,10 @@ const Home = () => {
 
   return (
     <div>
-      <section className=" py-10 text-black">
+      <section className="py-10 text-black">
         <div className="container mx-auto flex flex-wrap justify-center">
           <div className="w-full md:w-5/12 px-4 flex flex-col items-center mb-6">
-            <div className="mockup-window bg-base-200 border">
+            <div className="mockup-window bg-base-100 text-white border">
               <div className="flex flex-col bg-gray-100 items-center justify-center p-6">
                 <div className="bg-base-200 text-white rounded-xl p-4 w-full h-auto">
                   <EnergyBar
@@ -49,13 +50,22 @@ const Home = () => {
             <div className="drawer-content flex flex-col w-full">
               <div>
                 <div className="w-full">
-                  <div className="mockup-window bg-base-200 border">
+                  <div className="mockup-window bg-base-100 text-white border mb-6">
                     <div className="flex flex-col bg-gray-100 items-center justify-center p-4">
                       <HomePage
                         setEnergy={setEnergy}
                         setPet={setPet}
                         setEmotion={setEmotion}
                       />
+                    </div>
+                  </div>
+
+                  <div className="mockup-browser bg-base-100 border">
+                    <div className="mockup-browser-toolbar text-white">
+                      <div className="input">Item Bag</div>
+                    </div>
+                    <div className="flex bg-gray-100 items-center justify-center p-4">
+                      <ItemBag />
                     </div>
                   </div>
                 </div>
