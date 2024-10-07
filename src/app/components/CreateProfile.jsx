@@ -33,7 +33,7 @@ const CreateProfile = ({ setCreate }) => {
     const userPlaceholder = {
       goal: goal,
       username: newUsername,
-      difficulty_time: selectedDifficulty,
+      difficulty: selectedDifficulty,
       last_activity: Date.now(),
       stored_items: [],
     };
