@@ -6,7 +6,6 @@ const ItemBag = () => {
   const { loggedInUser } = useContext(UserContext);
   const [storedItems, setStoredItems] = useState([]);
 
-<<<<<<< HEAD
   useEffect(() => {
     if (loggedInUser && loggedInUser.stored_items) {
       setStoredItems(loggedInUser.stored_items);
