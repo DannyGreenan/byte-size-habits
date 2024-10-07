@@ -7,18 +7,19 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 
 export default function EnergyBar({energy, setEnergy, pet, setPet}) {
-  const [check, setCheck] = useState(0)
+  const [timerTrigger, setTimerTrigger] = useState(0)
 
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   useEffect(() => {
+    if(Object.keys(loggedInUser).length === 0) return
     getPet(loggedInUser.pet_id)
     .then((patchedPet) => {
       setPet(patchedPet)
       setEnergy(patchedPet.energy)
       updateEnergy(patchedPet)
     })
-  }, []);
+  }, [loggedInUser]);
 
   const updateEnergy = (oldPet = null) => {
     const currentTime = Date.now();
@@ -44,17 +45,17 @@ export default function EnergyBar({energy, setEnergy, pet, setPet}) {
         })
       }
     }
-    setCheck(check + 1)
+    setTimerTrigger(timerTrigger + 1)
   }
 
   useEffect(() => {
-    if(!check) {
+    if(!timerTrigger) {
       updateEnergy()
     } else {
       const id = setInterval(updateEnergy, 10000);
       return () => clearInterval(id)
     }
-  }, [check, pet]);
+  }, [timerTrigger, pet]);
 
   return (
     <>
