@@ -48,7 +48,7 @@ function LineChart() {
       y: {
         title: {
           display: true,
-          text: "Time Spent on Coding",
+          text: "Time Coding",
         },
         display: true,
         min: 10,
