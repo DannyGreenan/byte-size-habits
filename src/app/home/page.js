@@ -24,6 +24,7 @@ const Home = () => {
                     setEnergy={setEnergy}
                     pet={pet}
                     setPet={setPet}
+                    // setEmotion={setEmotion}
                   />
                 </div>
                 <img
@@ -33,7 +34,8 @@ const Home = () => {
                 />
                 <label
                   htmlFor="my-drawer"
-                  className="btn btn-primary mt-4 flex items-center">
+                  className="btn btn-primary mt-4 flex items-center"
+                >
                   <img
                     src="/logo.png"
                     alt="Small Character"
@@ -53,6 +55,7 @@ const Home = () => {
                   <div className="mockup-window bg-base-100 text-white border mb-6">
                     <div className="flex flex-col bg-gray-100 items-center justify-center p-4">
                       <HomePage
+                        energy={energy}
                         setEnergy={setEnergy}
                         setPet={setPet}
                         setEmotion={setEmotion}
@@ -75,7 +78,8 @@ const Home = () => {
               <label
                 htmlFor="my-drawer"
                 aria-label="close sidebar"
-                className="drawer-overlay"></label>
+                className="drawer-overlay"
+              ></label>
               <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                 <li className="p-3 text-center inline-flex items-center justify-center w-full h-20 mb-6 shadow-lg rounded-full">
                   Website Tutorials
