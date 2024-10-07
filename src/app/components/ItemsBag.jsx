@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../UserContext'
-
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../UserContext';
 
 const ItemBag = () => {
 	const { loggedInUser } = useContext(UserContext);
@@ -34,7 +33,6 @@ const ItemBag = () => {
 			)}
 		</div>
 	);
-
 };
 
 export default ItemBag;
