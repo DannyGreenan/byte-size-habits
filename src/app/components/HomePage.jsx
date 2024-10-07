@@ -29,11 +29,22 @@ const HomePage = ({ setEnergy, setPet, setEmotion }) => {
     if (minutes === 0 && seconds === 0) {
       console.log("timer has finished");
       setHasCoded(true);
-      patchUser(loggedInUser.user_id, {
-        progress: loggedInUser.progress + loggedInUser.difficulty_time,
+
+      const newProgress = {
+        date: new Date(),
+        time: loggedInUser.difficulty
+      }
+      const totalProgress = loggedInUser.progress
+      totalProgress.push(newProgress)
+      const userUpdate = {
+        progress: totalProgress,
         currency: loggedInUser.currency + 20,
         streak: loggedInUser.streak + 1,
-      }).then((user) => {
+        last_activity: Date.now(),
+      };
+
+      patchUser(loggedInUser.user_id, updateUser)
+      .then((user) => {
         const userStringified = JSON.stringify(loggedInUser);
         localStorage.setItem("user", userStringified);
         setLoggedInUser(user);
@@ -53,13 +64,22 @@ const HomePage = ({ setEnergy, setPet, setEmotion }) => {
     if (event.target.value === "yes") {
       setEmotion("joy");
       setHasCoded(true);
+
+      const newProgress = {
+        date: new Date(),
+        time: loggedInUser.difficulty
+      }
+      const totalProgress = loggedInUser.progress
+      totalProgress.push(newProgress)
       const userUpdate = {
-        progress: loggedInUser.progress + loggedInUser.difficulty_time,
+        progress: totalProgress,
         currency: loggedInUser.currency + 20,
         streak: loggedInUser.streak + 1,
         last_activity: Date.now(),
       };
-      patchUser(loggedInUser.user_id, userUpdate).then((user) => {
+
+      patchUser(loggedInUser.user_id, userUpdate)
+      .then((user) => {
         const userStringified = JSON.stringify(loggedInUser);
         localStorage.setItem("user", userStringified);
         setLoggedInUser(user);
@@ -85,7 +105,7 @@ const HomePage = ({ setEnergy, setPet, setEmotion }) => {
   const handleTimer = (event) => {
     if (event.target.value === "yes") {
       setEmotion("joy");
-      setMinutes(loggedInUser.difficulty_time - 1);
+      setMinutes(loggedInUser.difficulty - 1);
       setSeconds(59);
       setRunTimer(true);
     } else {
