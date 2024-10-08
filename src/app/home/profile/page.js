@@ -11,7 +11,7 @@ const UserProfile = () => {
   const [editLoading, setEditLoading] = useState(false);
   const [editedMsg, setEditedMsg] = useState(false);
   const [goal, setGoal] = useState("");
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [selectedDifficulty, setSelectedDifficulty] = useState(0);
 
   useEffect(() => {
     setSelectedDifficulty(loggedInUser.difficulty);
