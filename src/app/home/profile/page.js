@@ -67,7 +67,8 @@ const UserProfile = () => {
                             className="bg-byteDarkBlue active:bg-byteLightBlue uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                             type="button"
                             style={{ transition: "all 0.15s ease 0s" }}
-                            onClick={handleSubmit}>
+                            onClick={handleSubmit}
+                          >
                             {editLoading ? (
                               <span className="loading loading-dots loading-sm"></span>
                             ) : (
@@ -129,7 +130,8 @@ const UserProfile = () => {
                       <div className="bg-gray-100 px-4 py-6">
                         <select
                           className="select w-full select-lg select-info max-w-xs"
-                          onChange={handleGoal}>
+                          onChange={handleGoal}
+                        >
                           <option value={goal} defaultValue>
                             {goal ? goal : "Goal"}
                           </option>
@@ -162,10 +164,10 @@ const UserProfile = () => {
                               <input
                                 type="radio"
                                 name="radio-2"
-                                value="Easy"
+                                value={30}
                                 className="radio radio-primary"
                                 onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Easy"}
+                                defaultChecked={selectedDifficulty === 30}
                               />
                               <label className="mr-4"> Easy</label>
                             </li>
@@ -173,10 +175,10 @@ const UserProfile = () => {
                               <input
                                 type="radio"
                                 name="radio-2"
-                                value="Medium"
+                                value={45}
                                 className="radio radio-primary"
                                 onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Medium"}
+                                defaultChecked={selectedDifficulty === 45}
                               />
                               <label className="mr-4"> Medium</label>
                             </li>
@@ -184,10 +186,10 @@ const UserProfile = () => {
                               <input
                                 type="radio"
                                 name="radio-2"
-                                value="Hard"
+                                value={60}
                                 className="radio radio-primary"
                                 onClick={handleDifficultyChange}
-                                defaultChecked={selectedDifficulty === "Hard"}
+                                defaultChecked={selectedDifficulty === 60}
                               />
 
                               <label className="mr-4"> Hard</label>

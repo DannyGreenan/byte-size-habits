@@ -20,17 +20,6 @@ export default function EnergyBar({energy, setEnergy, pet, setPet}) {
     })
   }, [loggedInUser]);
 
-  const checkDayEllapsed = (date) =>{
-    console.log(date);
-    const currentDate = new Date()
-    console.log(currentDate.getDate());
-    console.log(currentDate.getMonth());
-    const oldDate = new Date(date)
-    console.log(oldDate);
-    console.log("old stuff", oldDate.getDate(), oldDate.getMonth());
-    //do logic to compare dates
-  }
-
   const updateEnergy = (oldPet = null) => {
     const currentTime = Date.now();
     if (loggedInUser.user_id && (pet || oldPet)) {
@@ -38,7 +27,6 @@ export default function EnergyBar({energy, setEnergy, pet, setPet}) {
       const timeDifferenceInMinutes = (currentTime - loggedInUser.last_activity) / 1000 / 60;
       const minutesElapsed = Math.floor(timeDifferenceInMinutes);
       if (minutesElapsed > 0) {
-        checkDayEllapsed(pet.daily_habit_complete)
         const newEnergyLevel =
           pet.energy - minutesElapsed >= 0
             ? pet.energy - minutesElapsed
