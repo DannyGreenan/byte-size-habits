@@ -1,4 +1,4 @@
-'use clinet'
+"use clinet";
 
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
@@ -23,20 +23,20 @@ const ItemBag = () => {
               return (
                 <li
                   key={index}
-                  className={`relative flex flex-col justify-center items-center py-2`}>
-                  <Image
-                    src={`/${item.toLowerCase()}.jpeg`}
-                    alt="Bag with items"
-                    className="rounded-lg border-black border-solid"
-                    width={115}
-                    height={115}
-                    style={{
-                      transform: "skewX(-2deg)",
-                    }}
-                  />
-                  <button className="btn glass absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-base-200 text-xs leading-tight">
-                    {item}
-                  </button>
+                  className="relative flex flex-col justify-center items-center py-2 group">
+                  <div className="indicator">
+                    <span className="indicator-item badge badge-primary">
+                      {item}
+                    </span>
+
+                    <Image
+                      src={`/${item.toLowerCase()}.jpeg`}
+                      alt="Bag with items"
+                      className="rounded-lg border-black border-solid"
+                      width={115}
+                      height={115}
+                    />
+                  </div>
                 </li>
               );
             })}
