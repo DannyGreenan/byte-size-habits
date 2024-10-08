@@ -1,3 +1,5 @@
+'use clinet'
+
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 import Image from "next/image";
