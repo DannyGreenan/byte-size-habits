@@ -12,7 +12,7 @@ module.exports = {
         foreground: "var(--foreground)",
         byteDarkBlue: "#116466",
         byteLightBlue: "#d1e8e2",
-        byteOrange: "#ffcb9a",
+        byteOrange: "#f3e5d8",
         byteDark: "#2c3531",
         byteBackground: "#d1e8e2",
       },
