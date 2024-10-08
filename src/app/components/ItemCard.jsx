@@ -23,8 +23,11 @@ const ItemCard = ({ item, index }) => {
   const handleBuy = (event) => {
     const newItem = item.description;
     const currentItems = loggedInUser.stored_items;
+    const newCurrency = loggedInUser.currency - item.cost;
+
     patchUser(loggedInUser.user_id, {
       stored_items: [...currentItems, newItem],
+      currency: newCurrency,
     }).then((user) => {
       const userStringified = JSON.stringify(user);
       localStorage.setItem("user", userStringified);

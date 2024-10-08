@@ -10,10 +10,15 @@ export function UserProvider({ children }) {
   const router = useRouter();
 
   useEffect(() => {
-    const savedUserStr = localStorage.user || `{}`;
-    const savedUser = JSON.parse(savedUserStr);
-    setLoggedInUser(savedUser);
-  }, []);
+		const savedUserStr = localStorage.getItem('user') || '{}';
+		try {
+			const savedUser = JSON.parse(savedUserStr);
+			setLoggedInUser(savedUser);
+		} catch (error) {
+			console.error('Error parsing JSON:', error);
+			setLoggedInUser({});
+		}
+	}, []);
 
   useEffect(() => {
     if (Object.keys(loggedInUser).length === 0) {
