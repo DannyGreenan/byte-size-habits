@@ -8,7 +8,7 @@ import { addPet } from "../models/pet.model";
 
 const CreateProfile = ({ setCreate }) => {
   const { setLoggedInUser } = useContext(UserContext);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(30);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("30");
   const [newUsername, setNewUsername] = useState("");
   const [goal, setGoal] = useState("TypeScript");
 
@@ -33,7 +33,7 @@ const CreateProfile = ({ setCreate }) => {
     const userPlaceholder = {
       goal: goal,
       username: newUsername,
-      difficulty: selectedDifficulty,
+      difficulty: parseInt(selectedDifficulty),
       last_activity: Date.now(),
       stored_items: [],
     };
@@ -64,6 +64,7 @@ const CreateProfile = ({ setCreate }) => {
         localStorage.setItem("user", userStringified);
         setLoggedInUser(user);
         router.push("/home");
+        console.log("here we go?");
       })
       .catch((error) => {
         setCreateError(true);
@@ -136,7 +137,7 @@ const CreateProfile = ({ setCreate }) => {
             <div className="flex justify-between">
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === 30 ? "btn-success" : "btn-ghost"
+                  selectedDifficulty === "30" ? "btn-success" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}
@@ -145,7 +146,7 @@ const CreateProfile = ({ setCreate }) => {
               </button>
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === 45 ? "btn-warning" : "btn-ghost"
+                  selectedDifficulty === "45" ? "btn-warning" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}
@@ -154,7 +155,7 @@ const CreateProfile = ({ setCreate }) => {
               </button>
               <button
                 className={`btn m-1 w-1/3 ${
-                  selectedDifficulty === 60 ? "btn-error" : "btn-ghost"
+                  selectedDifficulty === "60" ? "btn-error" : "btn-ghost"
                 }`}
                 type="button"
                 onClick={handleDifficulty}

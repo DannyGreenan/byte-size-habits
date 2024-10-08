@@ -27,7 +27,8 @@ export function UserProvider({ children }) {
       router.push("/");
     }
     if (Object.keys(loggedInUser).length > 0) {
-      router.push(`${pathname}`);
+      if (pathname === "/") router.push(`/home`);
+      else router.push(`${pathname}`);
     }
   }, [loggedInUser, router]);
 
