@@ -14,6 +14,8 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
   const [minutes, setMinutes] = useState(0);
   const [runTimer, setRunTimer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+  const [showTimerQuestion, setShowTimerQuestion] = useState(false);
   
   const getCurrencyAmount = (difficultyTime, timerOn = false) => {
     return timerOn ? difficultyTime : difficultyTime - 10
@@ -55,7 +57,7 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       };
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
-				const userStringified = JSON.stringify(loggedInUser);
+				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
@@ -88,16 +90,24 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       const progressDate = dateSrt.slice(0,10);
 
       // if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
-      const newProgress = {
-        date: progressDate,
-        time: loggedInUser.difficulty
-      }
-      // else = loggedInUser.difficulty
-
-
-      console.log("------>",loggedInUser);
       const totalProgress = loggedInUser.progress
-      totalProgress.push(newProgress)
+      let progressUpdate = {}
+      console.log(loggedInUser.progress);
+      if(loggedInUser.progress.date === undefined) {
+        progressUpdate = {
+          date: progressDate,
+          time: loggedInUser.difficulty
+        }
+        totalProgress.push(progressUpdate)
+      } else {
+        // else = loggedInUser.difficulty
+        progressUpdate = {
+        date: progressDate,
+        time: loggedInUser.progress.date + loggedInUser.difficulty
+      }
+      totalProgress.push(progressUpdate)
+    }
+      
       const userUpdate = {
         progress: totalProgress,
         currency: loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
@@ -106,16 +116,12 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       };
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
-				const userStringified = JSON.stringify(loggedInUser);
+				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
 					setEnergy(100);
 					setPet(patchedPet);
-
-					setTimeout(() => {
-						setIsLoading(false);
-					}, 4000);
 				});
 			});
 		} else {
@@ -125,29 +131,25 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		setIsVisible(true);
 		setTimeout(() => {
 			setIsLoading(false);
-		}, 4000);
+      setIsLoadingQuestion(true)
+      setShowTimerQuestion(true)
+		}, 3000);
+
+		setTimeout(() => {
+      setIsLoadingQuestion(false)
+    }, 6000);
 	};
 
 	const handleTimer = (event) => {
 		if (event.target.value === 'yes') {
 			setEmotion('love');
-			setMinutes(loggedInUser.difficulty - 1 - 29);
-			setSeconds(59 - 55);
+			setMinutes(loggedInUser.difficulty - 1);
+			setSeconds(59);
 			setRunTimer(true);
 		} else {
 			setEmotion('cry');
 		}
 	};
-  const handleTimer = (event) => {
-    if (event.target.value === "yes") {
-      setEmotion("love");
-      setMinutes(loggedInUser.difficulty - 1 - 29); //-----------------------------------------
-      setSeconds(59 - 55); //-----------------------------------------
-      setRunTimer(true);
-    } else {
-      setEmotion("cry");
-    }
-  };
 
   return (
     <>
@@ -232,7 +234,11 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 							)}
 						</div>
 					</div>
-					<div className='chat chat-start flex items-center'>
+				</>
+			) : null}
+
+
+{showTimerQuestion ? <div className='chat chat-start flex items-center'>
 						<div className='chat-image avatar'>
 							<div className='w-10 rounded-full'>
 								<img
@@ -242,12 +248,12 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 							</div>
 						</div>
 						<div className='chat-bubble flex items-center'>
-							{isLoading ? (
+							{isLoadingQuestion ? (
 								<span className='loading loading-dots loading-xs'></span>
 							) : (
 								<>
 									Would you like to study now and start a timer?
-									<div className='flex ml-4'>
+									{runTimer ? null : <div className='flex ml-4'>
 										<button
 											value='yes'
 											onClick={handleTimer}
@@ -262,13 +268,11 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 										>
 											Maybe later
 										</button>
-									</div>
+									</div>}
 								</>
 							)}
 						</div>
-					</div>
-				</>
-			) : null}
+					</div> : null}
 
 			{isVisible && runTimer ? (
 				<div className='m-5'>
