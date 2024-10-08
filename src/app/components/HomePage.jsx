@@ -93,17 +93,21 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
       const totalProgress = loggedInUser.progress
       let progressUpdate = {}
       console.log(loggedInUser.progress);
-      if(loggedInUser.progress.date === undefined) {
+      const todaysProgress = totalProgress.filter(item => item.date === progressDate)
+      console.log(todaysProgress);
+
+
+      if(todaysProgress) {
         progressUpdate = {
           date: progressDate,
-          time: loggedInUser.difficulty
+          time: loggedInUser.progress.date + loggedInUser.difficulty
         }
         totalProgress.push(progressUpdate)
       } else {
         // else = loggedInUser.difficulty
-        progressUpdate = {
+      progressUpdate = {
         date: progressDate,
-        time: loggedInUser.progress.date + loggedInUser.difficulty
+        time: loggedInUser.difficulty
       }
       totalProgress.push(progressUpdate)
     }
