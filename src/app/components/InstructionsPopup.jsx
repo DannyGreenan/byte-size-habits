@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
+import { FaCoins } from "react-icons/fa6";
+import { SlEnergy } from "react-icons/sl";
+import { GoGoal } from "react-icons/go";
+import { MdOutlineTimer } from "react-icons/md";
 
 const InstructionsPopup = ({ modalInstruction, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const suitableInstruction = modalInstruction;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -12,26 +13,54 @@ const InstructionsPopup = ({ modalInstruction, title }) => {
     }
   }, []);
 
-  const openModal = () => {
-    setIsOpen(true);
-    console.log("Modal state:", isOpen);
-  };
+  let iconTitle = "" 
 
-  const closeModal = () => setIsOpen(false);
+  if(title === "Coins")
+    iconTitle =     <>
+    <FaCoins 
+      size={25}
+    />
+    <p>{title}</p>
+  </> 
+  else if(title === "Energy")
+    iconTitle =     <>
+    <SlEnergy 
+      size={25}
+    />
+    <p>{title}</p>
+  </> 
+  else if(title === "Coding Goal")
+    iconTitle =     <>
+    <GoGoal 
+      size={25}
+    />
+    <p>{title}</p>
+  </> 
+  else if(title === "Difficulty")
+    iconTitle =     <>
+    <MdOutlineTimer       
+      size={25}
+    />
+    <p>{title}</p>
+  </> 
 
   return (
     <div>
-      <button onClick={openModal}>{title}</button>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        contentLabel="Instruction Popup"
-        className="bg-white p-5 max-w-lg mx-auto rounded-lg z-50"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-75 z-50">
-        <h2>{title}</h2>
-        <p>{suitableInstruction}</p>
-        <button onClick={closeModal}>Press Outside this Box to Close.</button>
-      </Modal>
+      <button className="btn text-lg btn-primary btn-outline w-44 justify-start" onClick={()=>document.getElementById(`my_modal_${title}`).showModal()}>{iconTitle}
+          </button>
+        <dialog id={`my_modal_${title}`} className="modal">
+          <div className="modal-box">
+            <h3 className="text-2xl">{title}</h3>
+            <p className="py-4">{modalInstruction}</p>
+            
+            <div className="modal-action">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
     </div>
   );
 };
