@@ -12,12 +12,12 @@ const ChartComponent = ({ data }) => {
   }
   useEffect(() => {
     const img = new Image();
-    img.src = "/happy.png"; // Path to your image
+    img.src = "/happy.png";
     img.width = 40;
     img.height = 40;
     img.onload = () => {
       chartInstance.current = new Chart(chartRef.current, {
-        type: "line", // or 'bar', 'pie', etc.
+        type: "line",
         data: data,
         options: {
           responsive: true,
@@ -28,8 +28,7 @@ const ChartComponent = ({ data }) => {
                 text: "Time Coding",
               },
               display: true,
-              min: 25,
-              max: 130,
+              min: 0,
               color: "gray-800",
 
               grid: {
@@ -67,17 +66,18 @@ const ChartComponent = ({ data }) => {
           },
           elements: {
             point: {
-              radius: 0.5, // Adjust the size of the point
-              pointStyle: img, // Use the image as the point style
+              radius: 0.5,
+              pointStyle: img,
             },
           },
         },
       });
     };
-
-    return () => {
-      chartInstance.current.destroy();
-    };
+    if (chartInstance.current) {
+      return () => {
+        chartInstance.current.destroy();
+      };
+    }
   }, [data]);
 
   return <canvas ref={chartRef} />;
