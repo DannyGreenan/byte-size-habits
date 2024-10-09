@@ -7,15 +7,16 @@ Chart.register(...registerables);
 const ChartComponent = ({ data }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
-  if (chartInstance.current) {
-    chartInstance.current.destroy();
-  }
+
   useEffect(() => {
     const img = new Image();
     img.src = "/happy.png";
     img.width = 40;
     img.height = 40;
     img.onload = () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
       chartInstance.current = new Chart(chartRef.current, {
         type: "line",
         data: data,
