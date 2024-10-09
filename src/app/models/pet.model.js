@@ -32,10 +32,10 @@ export async function patchPet(pet_id, updates, returnFunction, key) {
   }
 }
 
-export async function addPet(newPet) {
+export async function addPet() {
   const { data, error } = await supabaseServerClient
     .from("pets")
-    .upsert([newPet])
+    .upsert([{}])
     .select();
 
   if (error) {

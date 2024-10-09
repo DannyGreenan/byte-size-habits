@@ -37,7 +37,9 @@ const HeroBar = () => {
                   className="w-16 h-16 rounded-full border-2 border-white shadow-lg"
                 />
                 <span className="text-lg font-bold">
-                  {loggedInUser.username}
+                  {loggedInUser.username ? 
+				  loggedInUser.username
+				: <span className="loading loading-spinner loading-md"></span>}
                 </span>
               </div>
 
@@ -108,7 +110,7 @@ const HeroBar = () => {
               htmlFor="my-drawer"
               aria-label="close sidebar"
               className="drawer-overlay "></label>
-            <ul className="menu bg-base-200 text-base-content min-h-1/2 w-80 mt-16 rounded-xl">
+            <ul className="menu bg-base-200 text-base-content min-h-1/2 lg:w-80 w-60 lg:mt-20 rounded-xl mt-14">
               {/* Sidebar content here */}
               <li>
                 <a>
@@ -134,7 +136,9 @@ const HeroBar = () => {
               <li>
                 <a>
                   <InstructionsPopup
-                    modalInstruction="Your pet wants to see you succeed at your learning goal and depends on you to keep it fully charged and happy!"
+                    modalInstruction="Your pet wants to see you succeed at your learning goal and depends on you to keep it fully charged and happy! 
+					Your pet’s energy will decrease over time and the only way to restore its energy in full is to complete your daily goal. 
+					Don’t let your pet’s energy drop below 1%! You may not like what you see…"
                     title="Energy"
                   />
                 </a>
@@ -142,7 +146,9 @@ const HeroBar = () => {
               <li>
                 <a>
                   <InstructionsPopup
-                    modalInstruction="Everyday you complete your learning goal you are awarded coins."
+                    modalInstruction="Everyday you complete your learning goal you are awarded coins. 
+					Your balance is displayed in the top right corner. When you have accumulated enough coins you can treat your pet to a gift from the shop. 
+					Hint: Your pet LOVES to help you study, if you opt to use the timer feature you will be awarded bonus coins."
                     title="Coins"
                   />
                 </a>

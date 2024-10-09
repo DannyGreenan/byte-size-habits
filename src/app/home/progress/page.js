@@ -14,7 +14,10 @@ const Progress = () => {
   const gitCommits = loggedInUser.Github;
   const codeWarsChallenges = loggedInUser.Codewars;
   const streak = loggedInUser.streak;
-  const userProgress = loggedInUser.progress;
+
+  let userProgress = [];
+  if (Object.keys(loggedInUser).length > 0)
+    userProgress = loggedInUser.progress;
   const leetCodeChallenges = loggedInUser.Leetcode;
   let length = userProgress.length;
   const style = {

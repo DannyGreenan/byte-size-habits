@@ -16,8 +16,8 @@ export default function EnergyBar({}) {
 						<span>Loading</span>
 					) : (
 						<progress
-							className={`progress ${energy < 25 ? 'progress-error' : ''} ${
-								energy > 25 && energy < 60
+							className={`progress ${energy <= 20 ? 'progress-error' : ''} ${
+								energy > 20 && energy <= 60
 									? 'progress-warning'
 									: 'progress-success'
 							} w-56 h-6`}

@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 
 const CoinBalance = () => {
-	const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+	const { loggedInUser } = useContext(UserContext);
 	const [coins, setCoins] = useState(loggedInUser.currency);
 
 	useEffect(() => {
@@ -14,7 +14,7 @@ const CoinBalance = () => {
 
 	return (
 		<div className='fex items-center space-x-2'>
-			<span className='text-lg font-bold'>Coins: {coins}</span>
+			<span className='text-lg font-bold'>{coins !== undefined ? coins : <span className="loading loading-spinner loading-md"></span>}</span>
 		</div>
 	);
 };

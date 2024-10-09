@@ -37,20 +37,13 @@ const CreateProfile = ({ setCreate }) => {
 			last_activity: Date.now(),
 			stored_items: [],
 		};
-
-		const newPetStats = {
-			hunger: 100,
-			energy: 100,
-			daily_habit_complete: false,
-		};
-
 		fetchAllUsers()
 			.then((allUsers) => {
 				return allUsers.filter((user) => user.username === newUsername);
 			})
 			.then((foundUsers) => {
 				if (foundUsers.length !== 1) {
-					return addPet(newPetStats);
+					return addPet();
 				} else {
 					setCreateError(true);
 				}

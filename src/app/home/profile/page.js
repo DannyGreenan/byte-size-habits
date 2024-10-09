@@ -4,7 +4,6 @@ import { UserContext } from "@/app/context/UserContext";
 import { patchUser } from "../../models/profile.model";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import ItemBag from "@/app/components/ItemsBag";
 import { CgProfile } from "react-icons/cg";
 import { SiCodewars } from "react-icons/si";
 import { IoSpeedometerOutline } from "react-icons/io5";
@@ -58,7 +57,8 @@ const UserProfile = () => {
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -77,7 +77,8 @@ const UserProfile = () => {
                 width: "100%",
                 minHeight: "200px",
                 height: "auto",
-              }}>
+              }}
+            >
               <div className="">
                 <div className="">
                   <div>
@@ -98,7 +99,8 @@ const UserProfile = () => {
                             className="btn btn-primary btn-lg btn-wide uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                             type="button"
                             style={{ transition: "all 0.15s ease 0s" }}
-                            onClick={handleSubmit}>
+                            onClick={handleSubmit}
+                          >
                             {editLoading ? (
                               <span className="loading loading-dots loading-sm"></span>
                             ) : (
@@ -119,7 +121,11 @@ const UserProfile = () => {
                           </div>
                           <div className="stat-title">Username</div>
                           <div className="stat-value">
-                            {loggedInUser.username}
+                            {loggedInUser.username ? (
+                              loggedInUser.username
+                            ) : (
+                              <span className="loading loading-spinner loading-md"></span>
+                            )}
                           </div>
                           <div className="stat-desc">Logged in profile</div>
                         </div>
@@ -128,7 +134,14 @@ const UserProfile = () => {
                             <FaCode size={30} />
                           </div>
                           <div className="stat-title">Goal</div>
-                          <div className="stat-value"> {loggedInUser.goal}</div>
+                          {loggedInUser.goal ? (
+                            <div className="stat-value">
+                              {" "}
+                              {loggedInUser.goal}
+                            </div>
+                          ) : (
+                            <span className="loading loading-spinner loading-md"></span>
+                          )}
                           <div className="stat-desc">Current Goal</div>
                         </div>
                         <div className="stat">
@@ -138,7 +151,11 @@ const UserProfile = () => {
                           <div className="stat-title">Difficulty</div>
                           <div className="stat-value">
                             {" "}
-                            {loggedInUser.difficulty + "Mins"}
+                            {loggedInUser.difficulty !== undefined ? (
+                              loggedInUser.difficulty + "Mins"
+                            ) : (
+                              <span className="loading loading-spinner loading-md"></span>
+                            )}
                           </div>
                           <div className="stat-desc">
                             Current Difficulty Time
@@ -150,7 +167,11 @@ const UserProfile = () => {
                           </div>
                           <div className="stat-title">CodeWars</div>
                           <div className="stat-value">
-                            {loggedInUser.Codewars}
+                            {loggedInUser.Codewars ? (
+                              loggedInUser.Codewars
+                            ) : (
+                              <span className="loading loading-spinner loading-md"></span>
+                            )}
                           </div>
                           <div className="stat-desc">Challenges Complete</div>
                         </div>
@@ -160,7 +181,11 @@ const UserProfile = () => {
                           </div>
                           <div className="stat-title">GitHub</div>
                           <div className="stat-value">
-                            {loggedInUser.Github}
+                            {loggedInUser.Github ? (
+                              loggedInUser.Github
+                            ) : (
+                              <span className="loading loading-spinner loading-md"></span>
+                            )}
                           </div>
                           <div className="stat-desc">↗︎ Commits Pushed</div>
                         </div>
@@ -198,7 +223,8 @@ const UserProfile = () => {
                             className="h-6 w-6"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor">
+                            stroke="currentColor"
+                          >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -211,15 +237,21 @@ const UserProfile = () => {
                       <div className="bg-byteOrange px-4 py-6 flex justify-center items-center">
                         <select
                           className="select w-full select-lg max-w-xs"
-                          onChange={handleGoal}>
-                          <option value={goal} defaultValue>
-                            {goal ? goal : "Goal"}
+                          onChange={handleGoal}
+                        >
+                          <option value={loggedInUser.goal} defaultValue>
+                            Edit Goal
                           </option>
                           <option value="Typescript">TypeScript</option>
-                          <option value="Next.js">Next.js</option>
+                          <option value="Nextjs">Next.js</option>
                           <option value="JavaScript">JavaScript</option>
                           <option value="Python">Python</option>
-                          <option value="Supabase">Supabase</option>
+                          <option value="HTML">HTML</option>
+                          <option value="CSS">CSS</option>
+                          <option value="Tailwind">Tailwind</option>
+                          <option value="postgreSQL~16">postgreSQL</option>
+                          <option value="Express">Express</option>
+                          <option value="React">React</option>
                         </select>
                       </div>
                     </div>
@@ -234,7 +266,8 @@ const UserProfile = () => {
                             className="h-6 w-6"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor">
+                            stroke="currentColor"
+                          >
                             <path
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -253,7 +286,8 @@ const UserProfile = () => {
                                 selectedDifficulty === 30
                                   ? "text-primary"
                                   : "text-gray-500"
-                              }`}>
+                              }`}
+                            >
                               <div className={`stat `}>
                                 <div className="stat-figure text-secondary">
                                   <div className="w-16 rounded-full">
@@ -276,7 +310,8 @@ const UserProfile = () => {
                                 selectedDifficulty === 45
                                   ? "text-primary"
                                   : "text-gray-500"
-                              }`}>
+                              }`}
+                            >
                               <div className="stat">
                                 <div className="stat-figure text-primary">
                                   <div className="w-16 rounded-full">
@@ -302,7 +337,8 @@ const UserProfile = () => {
                                 selectedDifficulty === 60
                                   ? "text-primary"
                                   : "text-gray-500"
-                              }`}>
+                              }`}
+                            >
                               <div className="stat">
                                 <div className="stat-figure text-secondary">
                                   <div className="w-16 rounded-full">
