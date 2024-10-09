@@ -6,15 +6,7 @@ import EnergyTimer from "../components/EnergyTimer";
 
 const HomeLayout = ({ children }) => {
   return (
-    <div
-      className="relative min-h-screen"
-      style={{
-        backgroundImage: `url('/bg-subtle.jpeg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <div className="relative min-h-screen">
       <header>
         <EnergyTimer />
         <NavBar />

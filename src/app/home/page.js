@@ -2,20 +2,36 @@
 import Image from "next/image";
 import HomePage from "../components/HomePage";
 import EnergyBar from "../components/EnergyBar";
-import { useState, useContext } from "react/";
+import { useState } from "react/";
 import ItemBag from "../components/ItemsBag";
-import { EnergyContext } from "../context/EnergyContext.js";
 
 const Home = () => {
-  const { energy, setEnergy } = useContext(EnergyContext);
   const [emotion, setEmotion] = useState("happy");
 
   return (
     <div>
-      <section className="py-10 text-black">
+      <section className="py-6 text-black">
         <div className="container mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-6 justify-center">
           <div className="w-full px-4 flex flex-col items-center mb-6 lg:mb-0">
-            <div className="mockup-window bg-base-100 text-white border w-full">
+            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full flex justify-between items-end ">
+              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
               <div
                 className="flex flex-col bg-gray-100 items-center justify-center p-6"
                 style={{
@@ -33,7 +49,7 @@ const Home = () => {
                 </div>
                 <Image
                   alt="character image"
-                  className="relative max-w-full rounded-lg mt-4"
+                  className="relative max-w-full rounded-lg mt-4 "
                   src={`/${emotion}.png`}
                   height={800}
                   width={800}
@@ -43,16 +59,48 @@ const Home = () => {
           </div>
 
           <div className="w-full px-4 flex flex-col items-center space-y-6">
-            <div className="mockup-window bg-base-100 text-white border w-full">
-              <div className="flex flex-col bg-byteOrange items-center justify-center p-4">
+            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full items-end">
+              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              <div className="flex flex-col w-full bg-byteOrange items-center justify-center p-4">
                 <HomePage setEmotion={setEmotion} />
               </div>
             </div>
 
-            <div className="mockup-browser bg-base-100 border w-full relative">
-              <div className="mockup-browser-toolbar text-white">
-                <div className="input">Item Bag</div>
-              </div>
+            <div className="mockup-window bg-base-100 text-white border-2 border-base-100 w-full items-end overflow-hidden">
+              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
 
               <Image
                 src="/item-bag.png"
@@ -62,13 +110,10 @@ const Home = () => {
                 height={1000}
               />
 
-              <div
-                className="absolute inset-0 flex items-center justify-center skew-y-6"
-                style={{
-                  transform: "translateX(-34px) translateY(130px)",
-                }}
-              >
-                <ItemBag />
+              <div className="relative w-full h-full">
+                <div>
+                  <ItemBag />
+                </div>
               </div>
             </div>
           </div>
