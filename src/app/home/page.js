@@ -13,10 +13,10 @@ const Home = () => {
 
   return (
     <div>
-      <section className="py-10 text-black">
+      <section className="py-6 text-black">
         <div className="container mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-6 justify-center">
           <div className="w-full px-4 flex flex-col items-center mb-6 lg:mb-0">
-            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full flex justify-between items-end">
+            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full flex justify-between items-end ">
               <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
                 {" "}
                 <svg
@@ -55,7 +55,7 @@ const Home = () => {
                 </div>
                 <Image
                   alt="character image"
-                  className="relative max-w-full rounded-lg mt-4"
+                  className="relative max-w-full rounded-lg mt-4 "
                   src={`/${emotion}.png`}
                   height={800}
                   width={800}
