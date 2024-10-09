@@ -97,23 +97,16 @@ const HomePage = ({ setEmotion }) => {
 			const dateSrt = newDate.toISOString();
 			const progressDate = dateSrt.slice(0, 10);
 
-			// if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
 			const totalProgress = loggedInUser.progress;
 			let progressUpdate = {};
-			// console.log(loggedInUser.progress);
 			const todaysProgress = totalProgress.filter(
 				(item) => item.date === progressDate
 			);
-			// console.log(todaysProgress);
 			
-			if (todaysProgress) {
-				progressUpdate = {
-					date: progressDate,
-					time: loggedInUser.progress.date + loggedInUser.difficulty,
-				};
-				totalProgress.push(progressUpdate);
+			if (todaysProgress.length > 0) {
+				const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
+				totalProgress[todaysIndex].time += loggedInUser.difficulty
 			} else {
-				// else = loggedInUser.difficulty
 				progressUpdate = {
 					date: progressDate,
 					time: loggedInUser.difficulty,
