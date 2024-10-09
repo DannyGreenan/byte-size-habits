@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getPet, patchPet, addPet } from "../../../../models/pet.model";
-import EnergyNotification from "@/app/components/Notications";
+import EnergyNotification from "@/app/components/EnergyNotications";
 
 export default function fetchPet({ params }) {
   const { pet_id } = params;

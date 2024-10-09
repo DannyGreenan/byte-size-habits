@@ -1,60 +1,63 @@
 'use client';
 
 import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../context/UserContext';
 import { patchUser } from '../models/profile.model';
 import { patchPet } from '../models/pet.model';
+import EnergyNotification from './EnergyNotications'
 
 const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-  const [hasCoded, setHasCoded] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [taskComplete, setTaskComplete] = useState(false);
-  const [seconds, setSeconds] = useState(1000);
-  const [minutes, setMinutes] = useState(0);
-  const [runTimer, setRunTimer] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
-  const [showTimerQuestion, setShowTimerQuestion] = useState(false);
-  
-  const getCurrencyAmount = (difficultyTime, timerOn = false) => {
-    return timerOn ? difficultyTime : difficultyTime - 10
-  }
+	const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+	const [hasCoded, setHasCoded] = useState(false);
+	const [isVisible, setIsVisible] = useState(false);
+	const [taskComplete, setTaskComplete] = useState(false);
+	const [seconds, setSeconds] = useState(1000);
+	const [minutes, setMinutes] = useState(0);
+	const [runTimer, setRunTimer] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+	const [showTimerQuestion, setShowTimerQuestion] = useState(false);
 
-  useEffect(() => {
-    if(!runTimer) return
-    const timer = setInterval(() => {
-      if (seconds > 0) {
-        setSeconds(seconds - 1);
-      } else {
-        setSeconds(59);
-        if (minutes > 0) {
-          setMinutes(minutes - 1);
-        }
-      }
-    }, 1000);
+	const getCurrencyAmount = (difficultyTime, timerOn = false) => {
+		return timerOn ? difficultyTime : difficultyTime - 10;
+	};
 
-    if (minutes === 0 && seconds === 0) {
-      setHasCoded(true);
-      setIsVisible(false)
-      setTaskComplete(true)
-      setRunTimer(false)
+	useEffect(() => {
+		if (!runTimer) return;
+		const timer = setInterval(() => {
+			if (seconds > 0) {
+				setSeconds(seconds - 1);
+			} else {
+				setSeconds(59);
+				if (minutes > 0) {
+					setMinutes(minutes - 1);
+				}
+			}
+		}, 1000);
 
-      const newDate = new Date()
-      const dateSrt  = newDate.toISOString();
-      const progressDate = dateSrt.slice(0,10);
-      const newProgress = {
-        date: progressDate,
-        time: loggedInUser.difficulty
-      }
-      const totalProgress = loggedInUser.progress
-      totalProgress.push(newProgress)
-      const userUpdate = {
-        progress: totalProgress,
-        currency: loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty, true),
-        streak: loggedInUser.streak + 1,
-        last_activity: Date.now(),
-      };
+		if (minutes === 0 && seconds === 0) {
+			setHasCoded(true);
+			setIsVisible(false);
+			setTaskComplete(true);
+			setRunTimer(false);
+
+			const newDate = new Date();
+			const dateSrt = newDate.toISOString();
+			const progressDate = dateSrt.slice(0, 10);
+			const newProgress = {
+				date: progressDate,
+				time: loggedInUser.difficulty,
+			};
+			const totalProgress = loggedInUser.progress;
+			totalProgress.push(newProgress);
+			const userUpdate = {
+				progress: totalProgress,
+				currency:
+					loggedInUser.currency +
+					getCurrencyAmount(loggedInUser.difficulty, true),
+				streak: loggedInUser.streak + 1,
+				last_activity: Date.now(),
+			};
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
 				const userStringified = JSON.stringify(user);
@@ -78,46 +81,48 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		if (energy > 80 && energy <= 100) setEmotion('squint');
 	}, [energy]);
 
-  const haveYouCodedHandler = (event) => {
-    setIsLoading(true);
-    if (event.target.value === "yes") {
-      setEmotion("joy");
-      setHasCoded(true);
-      setTaskComplete(true)
+	const haveYouCodedHandler = (event) => {
+		setIsLoading(true);
+		if (event.target.value === 'yes') {
+			setEmotion('joy');
+			setHasCoded(true);
+			setTaskComplete(true);
 
-      const newDate = new Date()
-      const dateSrt  = newDate.toISOString();
-      const progressDate = dateSrt.slice(0,10);
+			const newDate = new Date();
+			const dateSrt = newDate.toISOString();
+			const progressDate = dateSrt.slice(0, 10);
 
-      // if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
-      const totalProgress = loggedInUser.progress
-      let progressUpdate = {}
-      console.log(loggedInUser.progress);
-      const todaysProgress = totalProgress.filter(item => item.date === progressDate)
-      console.log(todaysProgress);
+			// if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
+			const totalProgress = loggedInUser.progress;
+			let progressUpdate = {};
+			console.log(loggedInUser.progress);
+			const todaysProgress = totalProgress.filter(
+				(item) => item.date === progressDate
+			);
+			console.log(todaysProgress);
 
+			if (todaysProgress) {
+				progressUpdate = {
+					date: progressDate,
+					time: loggedInUser.progress.date + loggedInUser.difficulty,
+				};
+				totalProgress.push(progressUpdate);
+			} else {
+				// else = loggedInUser.difficulty
+				progressUpdate = {
+					date: progressDate,
+					time: loggedInUser.difficulty,
+				};
+				totalProgress.push(progressUpdate);
+			}
 
-      if(todaysProgress) {
-        progressUpdate = {
-          date: progressDate,
-          time: loggedInUser.progress.date + loggedInUser.difficulty
-        }
-        totalProgress.push(progressUpdate)
-      } else {
-        // else = loggedInUser.difficulty
-      progressUpdate = {
-        date: progressDate,
-        time: loggedInUser.difficulty
-      }
-      totalProgress.push(progressUpdate)
-    }
-      
-      const userUpdate = {
-        progress: totalProgress,
-        currency: loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
-        streak: loggedInUser.streak + 1,
-        last_activity: Date.now(),
-      };
+			const userUpdate = {
+				progress: totalProgress,
+				currency:
+					loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
+				streak: loggedInUser.streak + 1,
+				last_activity: Date.now(),
+			};
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
 				const userStringified = JSON.stringify(user);
@@ -135,13 +140,13 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		setIsVisible(true);
 		setTimeout(() => {
 			setIsLoading(false);
-      setIsLoadingQuestion(true)
-      setShowTimerQuestion(true)
+			setIsLoadingQuestion(true);
+			setShowTimerQuestion(true);
 		}, 3000);
 
 		setTimeout(() => {
-      setIsLoadingQuestion(false)
-    }, 6000);
+			setIsLoadingQuestion(false);
+		}, 6000);
 	};
 
 	const handleTimer = (event) => {
@@ -155,58 +160,64 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		}
 	};
 
-  return (
-    <>
-      {!taskComplete ? <div className="chat chat-start flex items-center">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img alt="Tailwind CSS chat bubble component" src="/happy.png" />
-          </div>
-        </div>
+	return (
+		<>
+			{!taskComplete ? (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
+						</div>
+					</div>
 
-        <div className="chat-bubble flex items-center">
-          Did you code today?
-          {!isVisible ? (
-            <div className="flex ml-4">
-              <button
-                value="yes"
-                onClick={haveYouCodedHandler}
-                className="btn btn-primary mx-2">
-                Yes
-              </button>
-              <button
-                value="no"
-                onClick={haveYouCodedHandler}
-                className="btn btn-primary mx-2">
-                No
-              </button>
-            </div>
-          ) : null}
-        </div>
-      </div> : <div className="chat chat-start flex items-center">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img alt="Tailwind CSS chat bubble component" src="/happy.png" />
-          </div>
-        </div>
+					<div className='chat-bubble flex items-center'>
+						Did you code today?
+						{!isVisible ? (
+							<div className='flex ml-4'>
+								<button
+									value='yes'
+									onClick={haveYouCodedHandler}
+									className='btn btn-primary mx-2'
+								>
+									Yes
+								</button>
+								<button
+									value='no'
+									onClick={haveYouCodedHandler}
+									className='btn btn-primary mx-2'
+								>
+									No
+								</button>
+							</div>
+						) : null}
+					</div>
+				</div>
+			) : (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
+						</div>
+					</div>
 
-        <div className="chat-bubble flex items-center">
-          You already coded today!! :D
-        </div>
-      </div>}
+					<div className='chat-bubble flex items-center'>
+						You already coded today!! :D
+					</div>
+				</div>
+			)}
 
-      {taskComplete ? (
-              <div className="chat chat-start flex items-center">
-                <div className="chat-image avatar">
-                  <div className="w-10 rounded-full">
-                    <img alt="Tailwind CSS chat bubble component" src="/happy.png" />
-                  </div>
-                </div>
-                <div className="chat-bubble">
-                  Well done, go celebrate and eat cake!!
-                </div>
-              </div>
-                ) : null}
+			{taskComplete ? (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
+						</div>
+					</div>
+					<div className='chat-bubble'>
+						Well done, go celebrate and eat cake!!
+					</div>
+				</div>
+			) : null}
 
 			{isVisible && !hasCoded ? (
 				<>
@@ -241,23 +252,21 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 				</>
 			) : null}
 
-
-{showTimerQuestion ? <div className='chat chat-start flex items-center'>
-						<div className='chat-image avatar'>
-							<div className='w-10 rounded-full'>
-								<img
-									alt='Tailwind CSS chat bubble component'
-									src='/happy.png'
-								/>
-							</div>
+			{showTimerQuestion ? (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
 						</div>
-						<div className='chat-bubble flex items-center'>
-							{isLoadingQuestion ? (
-								<span className='loading loading-dots loading-xs'></span>
-							) : (
-								<>
-									Would you like to study now and start a timer?
-									{runTimer ? null : <div className='flex ml-4'>
+					</div>
+					<div className='chat-bubble flex items-center'>
+						{isLoadingQuestion ? (
+							<span className='loading loading-dots loading-xs'></span>
+						) : (
+							<>
+								Would you like to study now and start a timer?
+								{runTimer ? null : (
+									<div className='flex ml-4'>
 										<button
 											value='yes'
 											onClick={handleTimer}
@@ -272,11 +281,13 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 										>
 											Maybe later
 										</button>
-									</div>}
-								</>
-							)}
-						</div>
-					</div> : null}
+									</div>
+								)}
+							</>
+						)}
+					</div>
+				</div>
+			) : null}
 
 			{isVisible && runTimer ? (
 				<div className='m-5'>
