@@ -224,9 +224,19 @@ const HeroBar = () => {
                 <a>
                   <InstructionsPopup
                     modalInstruction="Your pet wants to see you succeed at your learning goal and depends on you to keep it fully charged and happy! 
-            Your pet’s energy will decrease over time and the only way to restore its energy in full is to complete your daily goal. 
-            Don’t leave it too long as your pet will eventually power down!"
-                    title="Pet Energy"
+					Your pet’s energy will decrease over time and the only way to restore its energy in full is to complete your daily goal. 
+					Don’t let your pet’s energy drop below 1%! You may not like what you see…"
+                    title="Energy"
+                  />
+                </a>
+              </li>
+              <li>
+                <a>
+                  <InstructionsPopup
+                    modalInstruction="Everyday you complete your learning goal you are awarded coins. 
+					Your balance is displayed in the top right corner. When you have accumulated enough coins you can treat your pet to a gift from the shop. 
+					Hint: Your pet LOVES to help you study, if you opt to use the timer feature you will be awarded bonus coins."
+                    title="Coins"
                   />
                 </a>
               </li>
