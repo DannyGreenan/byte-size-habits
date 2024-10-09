@@ -13,16 +13,15 @@ const Home = () => {
       <section className="py-6 text-black">
         <div className="container mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-6 justify-center">
           <div className="w-full px-4 flex flex-col items-center mb-6 lg:mb-0">
-            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full flex justify-between items-end ">
-              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+            <div className="mockup-window border-2 border-accent bg-neutral text-neutral-content w-full flex justify-between items-end ">
+              <button className="btn btn-error btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                  stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -42,9 +41,8 @@ const Home = () => {
                   width: "100%",
                   minHeight: "500px",
                   height: "auto",
-                }}
-              >
-                <div className="bg-base-100 text-white rounded-xl p-4 w-full h-auto">
+                }}>
+                <div className="bg-neutral text-neutral-content rounded-xl p-4 w-full h-auto">
                   <EnergyBar />
                 </div>
                 <Image
@@ -59,16 +57,15 @@ const Home = () => {
           </div>
 
           <div className="w-full px-4 flex flex-col items-center space-y-6">
-            <div className="mockup-window border-2 border-base-100 bg-base-100 text-white w-full items-end">
-              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+            <div className="mockup-window border-2 border-accent bg-neutral text-neutral-content w-full items-end">
+              <button className="btn btn-square btn-error btn-outline btn-sm my-6 mx-2 -mt-10">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                  stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -83,16 +80,15 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="mockup-window bg-base-100 text-white border-2 border-base-100 w-full items-end overflow-hidden">
-              <button className="btn btn-square btn-outline btn-sm my-6 mx-2 -mt-10">
+            <div className="mockup-window bg-neutral text-neutral-content border-2 border-accent w-full items-end overflow-hidden">
+              <button className="btn btn-square btn-error btn-outline btn-sm my-6 mx-2 -mt-10">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                  stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

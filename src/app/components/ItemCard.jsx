@@ -39,10 +39,10 @@ const ItemCard = ({ item, index }) => {
   return (
     <div
       id={index}
-      className="mockup-browser bg-base-200 border-2 border-base-200">
-      <div className="mockup-browser-toolbar">
-        <div className="input">{`/${item.description}`}</div>
-        <button className="btn btn-square btn-outline btn-sm -mr-4">
+      className="mockup-browser bg-neutral border-2 border-accent">
+      <div className="mockup-browser-toolbar text-neutral-content">
+        <div className="input text-accent">{`/${item.description}`}</div>
+        <button className="btn btn-square btn-error btn-outline ml-1 btn-sm -mr-4">
           {" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"

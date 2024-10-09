@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-b from-byteBackground to-white; /* Replace with your desired colors */
+  @apply bg-gradient-to-b from-base-100 to-base-300; /* Replace with your desired colors */
 }
 
 @layer components {
