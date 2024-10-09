@@ -1,30 +1,70 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEnergy } from '../context/EnergyContext.js';
+import { EnergyContext } from '../context/EnergyContext.js';
+
 
 const EnergyNotification = () => {
-	const { energy } = useEnergy();
+	const { energy } = useContext(EnergyContext);
 
 	useEffect(() => {
-		if (energy <= 70 && energy > 50) {
+		if (energy === 80) {
 			toast.info(
-				"Notice: Pet's energy is has demonstrated a reduction! Below 70%",
+				"My energy has dropped to 80%, would you like to study now?",
 				{
 					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/joy.png' />
+				}
+			)
+		}
+		else if (energy === 60) {
+			toast.info(
+				"My energy has dropped to 60%, maybe you should think about studying soon?",
+				{
+					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/peaceful.png' />
 				}
 			);
-		} else if (energy <= 50 && energy > 30) {
-			toast.warn("Alert: Pet's energy is dropped considerably! Below 50%", {
-				position: 'bottom-right',
-			});
-		} else if (energy <= 30) {
-			toast.error("Warning: Pet's energy is dropped considerably! Below 50%", {
-				position: 'bottom-right',
-			});
 		}
+		else if (energy === 40) {
+			toast.info(
+				"My energy has dropped to 40%... It's time to study!! Go to the home page and start a timer!!",
+				{
+					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/worry.png' />
+				}
+			);
+		}
+		else if (energy === 20) {
+			toast.info(
+				"My energy has dropped to 20%... My wellbeing depends on you... Go to the home page and start your study session now!!",
+				{
+					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/angry.png' />
+				}
+			);
+		}
+		else if (energy === 5) {
+			toast.info(
+				"My energy has dropped to 5%... *cough* Please study, I don't know how much longer I can hold on for...",
+				{
+					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/sad.png' />
+				}
+			);
+		}
+		else if (energy === 1) {
+			toast.info(
+				"*cough* *wheeze* ... I ... Think ... You... *cough* ... Need... To... *wheeze* ... *cough*... code!!!",
+				{
+					position: 'bottom-right',
+					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/dead.png' />
+				}
+			);
+		}
+
 	}, [energy]);
 
 	return (

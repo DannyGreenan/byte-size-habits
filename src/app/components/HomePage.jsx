@@ -2,12 +2,13 @@
 
 import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
+import { EnergyContext } from '../context/EnergyContext.js';
 import { patchUser } from '../models/profile.model';
 import { patchPet } from '../models/pet.model';
-import EnergyNotification from './EnergyNotications'
 
-const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
+const HomePage = ({ setEmotion }) => {
 	const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+	const { energy, setEnergy } = useContext(EnergyContext);
 	const [hasCoded, setHasCoded] = useState(false);
 	const [isVisible, setIsVisible] = useState(false);
 	const [taskComplete, setTaskComplete] = useState(false);
@@ -63,9 +64,9 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
+				console.log("HomePage patch pet to 100 energy");
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
 					setEnergy(100);
-					setPet(patchedPet);
 				});
 			});
 		}
@@ -80,14 +81,14 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		if (energy > 60 && energy <= 80) setEmotion('joy');
 		if (energy > 80 && energy <= 100) setEmotion('squint');
 	}, [energy]);
-
+	
 	const haveYouCodedHandler = (event) => {
 		setIsLoading(true);
 		if (event.target.value === 'yes') {
 			setEmotion('joy');
 			setHasCoded(true);
 			setTaskComplete(true);
-
+			
 			const newDate = new Date();
 			const dateSrt = newDate.toISOString();
 			const progressDate = dateSrt.slice(0, 10);
@@ -95,12 +96,12 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 			// if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
 			const totalProgress = loggedInUser.progress;
 			let progressUpdate = {};
-			console.log(loggedInUser.progress);
+			// console.log(loggedInUser.progress);
 			const todaysProgress = totalProgress.filter(
 				(item) => item.date === progressDate
 			);
-			console.log(todaysProgress);
-
+			// console.log(todaysProgress);
+			
 			if (todaysProgress) {
 				progressUpdate = {
 					date: progressDate,
@@ -115,22 +116,21 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 				};
 				totalProgress.push(progressUpdate);
 			}
-
+			
 			const userUpdate = {
 				progress: totalProgress,
 				currency:
-					loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
+				loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
 				streak: loggedInUser.streak + 1,
 				last_activity: Date.now(),
 			};
-
+			
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
 				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
 					setEnergy(100);
-					setPet(patchedPet);
 				});
 			});
 		} else {

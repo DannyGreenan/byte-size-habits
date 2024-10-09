@@ -1,7 +1,6 @@
 import "./globals.css";
 import { UserProvider } from "./context/UserContext";
 import { EnergyProvider } from "./context/EnergyContext.js";
-import EnergyNotification from "./components/EnergyNotications";
 import { Nunito } from "next/font/google";
 
 const nunito = Nunito({
@@ -19,10 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={nunito.className}>
         <UserProvider>
-          <EnergyProvider>
-            {children}
-            <EnergyNotification />
-          </EnergyProvider>
+          <EnergyProvider>{children}</EnergyProvider>
         </UserProvider>
       </body>
     </html>

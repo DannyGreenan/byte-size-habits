@@ -1,14 +1,11 @@
 "use client";
 import Image from "next/image";
-import InstructionsPopup from "../components/InstructionsPopup";
 import HomePage from "../components/HomePage";
 import EnergyBar from "../components/EnergyBar";
 import { useState } from "react/";
 import ItemBag from "../components/ItemsBag";
 
 const Home = () => {
-  const [energy, setEnergy] = useState(null);
-  const [pet, setPet] = useState(null);
   const [emotion, setEmotion] = useState("happy");
 
   return (
@@ -24,7 +21,8 @@ const Home = () => {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor">
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -44,14 +42,10 @@ const Home = () => {
                   width: "100%",
                   minHeight: "500px",
                   height: "auto",
-                }}>
+                }}
+              >
                 <div className="bg-base-100 text-white rounded-xl p-4 w-full h-auto">
-                  <EnergyBar
-                    energy={energy}
-                    setEnergy={setEnergy}
-                    pet={pet}
-                    setPet={setPet}
-                  />
+                  <EnergyBar />
                 </div>
                 <Image
                   alt="character image"
@@ -73,7 +67,8 @@ const Home = () => {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor">
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -84,12 +79,7 @@ const Home = () => {
               </button>
 
               <div className="flex flex-col w-full bg-byteOrange items-center justify-center p-4">
-                <HomePage
-                  energy={energy}
-                  setEnergy={setEnergy}
-                  setPet={setPet}
-                  setEmotion={setEmotion}
-                />
+                <HomePage setEmotion={setEmotion} />
               </div>
             </div>
 
@@ -101,7 +91,8 @@ const Home = () => {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor">
+                  stroke="currentColor"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
