@@ -1,9 +1,13 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEnergy } from '../context/EnergyContext.js';
 
+const EnergyNotification = () => {
+	const { energy } = useEnergy();
 
-const EnergyNotification = ({ energy }) => {
 	useEffect(() => {
 		if (energy <= 70 && energy > 50) {
 			toast.info(
