@@ -59,7 +59,7 @@ const EnergyNotification = () => {
 			toast.error(
 				"*cough* *wheeze* ... I ... Think ... You... *cough* ... Need... To... *wheeze* ... *cough*... code!!!",
 				{
-					position: 'bottom-right',
+					position: 'top-center',
 					icon: ({theme, type}) =>  <img alt='Tailwind CSS chat bubble component' src='/dead.png' />
 				}
 			);
