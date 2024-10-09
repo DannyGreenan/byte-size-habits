@@ -6,7 +6,29 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: [
+      "light",
+      "dark",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "aqua",
+      "forest",
+      "halloween",
+      {
+        light: {
+          primary: "#f87272", // The default primary color in dark theme
+          secondary: "#f000b8",
+          accent: "#37cdbe",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
+          info: "#3abff8",
+          success: "#36d399",
+          warning: "#fbbd23",
+          error: "#f87272",
+        },
+      },
+    ],
   },
   theme: {
     extend: {
