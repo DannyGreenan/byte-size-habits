@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserContext';
 import { EnergyContext } from '../context/EnergyContext.js';
 import { patchUser } from '../models/profile.model';
 import { patchPet } from '../models/pet.model';
+import { FaUserGraduate } from "react-icons/fa";
 
 const HomePage = ({ setEmotion }) => {
 	const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -16,6 +17,8 @@ const HomePage = ({ setEmotion }) => {
 	const [minutes, setMinutes] = useState(0);
 	const [runTimer, setRunTimer] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [codeTodayQuestion, setCodeTodayQuestion] = useState("");
+	const [timerQuestion, setTimerQuestion] = useState("");
 	const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
 	const [showTimerQuestion, setShowTimerQuestion] = useState(false);
 
@@ -85,6 +88,7 @@ const HomePage = ({ setEmotion }) => {
 	const haveYouCodedHandler = (event) => {
 		setIsLoading(true);
 		if (event.target.value === 'yes') {
+			setCodeTodayQuestion(`Yes I have done ${loggedInUser.difficulty} minutes of studying ${loggedInUser.goal} already today.`)
 			setEmotion('joy');
 			setHasCoded(true);
 			setTaskComplete(true);
@@ -134,6 +138,7 @@ const HomePage = ({ setEmotion }) => {
 				});
 			});
 		} else {
+			setCodeTodayQuestion("No, I haven't had time yet.")
 			setHasCoded(false);
 			setEmotion('sad');
 		}
@@ -151,19 +156,21 @@ const HomePage = ({ setEmotion }) => {
 
 	const handleTimer = (event) => {
 		if (event.target.value === 'yes') {
+			setTimerQuestion(`Yes, I am ready to study ${loggedInUser.goal}`)
 			setEmotion('love');
 			setMinutes(loggedInUser.difficulty - 1);
 			setSeconds(59);
 			setRunTimer(true);
 		} else {
 			setEmotion('cry');
+			setTimerQuestion(`Maybe later, I can't possible spare ${loggedInUser.difficulty} minutes.`)
 		}
 	};
 
 	return (
 		<>
 			{!taskComplete ? (
-				<div className='chat chat-start flex items-center'>
+				<div className='chat chat-start flex items-center self-start'>
 					<div className='chat-image avatar'>
 						<div className='w-10 rounded-full'>
 							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
@@ -193,7 +200,7 @@ const HomePage = ({ setEmotion }) => {
 					</div>
 				</div>
 			) : (
-				<div className='chat chat-start flex items-center'>
+				<div className='chat chat-start flex items-center self-start'>
 					<div className='chat-image avatar'>
 						<div className='w-10 rounded-full'>
 							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
@@ -206,8 +213,19 @@ const HomePage = ({ setEmotion }) => {
 				</div>
 			)}
 
+			{codeTodayQuestion ? <div className='chat chat-end flex items-center self-end'>
+					<div className='chat-bubble flex items-center chat-bubble-primary btn-primary-content'>
+						{codeTodayQuestion}
+					</div>
+					<div className='chat-image avatar'>
+						<div className='w-10'>
+						<FaUserGraduate size={30} color='black' />
+						</div>
+					</div>
+				</div> : null}
+
 			{taskComplete ? (
-				<div className='chat chat-start flex items-center'>
+				<div className='chat chat-start flex items-center self-start'>
 					<div className='chat-image avatar'>
 						<div className='w-10 rounded-full'>
 							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
@@ -221,7 +239,7 @@ const HomePage = ({ setEmotion }) => {
 
 			{isVisible && !hasCoded ? (
 				<>
-					<div className='chat chat-start flex items-center'>
+					<div className='chat chat-start flex items-center self-start'>
 						<div className='chat-image avatar'>
 							<div className='w-10 rounded-full'>
 								<img
@@ -253,7 +271,7 @@ const HomePage = ({ setEmotion }) => {
 			) : null}
 
 			{showTimerQuestion ? (
-				<div className='chat chat-start flex items-center'>
+				<div className='chat chat-start flex items-center self-start'>
 					<div className='chat-image avatar'>
 						<div className='w-10 rounded-full'>
 							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
@@ -288,6 +306,17 @@ const HomePage = ({ setEmotion }) => {
 					</div>
 				</div>
 			) : null}
+
+			{timerQuestion ? <div className='chat chat-end flex items-center self-end'>
+					<div className='chat-bubble flex items-center chat-bubble-primary btn-primary-content'>
+						{timerQuestion}
+					</div>
+					<div className='chat-image avatar'>
+						<div className='w-10'>
+						<FaUserGraduate size={30} color='black' />
+						</div>
+					</div>
+				</div> : null}
 
 			{isVisible && runTimer ? (
 				<div className='m-5'>
