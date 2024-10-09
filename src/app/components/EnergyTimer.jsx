@@ -24,6 +24,7 @@ export default function EnergyTimer() {
 	}, [loggedInUser]);
 
 	const updateEnergy = (oldPet = null) => {
+    if(pet === undefined || pet === null) return
 		const currentTime = Date.now();
     let currentPet = pet
 		if (loggedInUser.user_id && (pet || oldPet)) {
