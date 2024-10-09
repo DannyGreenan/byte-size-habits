@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../context/UserContext';
 
 const CoinBalance = () => {
 	const { loggedInUser, setLoggedInUser } = useContext(UserContext);

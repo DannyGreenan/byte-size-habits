@@ -1,9 +1,10 @@
 'use client';
 
 import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../context/UserContext';
 import { patchUser } from '../models/profile.model';
 import { patchPet } from '../models/pet.model';
+import EnergyNotification from './EnergyNotications'
 
 const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 	const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -14,6 +15,12 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 	const [minutes, setMinutes] = useState(0);
 	const [runTimer, setRunTimer] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
+	const [showTimerQuestion, setShowTimerQuestion] = useState(false);
+
+	const getCurrencyAmount = (difficultyTime, timerOn = false) => {
+		return timerOn ? difficultyTime : difficultyTime - 10;
+	};
 
 	useEffect(() => {
 		if (!runTimer) return;
@@ -34,21 +41,26 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 			setTaskComplete(true);
 			setRunTimer(false);
 
+			const newDate = new Date();
+			const dateSrt = newDate.toISOString();
+			const progressDate = dateSrt.slice(0, 10);
 			const newProgress = {
-				date: new Date(),
+				date: progressDate,
 				time: loggedInUser.difficulty,
 			};
 			const totalProgress = loggedInUser.progress;
 			totalProgress.push(newProgress);
 			const userUpdate = {
 				progress: totalProgress,
-				currency: loggedInUser.currency + 20,
+				currency:
+					loggedInUser.currency +
+					getCurrencyAmount(loggedInUser.difficulty, true),
 				streak: loggedInUser.streak + 1,
 				last_activity: Date.now(),
 			};
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
-				const userStringified = JSON.stringify(loggedInUser);
+				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
@@ -76,30 +88,49 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 			setHasCoded(true);
 			setTaskComplete(true);
 
-			const newProgress = {
-				date: new Date(),
-				time: loggedInUser.difficulty,
-			};
-			const totalProgress = loggedInUser.progress || [];
-			totalProgress.push(newProgress);
+			const newDate = new Date();
+			const dateSrt = newDate.toISOString();
+			const progressDate = dateSrt.slice(0, 10);
+
+			// if loggedInUser.progress.date === progressDate ... += loggedInUser.difficulty
+			const totalProgress = loggedInUser.progress;
+			let progressUpdate = {};
+			console.log(loggedInUser.progress);
+			const todaysProgress = totalProgress.filter(
+				(item) => item.date === progressDate
+			);
+			console.log(todaysProgress);
+
+			if (todaysProgress) {
+				progressUpdate = {
+					date: progressDate,
+					time: loggedInUser.progress.date + loggedInUser.difficulty,
+				};
+				totalProgress.push(progressUpdate);
+			} else {
+				// else = loggedInUser.difficulty
+				progressUpdate = {
+					date: progressDate,
+					time: loggedInUser.difficulty,
+				};
+				totalProgress.push(progressUpdate);
+			}
+
 			const userUpdate = {
 				progress: totalProgress,
-				currency: loggedInUser.currency + 20,
+				currency:
+					loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
 				streak: loggedInUser.streak + 1,
 				last_activity: Date.now(),
 			};
 
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
-				const userStringified = JSON.stringify(loggedInUser);
+				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
 					setEnergy(100);
 					setPet(patchedPet);
-
-					setTimeout(() => {
-						setIsLoading(false);
-					}, 4000);
 				});
 			});
 		} else {
@@ -109,14 +140,20 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 		setIsVisible(true);
 		setTimeout(() => {
 			setIsLoading(false);
-		}, 4000);
+			setIsLoadingQuestion(true);
+			setShowTimerQuestion(true);
+		}, 3000);
+
+		setTimeout(() => {
+			setIsLoadingQuestion(false);
+		}, 6000);
 	};
 
 	const handleTimer = (event) => {
 		if (event.target.value === 'yes') {
 			setEmotion('love');
-			setMinutes(loggedInUser.difficulty - 1 - 29);
-			setSeconds(59 - 55);
+			setMinutes(loggedInUser.difficulty - 1);
+			setSeconds(59);
 			setRunTimer(true);
 		} else {
 			setEmotion('cry');
@@ -125,35 +162,49 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 
 	return (
 		<>
-			<div className='chat chat-start flex items-center'>
-				<div className='chat-image avatar'>
-					<div className='w-10 rounded-full'>
-						<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
+			{!taskComplete ? (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
+						</div>
+					</div>
+
+					<div className='chat-bubble flex items-center'>
+						Did you code today?
+						{!isVisible ? (
+							<div className='flex ml-4'>
+								<button
+									value='yes'
+									onClick={haveYouCodedHandler}
+									className='btn btn-primary mx-2'
+								>
+									Yes
+								</button>
+								<button
+									value='no'
+									onClick={haveYouCodedHandler}
+									className='btn btn-primary mx-2'
+								>
+									No
+								</button>
+							</div>
+						) : null}
 					</div>
 				</div>
-
-				<div className='chat-bubble flex items-center'>
-					Did you code today?
-					{!isVisible ? (
-						<div className='flex ml-4'>
-							<button
-								value='yes'
-								onClick={haveYouCodedHandler}
-								className='btn btn-primary mx-2'
-							>
-								Yes
-							</button>
-							<button
-								value='no'
-								onClick={haveYouCodedHandler}
-								className='btn btn-primary mx-2'
-							>
-								No
-							</button>
+			) : (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
 						</div>
-					) : null}
+					</div>
+
+					<div className='chat-bubble flex items-center'>
+						You already coded today!! :D
+					</div>
 				</div>
-			</div>
+			)}
 
 			{taskComplete ? (
 				<div className='chat chat-start flex items-center'>
@@ -198,21 +249,23 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 							)}
 						</div>
 					</div>
-					<div className='chat chat-start flex items-center'>
-						<div className='chat-image avatar'>
-							<div className='w-10 rounded-full'>
-								<img
-									alt='Tailwind CSS chat bubble component'
-									src='/happy.png'
-								/>
-							</div>
+				</>
+			) : null}
+
+			{showTimerQuestion ? (
+				<div className='chat chat-start flex items-center'>
+					<div className='chat-image avatar'>
+						<div className='w-10 rounded-full'>
+							<img alt='Tailwind CSS chat bubble component' src='/happy.png' />
 						</div>
-						<div className='chat-bubble flex items-center'>
-							{isLoading ? (
-								<span className='loading loading-dots loading-xs'></span>
-							) : (
-								<>
-									Would you like to study now and start a timer?
+					</div>
+					<div className='chat-bubble flex items-center'>
+						{isLoadingQuestion ? (
+							<span className='loading loading-dots loading-xs'></span>
+						) : (
+							<>
+								Would you like to study now and start a timer?
+								{runTimer ? null : (
 									<div className='flex ml-4'>
 										<button
 											value='yes'
@@ -229,11 +282,11 @@ const HomePage = ({ energy, setEnergy, setPet, setEmotion }) => {
 											Maybe later
 										</button>
 									</div>
-								</>
-							)}
-						</div>
+								)}
+							</>
+						)}
 					</div>
-				</>
+				</div>
 			) : null}
 
 			{isVisible && runTimer ? (

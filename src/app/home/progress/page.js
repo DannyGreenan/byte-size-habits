@@ -4,7 +4,7 @@ import { TiMessage, TiTickOutline } from "react-icons/ti";
 import { ImCross } from "react-icons/im";
 import ChartComponent from "@/app/components/chart";
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "@/app/UserContext";
+import { UserContext } from "@/app/context/UserContext";
 import Image from "next/image";
 
 const Progress = () => {
