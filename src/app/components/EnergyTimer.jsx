@@ -30,6 +30,7 @@ export default function EnergyTimer() {
 		if (loggedInUser.user_id && (pet || oldPet)) {
 			if (oldPet) currentPet = oldPet;
 			const timeDifferenceInMinutes =
+				// time / 1000ms / 60s === minutes
 				(currentTime - loggedInUser.last_activity) / 1000 / 60;
 			const minutesElapsed = Math.floor(timeDifferenceInMinutes);
 			if (minutesElapsed > 0) {
@@ -51,10 +52,43 @@ export default function EnergyTimer() {
 		setTimerTrigger(timerTrigger + 1);
 	};
 
+	const addDateToProgress = () => {
+		if (Object.keys(loggedInUser).length === 0) return;
+		const newDate = new Date();
+			const dateSrt = newDate.toISOString();
+			const progressDate = dateSrt.slice(0, 10);
+
+			const totalProgress = loggedInUser.progress;
+			let progressUpdate = {};
+			const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
+			
+			if (todaysIndex !== -1) return
+			else {
+				progressUpdate = {
+					date: progressDate,
+					time: 0,
+				};
+				totalProgress.push(progressUpdate);
+			}
+			
+			const userUpdate = {
+				progress: totalProgress,
+				last_activity: Date.now(),
+			};
+
+			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
+				const userStringified = JSON.stringify(user);
+				localStorage.setItem('user', userStringified);
+				setLoggedInUser(user);
+			});
+	}
+
 	useEffect(() => {
 		if (!timerTrigger) {
 			updateEnergy();
+			addDateToProgress();
 		} else {
+			// 60s * 1000ms === 60000ms
 			const id = setInterval(updateEnergy, 60000);
 			return () => clearInterval(id);
 		}
