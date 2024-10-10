@@ -125,8 +125,8 @@ const HomePage = ({ setEmotion }) => {
 
 				let streak = 0
 				totalProgress.reverse().forEach((dateKey, index) => {
-					// 24hours === 86400000ms
-				  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
+					// 24h * 60m * 60s * 1000ms  === 86400000ms
+				 	if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
 				})
 			
 			const userUpdate = {
