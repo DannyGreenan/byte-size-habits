@@ -48,26 +48,39 @@ const HomePage = ({ setEmotion }) => {
 			const newDate = new Date();
 			const dateSrt = newDate.toISOString();
 			const progressDate = dateSrt.slice(0, 10);
-			const newProgress = {
-				date: progressDate,
-				time: loggedInUser.difficulty,
-			};
+
 			const totalProgress = loggedInUser.progress;
-			totalProgress.push(newProgress);
+			let progressUpdate = {};
+			const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
+			
+			if (todaysIndex !== -1) totalProgress[todaysIndex].time += loggedInUser.difficulty 
+			else {
+				progressUpdate = {
+					date: progressDate,
+					time: loggedInUser.difficulty,
+				};
+				totalProgress.push(progressUpdate);
+			}
+			
+			// streak count here ---------------------------------------------------------------
+			let streak = 0
+			totalProgress.reverse().forEach((dateKey, index) => {
+			  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
+			})
+
+			console.log("------------->",totalProgress.reverse());
 			const userUpdate = {
-				progress: totalProgress,
+				progress: totalProgress.reverse(),
 				currency:
-					loggedInUser.currency +
-					getCurrencyAmount(loggedInUser.difficulty, true),
-				streak: loggedInUser.streak + 1,
+				loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
+				streak: streak,
 				last_activity: Date.now(),
 			};
-
+			
 			patchUser(loggedInUser.user_id, userUpdate).then((user) => {
 				const userStringified = JSON.stringify(user);
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
-				console.log("HomePage patch pet to 100 energy");
 				patchPet(user.pet_id, { energy: 100 }).then((patchedPet) => {
 					setEnergy(100);
 				});
@@ -99,26 +112,28 @@ const HomePage = ({ setEmotion }) => {
 
 			const totalProgress = loggedInUser.progress;
 			let progressUpdate = {};
-			const todaysProgress = totalProgress.filter(
-				(item) => item.date === progressDate
-			);
+			const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
 			
-			if (todaysProgress.length > 0) {
-				const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
-				totalProgress[todaysIndex].time += loggedInUser.difficulty
-			} else {
+			if (todaysIndex !== -1) totalProgress[todaysIndex].time += loggedInUser.difficulty 
+			else {
 				progressUpdate = {
 					date: progressDate,
 					time: loggedInUser.difficulty,
 				};
 				totalProgress.push(progressUpdate);
 			}
+
+				let streak = 0
+				totalProgress.reverse().forEach((dateKey, index) => {
+					// 24hours === 86400000ms
+				  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
+				})
 			
 			const userUpdate = {
-				progress: totalProgress,
+				progress: totalProgress.reverse(),
 				currency:
 				loggedInUser.currency + getCurrencyAmount(loggedInUser.difficulty),
-				streak: loggedInUser.streak + 1,
+				streak: streak,
 				last_activity: Date.now(),
 			};
 			
