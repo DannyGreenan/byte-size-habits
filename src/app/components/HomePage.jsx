@@ -267,7 +267,7 @@ const HomePage = ({ setEmotion }) => {
 
 									<a
 										className='link link-info'
-										href={`https://devdocs.io/${loggedInUser.goal.toLowerCase()}/`}
+										href={Object.keys(loggedInUser).length > 0 ?`https://devdocs.io/${loggedInUser.goal.toLowerCase()}/` : 0}
 									>
 										{loggedInUser.goal + '  ' + 'Docs'}
 									</a>

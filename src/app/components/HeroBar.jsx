@@ -10,6 +10,16 @@ import { PiNotebook } from "react-icons/pi";
 const HeroBar = () => {
   const { loggedInUser } = useContext(UserContext);
 
+  if(Object.keys(loggedInUser).length === 0) return
+  const newDate = new Date();
+  const dateSrt = newDate.toISOString();
+  const progressDate = dateSrt.slice(0, 10);
+
+  const totalProgress = loggedInUser.progress;
+  const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
+  if(todaysIndex === -1 ) return
+  const todaysHabitComplete = totalProgress[todaysIndex].time
+
   return (
     <div className="bg-neutral border-2 border-accent w-full max-w-4xl mx-auto m-10 rounded-xl">
       <div className="flex justify-center">
@@ -83,7 +93,7 @@ const HeroBar = () => {
                 Tutorials
               </label>
 
-              <button className="btn btn-error text-neutral-content">
+              <button className={`btn ${todaysHabitComplete? "btn-error" : "btn-neutral"} text-neutral-content`}>
                 Streak
                 <FaFire size={30} className="opacity-50" />
               </button>
