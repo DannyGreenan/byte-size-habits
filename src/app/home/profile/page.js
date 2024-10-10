@@ -279,7 +279,7 @@ const UserProfile = () => {
                               className={`cursor-pointer ${
                                 selectedDifficulty === 30
                                   ? "text-primary"
-                                  : "text-gray-500"
+                                  : "text-gray-600"
                               }`}>
                               <div className={`stat `}>
                                 <div className="stat-figure text-secondary">
@@ -302,7 +302,7 @@ const UserProfile = () => {
                               className={`cursor-pointer ${
                                 selectedDifficulty === 45
                                   ? "text-primary"
-                                  : "text-gray-500"
+                                  : "text-gray-600"
                               }`}>
                               <div className="stat">
                                 <div className="stat-figure text-primary">
@@ -328,7 +328,7 @@ const UserProfile = () => {
                               className={`cursor-pointer ${
                                 selectedDifficulty === 60
                                   ? "text-primary"
-                                  : "text-gray-500"
+                                  : "text-gray-600"
                               }`}>
                               <div className="stat">
                                 <div className="stat-figure text-secondary">
