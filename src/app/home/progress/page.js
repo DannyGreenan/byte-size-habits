@@ -237,22 +237,26 @@ const Progress = () => {
                 <div className="h-23 bg-gray-100 flex flex-row justify-center items-center">
                   <button
                     onClick={handleThisWeek}
-                    className="btn btn-primary mx-2">
+                    className="btn btn-primary mx-2"
+                  >
                     This Week
                   </button>
                   <button
                     onClick={handleLastWeek}
-                    className="btn btn-primary mx-2">
+                    className="btn btn-primary mx-2"
+                  >
                     Last Week
                   </button>
                   <button
                     onClick={handleLastMonth}
-                    className="btn btn-primary mx-2">
+                    className="btn btn-primary mx-2"
+                  >
                     Last Month
                   </button>
                   <button
                     onClick={handleAllData}
-                    className="btn btn-primary mx-2">
+                    className="btn btn-primary mx-2"
+                  >
                     All Progress
                   </button>
                 </div>
@@ -270,11 +274,12 @@ const Progress = () => {
               {userProgress.map((userData) => (
                 <section key={userData.date}>
                   <div
-                    className={`p-4 rounded-full avatar flex flex-col items-center ${
+                    className={`p-4 rounded-full avatar flex flex-col items-center border-white ${
                       userData.time
                         ? "bg-success text-success-content"
                         : "bg-gray-400 text-gray-500"
-                    }`}>
+                    }`}
+                  >
                     <div className="text-2xl">
                       {userData.time ? (
                         <FaFire size={60} className="opacity-50" />

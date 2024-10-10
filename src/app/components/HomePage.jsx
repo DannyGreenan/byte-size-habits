@@ -62,7 +62,6 @@ const HomePage = ({ setEmotion }) => {
 				totalProgress.push(progressUpdate);
 			}
 			
-			// streak count here ---------------------------------------------------------------
 			let streak = 0
 			totalProgress.reverse().forEach((dateKey, index) => {
 			  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++

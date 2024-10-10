@@ -48,7 +48,7 @@ const ItemBag = () => {
         </div>
       ) : (
         <div>
-          <p>Your bag is empty</p>
+          <p className="lg:mt-10 mt-24">Your bag is empty</p>
         </div>
       )}
     </div>
