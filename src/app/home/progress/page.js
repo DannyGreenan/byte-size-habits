@@ -20,6 +20,7 @@ const Progress = () => {
     userProgress = loggedInUser.progress;
   const leetCodeChallenges = loggedInUser.Leetcode;
   let length = userProgress.length;
+
   const style = {
     backgroundImage: `url('/button-bg.png')`,
     backgroundSize: "cover",
@@ -30,12 +31,11 @@ const Progress = () => {
     width: "250px",
   };
   const textUtil =
-    "absolute bottom-1 left-1/2 transform -translate-x-1/2 title-font font-medium font-bold text-xl text-black text-center z-10 leading-5";
+    "absolute bottom-3 left-1/2 transform -translate-x-1/2 title-font font-medium font-bold text-xl text-black text-center z-10 leading-5";
   const imageUtil =
-    "absolute top-1/4 left-1/2 transform -translate-x-1/2 object-cover z-10";
-  const boxUtil =
-    "border-2 border-byteDarkBlue px-20 py-10 rounded-2xl transform transition duration-500 hover:scale-110";
-  const flexUtil = "flex flex-row items-center justify-center relative";
+    "absolute top-2 left-1/2 transform -translate-x-1/2 object-cover z-10";
+  const boxUtil = "border-2 border-byteDarkBlue px-10 py-5 rounded-2xl ";
+  const flexUtil = "flex flex-row items-center justify-center relative ";
   function daysAndTimes(userProgress, length) {
     if (userProgress.length > 6) {
       length = 7;
@@ -52,6 +52,7 @@ const Progress = () => {
     const daysAndTimesObj = { days: days, times: times };
     return daysAndTimesObj;
   }
+
   useEffect(() => {
     if (Object.keys(loggedInUser).length === 0) return;
     const daysTimesObj = daysAndTimes(userProgress, length);
@@ -125,88 +126,99 @@ const Progress = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="mockup-browser bg-base-100 border">
             <div className="mockup-browser-toolbar">
-              <div className="input">https://daisyui.com</div>
+              <div className="input">Coding Stats</div>
             </div>
-            {/* working in this one b? */}
 
-            <div className="container px-5 py-2 mx-auto bg-gray-100">
-              <div className="grid grid-cols-2 grid-flow-row justify-center items-center mx-2 bg-gray-100 gap-y-2">
+            <div className="container px-5 py-8 mx-auto bg-gray-100">
+              <div className="grid sm:grid-rows-1 lg:grid-cols-2  grid-flow-row justify-center items-center mx-2 bg-gray-100 gap-y-5 gap-x-2">
                 <div className="p-0 md:w-100 h-100 sm:w-50 w-auto h-auto">
-                  <div className={flexUtil}>
-                    <div className={boxUtil} style={style}></div>
-                    <Image
-                      src="/github.png"
-                      className={imageUtil}
-                      alt="GitHub logo"
-                      width={65}
-                      height={65}
-                    />
-                    <p className={textUtil}>Git commits: {gitCommits}</p>
+                  <div className=" transform transition duration-500 hover:scale-110">
+                    <div className={flexUtil}>
+                      <div className={boxUtil} style={style}></div>
+                      <Image
+                        src="/github.png"
+                        className={imageUtil}
+                        alt="GitHub logo"
+                        width={65}
+                        height={65}
+                      />
+                      <p className={textUtil}>Git commits: {gitCommits}</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className={flexUtil}>
-                  <div className={boxUtil} style={style}></div>
-                  <Image
-                    src="/codewars.png"
-                    className={imageUtil}
-                    alt="Codewars logo"
-                    width={65}
-                    height={65}
-                  />
-                  <p className={textUtil}>
-                    Codewars Challenges: {codeWarsChallenges}
-                  </p>
+                <div className=" transform transition duration-500 hover:scale-110">
+                  <div className={flexUtil}>
+                    <div className={boxUtil} style={style}></div>
+                    <Image
+                      src="/codewars.png"
+                      className={imageUtil}
+                      alt="Codewars logo"
+                      width={65}
+                      height={65}
+                    />
+                    <p className={textUtil}>
+                      Codewars Challenges: {codeWarsChallenges}
+                    </p>
+                  </div>
                 </div>
 
-                <div className={flexUtil}>
-                  <div className={boxUtil} style={style}></div>
-                  <Image
-                    src="/leetcode.png"
-                    className={imageUtil}
-                    alt="Leetcode logo"
-                    width={65}
-                    height={65}
-                  />
-                  <p className={textUtil}>
-                    LeetCode Challenges: {leetCodeChallenges}
-                  </p>
+                <div className=" transform transition duration-500 hover:scale-110">
+                  <div className={flexUtil}>
+                    <div className={boxUtil} style={style}></div>
+                    <Image
+                      src="/leetcode.png"
+                      className={imageUtil}
+                      alt="Leetcode logo"
+                      width={65}
+                      height={65}
+                    />
+                    <p className={textUtil}>
+                      LeetCode Challenges: {leetCodeChallenges}
+                    </p>
+                  </div>
                 </div>
 
-                <div className={flexUtil}>
-                  <div className={boxUtil} style={style}></div>
-                  <Image
-                    src="/squint.png"
-                    className={imageUtil}
-                    alt="VERY happy computer pet"
-                    width={65}
-                    height={65}
-                  />
-                  <p className={textUtil}>Streak: {streak}</p>
+                <div className=" transform transition duration-500 hover:scale-110">
+                  <div className={flexUtil}>
+                    <div className={boxUtil} style={style}></div>
+                    <Image
+                      src="/squint.png"
+                      className={imageUtil}
+                      alt="VERY happy computer pet"
+                      width={65}
+                      height={65}
+                    />
+                    <p className={textUtil}>Streak: {streak}</p>
+                  </div>
                 </div>
 
-                <div className={flexUtil}>
-                  <div className={boxUtil} style={style}></div>
-                  <Image
-                    src="/happy.png"
-                    className={imageUtil}
-                    alt="Happy computer pet"
-                    width={65}
-                    height={65}
-                  />
-                  <p className={textUtil}>Average time: {averageTime} mins</p>
+                <div className=" transform transition duration-500 hover:scale-110">
+                  <div className={flexUtil}>
+                    <div className={boxUtil} style={style}></div>
+                    <Image
+                      src="/happy.png"
+                      className={imageUtil}
+                      alt="Happy computer pet"
+                      width={65}
+                      height={65}
+                    />
+                    <p className={textUtil}>Average time: {averageTime} mins</p>
+                  </div>
                 </div>
 
-                <div className={flexUtil}>
-                  <div className={boxUtil} style={style}></div>
-                  <Image
-                    src="/joy.png"
-                    className={imageUtil}
-                    alt="Joyous computer pet"
-                    width={65}
-                    height={65}
-                  />
-                  <p className={textUtil}>Total time: {totalTimes} mins</p>
+                <div className=" transform transition duration-500 hover:scale-110">
+                  <div className={flexUtil}>
+                    <div className={boxUtil} style={style}></div>
+                    <Image
+                      src="/joy.png"
+                      className={imageUtil}
+                      alt="Joyous computer pet"
+                      width={65}
+                      height={65}
+                    />
+                    <p className={textUtil}>Total time: {totalTimes} mins</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -253,53 +265,28 @@ const Progress = () => {
 
         <div className="mt-8 mockup-browser bg-base-100 border">
           <div className="mockup-browser-toolbar">
-            <div className="input">https://daisyui.com</div>
+            <div className="input">Days in a Row Tracker</div>
           </div>
           <div className="bg-gray-100 p-6 shadow-md">
             <h2 className="text-xl font-bold mb-4">Days in a Row Tracker</h2>
             <div className="grid grid-cols-7 gap-4 text-center">
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Mon</div>
-              </div>
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Tue</div>
-              </div>
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Wed</div>
-              </div>
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Thu</div>
-              </div>
-              <div className="bg-gradient-to-r from-red-400 to-red-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <ImCross />
-                </div>
-                <div>Fri</div>
-              </div>
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Sat</div>
-              </div>
-              <div className="bg-gradient-to-r from-green-400 to-green-600 p-4 rounded-full text-white flex flex-col items-center">
-                <div className="text-2xl">
-                  <TiTickOutline />
-                </div>
-                <div>Sun</div>
-              </div>
+              {userProgress.map((userData) => (
+                <>
+                  <div
+                    className={`p-4 rounded-full flex flex-col items-center ${
+                      userData.time
+                        ? "bg-gradient-to-r from-green-400 to-green-600 text-white"
+                        : "bg-gradient-to-r from-red-400 to-red-600 text-white"
+                    }`}
+                    key={userData.date}
+                  >
+                    <div className="text-2xl">
+                      {userData.time ? <TiTickOutline /> : <ImCross />}
+                    </div>
+                    <div>{userData.date}</div>
+                  </div>
+                </>
+              ))}
             </div>
           </div>
         </div>
