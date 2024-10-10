@@ -30,6 +30,7 @@ export default function EnergyTimer() {
 		if (loggedInUser.user_id && (pet || oldPet)) {
 			if (oldPet) currentPet = oldPet;
 			const timeDifferenceInMinutes =
+				// time / 1000ms / 60s === minutes
 				(currentTime - loggedInUser.last_activity) / 1000 / 60;
 			const minutesElapsed = Math.floor(timeDifferenceInMinutes);
 			if (minutesElapsed > 0) {
@@ -51,10 +52,62 @@ export default function EnergyTimer() {
 		setTimerTrigger(timerTrigger + 1);
 	};
 
+	const addDateToProgress = () => {
+		if (Object.keys(loggedInUser).length === 0) return;
+		const newDate = new Date();
+		const dateSrt = newDate.toISOString();
+		const todaysDate = dateSrt.slice(0, 10);
+
+		const totalProgress = loggedInUser.progress;
+		const earliestDate = totalProgress[0].date
+		// 24h * 60m * 60s * 1000ms  === 86400000ms
+		const daysBetweenDates = (new Date(todaysDate) - new Date(earliestDate)) / 86400000
+
+		console.log("early",earliestDate);
+		console.log("late", todaysDate);
+		console.log("diff", daysBetweenDates, "should be 2");
+
+		for (let day = 0; day < daysBetweenDates - 1; day++) {
+			const missingDate = new Date(todaysDate - 86400000 * day)
+			console.log(missingDate);
+			const missingDay = {
+				date: missingDate,
+				time: 0,	
+			}
+			if(totalProgress.includes(missingDate)) continue
+			totalProgress.push(missingDay);
+		}
+
+		let progressUpdate = {};
+		const todaysIndex = totalProgress.findIndex(item => item.date === todaysDate)
+		
+		if (todaysIndex !== -1) return
+		else {
+			progressUpdate = {
+				date: todaysDate,
+				time: 0,
+			};
+			totalProgress.push(progressUpdate);
+		}
+		
+		const userUpdate = {
+			progress: totalProgress,
+			last_activity: Date.now(),
+		};
+
+		patchUser(loggedInUser.user_id, userUpdate).then((user) => {
+			const userStringified = JSON.stringify(user);
+			localStorage.setItem('user', userStringified);
+			setLoggedInUser(user);
+		});
+	}
+
 	useEffect(() => {
 		if (!timerTrigger) {
 			updateEnergy();
+			addDateToProgress();
 		} else {
+			// 60s * 1000ms === 60000ms
 			const id = setInterval(updateEnergy, 60000);
 			return () => clearInterval(id);
 		}
