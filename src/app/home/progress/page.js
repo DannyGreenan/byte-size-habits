@@ -271,21 +271,20 @@ const Progress = () => {
             <h2 className="text-xl font-bold mb-4">Days in a Row Tracker</h2>
             <div className="grid grid-cols-7 gap-4 text-center">
               {userProgress.map((userData) => (
-                <>
+                <section key={userData.date}>
                   <div
                     className={`p-4 rounded-full flex flex-col items-center ${
                       userData.time
-                        ? "bg-gradient-to-r from-green-400 to-green-600 text-white"
-                        : "bg-gradient-to-r from-red-400 to-red-600 text-white"
+                        ? "bg-gradient-to-r from-success to-white text-success-content"
+                        : "bg-gradient-to-r from-error to-white text-error-content"
                     }`}
-                    key={userData.date}
                   >
                     <div className="text-2xl">
                       {userData.time ? <TiTickOutline /> : <ImCross />}
                     </div>
                     <div>{userData.date}</div>
                   </div>
-                </>
+                </section>
               ))}
             </div>
           </div>
