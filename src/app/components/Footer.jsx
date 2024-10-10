@@ -9,38 +9,38 @@ const Footer = () => {
   return (
     <>
       {" "}
-      <aside className="grid-flow-col items-center">
+      <aside className="grid-flow-col items-center text-primary">
         <LiaHippoSolid size={50} />
         <p className="text-xl">MooDengGang</p>
         <p className="text-xs">All right reserved - Copyright © </p>
       </aside>
-      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end text-primary">
         <a
           href="https://www.linkedin.com/in/danny-greenan/"
-          className="hover:text-primary">
+          className="hover:text-accent">
           <FaUserAstronaut size={30} />
           Danny
         </a>
         <a
           href="https://www.linkedin.com/in/jazz-barlow/"
-          className="hover:text-primary">
+          className="hover:text-accent">
           <GiPirateCoat size={30} />
           Jazz
         </a>
         <a
           href="https://www.linkedin.com/in/jen-warman-38198a172/"
-          className="hover:text-primary">
+          className="hover:text-accent">
           <ImLeaf size={30} />
           Jen
         </a>
         <a
           href="https://www.linkedin.com/in/elizabeth-hughes-347633171/"
-          className="hover:text-primary">
+          className="hover:text-accent">
           <GiTurtle size={30} /> Lizzie
         </a>
         <a
           href="https://www.linkedin.com/in/fernandostcampos/"
-          className="hover:text-primary">
+          className="hover:text-accent">
           <GiPalmTree size={30} /> Fernando
         </a>
       </nav>

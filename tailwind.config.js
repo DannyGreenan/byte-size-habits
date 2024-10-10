@@ -17,7 +17,7 @@ module.exports = {
       "halloween",
       {
         light: {
-          primary: "#f87272", // The default primary color in dark theme
+          primary: "#7480ff", // The default primary color in dark theme
           secondary: "#f000b8",
           accent: "#37cdbe",
           neutral: "#3d4451",
