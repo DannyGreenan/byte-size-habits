@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext } from "react";
+import { FaFire } from "react-icons/fa";
 import { UserContext } from "../context/UserContext";
 import CoinBalance from "./CoinBalance";
 import InstructionsPopup from "./InstructionsPopup";
@@ -10,7 +11,7 @@ const HeroBar = () => {
   const { loggedInUser } = useContext(UserContext);
 
   return (
-    <div className="bg-neutral border-2 border-accent w-full max-w-4xl mx-auto m-10 rounded-2xl">
+    <div className="bg-neutral border-2 border-accent w-full max-w-4xl mx-auto m-10 rounded-xl">
       <div className="flex justify-center">
         <section className="hero pt-5">
           <div className="relative w-full">
@@ -82,6 +83,10 @@ const HeroBar = () => {
                 Tutorials
               </label>
 
+              <button className="btn btn-error text-neutral-content">
+                Streak
+                <FaFire size={30} className="opacity-50" />
+              </button>
               {/* Flexbox container for theme switcher and dropdown */}
               <div className="flex items-center space-x-4 text-primary">
                 {/* Theme switcher */}

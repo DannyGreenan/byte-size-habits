@@ -1,6 +1,7 @@
 "use client";
 
 import { TiMessage, TiTickOutline } from "react-icons/ti";
+import { FaFire } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import ChartComponent from "@/app/components/chart";
 import { useState, useContext, useEffect } from "react";
@@ -124,7 +125,7 @@ const Progress = () => {
     <section className="relative py-10">
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="mockup-browser bg-base-100 border">
+          <div className="mockup-browser bg-neutral border-2 border-accent">
             <div className="mockup-browser-toolbar">
               <div className="input">Coding Stats</div>
             </div>
@@ -157,6 +158,7 @@ const Progress = () => {
                       width={65}
                       height={65}
                     />
+
                     <p className={textUtil}>
                       Codewars Challenges: {codeWarsChallenges}
                     </p>
@@ -224,7 +226,7 @@ const Progress = () => {
             </div>
           </div>
 
-          <div className="mockup-browser bg-base-100 border">
+          <div className="mockup-browser bg-neutral border-2 border-accent">
             <div className="mockup-browser-toolbar">
               <div className="input">Progress Chart</div>
             </div>
@@ -235,26 +237,22 @@ const Progress = () => {
                 <div className="h-23 bg-gray-100 flex flex-row justify-center items-center">
                   <button
                     onClick={handleThisWeek}
-                    className="btn btn-primary mx-2"
-                  >
+                    className="btn btn-primary mx-2">
                     This Week
                   </button>
                   <button
                     onClick={handleLastWeek}
-                    className="btn btn-primary mx-2"
-                  >
+                    className="btn btn-primary mx-2">
                     Last Week
                   </button>
                   <button
                     onClick={handleLastMonth}
-                    className="btn btn-primary mx-2"
-                  >
+                    className="btn btn-primary mx-2">
                     Last Month
                   </button>
                   <button
                     onClick={handleAllData}
-                    className="btn btn-primary mx-2"
-                  >
+                    className="btn btn-primary mx-2">
                     All Progress
                   </button>
                 </div>
@@ -263,26 +261,30 @@ const Progress = () => {
           </div>
         </div>
 
-        <div className="mt-8 mockup-browser bg-base-100 border">
+        <div className="mt-8 mockup-browser bg-neutral border-2 border-accent">
           <div className="mockup-browser-toolbar">
             <div className="input">Days in a Row Tracker</div>
           </div>
           <div className="bg-gray-100 p-6 shadow-md">
-            <h2 className="text-xl font-bold mb-4">Days in a Row Tracker</h2>
-            <div className="grid grid-cols-7 gap-4 text-center">
+            <div className="avatar-group -space-x-4 rtl:space-x-reverse">
               {userProgress.map((userData) => (
                 <section key={userData.date}>
                   <div
-                    className={`p-4 rounded-full flex flex-col items-center ${
+                    className={`p-4 rounded-full avatar flex flex-col items-center ${
                       userData.time
-                        ? "bg-gradient-to-r from-success to-white text-success-content"
-                        : "bg-gradient-to-r from-error to-white text-error-content"
-                    }`}
-                  >
+                        ? "bg-success text-success-content"
+                        : "bg-gray-400 text-gray-500"
+                    }`}>
                     <div className="text-2xl">
-                      {userData.time ? <TiTickOutline /> : <ImCross />}
+                      {userData.time ? (
+                        <FaFire size={60} className="opacity-50" />
+                      ) : (
+                        <FaFire size={60} className="opacity-50" />
+                      )}
                     </div>
-                    <div>{userData.date}</div>
+                  </div>
+                  <div className="text-xs text-success-content translate-x-4 pt-1">
+                    {userData.date}
                   </div>
                 </section>
               ))}

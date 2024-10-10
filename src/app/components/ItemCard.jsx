@@ -86,7 +86,7 @@ const ItemCard = ({ item, index }) => {
 
         <div className="card-body flex flex-col justify-start text-left lg:text-left mt-4 lg:mt-0 lg:ml-1">
           {itemPurchased ? null : (
-            <p className="text-lg text-base-200 mb-4">
+            <p className="text-xl text-gray-800 font-nunito font-extrabold mb-4">
               {item.cost + " " + "Coins"}
             </p>
           )}
