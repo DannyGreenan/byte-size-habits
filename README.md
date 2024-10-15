@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Byte Size Habits - Habit tracker App
 
-## Getting Started
+![Btye Size Habits Frontpage](https://github.com/DannyGreenan/Ribbit-frontend-project/blob/main/src/assets/img/Ribbit-Frontpage.png)
 
-First, run the development server:
+## Project Summary
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ByteSize Habits is a modern web application designed to help users track their daily habits and personal goals, with a playful, Tamagotchi-style interface. Created using React, Next.js, and styled with TailwindCSS and DaisyUI, the app allows users to set goals, track progress, and interact with a cute, tech-themed character.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To use the app, simply log in as one of the users, for example, “mooDeng.” Once logged in, you can access the homepage, where you’ll find your habit-tracking dashboard. The app offers customizable features such as goal setting, a progress tracker, and a streak counter. Users can also view their personal stats and interact with the character by feeding it memory cards as they complete habits.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### [Deployed website](https://ribbitribbit.netlify.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### [Backend Repo](https://github.com/DannyGreenan/backend-project.git)
 
-## Learn More
+## Setup
 
-To learn more about Next.js, take a look at the following resources:
+### How to clone
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    $ git clone https://github.com/DannyGreenan/frontend-project.git
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    $ cd fe-nc-news
 
-## Deploy on Vercel
+### Install Dependencies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+run npm install to install all libaries listed in the package.JSON
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    npm install
+
+## Minimum Versions
+
+**Node.js**: Minimum version `v22.3.0`
+
+This portfolio project was created as part of a Digital Skills Bootcamp in Software Engineering provided by [Northcoders](https://northcoders.com/)
