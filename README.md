@@ -1,7 +1,7 @@
 # Byte Size Habits - Habit tracker App
 
-<img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/logo.png" align="right"
-     alt="Byte Size Logo" width="120" height="178">
+<img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/logo-no-bg.png" align="right"
+     alt="Byte Size Logo" width="120" height="120">
 
 ByteSize Habits is a modern web application designed to help users track their daily habits and personal goals, with a playful, Tamagotchi-style interface. Created using React, Next.js, and styled with TailwindCSS and DaisyUI, the app allows users to set goals, track progress, and interact with a cute, tech-themed character.
 
