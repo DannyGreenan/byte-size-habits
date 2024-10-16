@@ -13,8 +13,14 @@ ByteSize Habits is a modern web application designed to help users track their d
 
 ## Project Summary
 
+To use the app, simply log in as one of the users, for example, “mooDeng.”
+
+<p align="center">
+  <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-login.png" alt="ByteSize Login" width="738">
+</p>
+
+Once logged in, you can access the homepage, where you’ll find your habit-tracking dashboard. The app offers customizable features such as goal setting, a progress tracker, and a streak counter. Users can also view their personal stats and interact with the character by feeding it memory cards as they complete habits.
+
 <p align="center">
   <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-homepage.png" alt="ByteSize Homepage" width="738">
 </p>
-
-To use the app, simply log in as one of the users, for example, “mooDeng.” Once logged in, you can access the homepage, where you’ll find your habit-tracking dashboard. The app offers customizable features such as goal setting, a progress tracker, and a streak counter. Users can also view their personal stats and interact with the character by feeding it memory cards as they complete habits.
