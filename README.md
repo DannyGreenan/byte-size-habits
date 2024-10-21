@@ -36,3 +36,9 @@ Head over to the progress page to check your current achievements. You'll find a
 <p align="center">
   <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-progress.png" alt="ByteSize Homepage" width="738">
 </p>
+
+In the item shop, you can explore accessories for your pet and, if you've earned enough, treat them to something special.
+
+<p align="center">
+  <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-itemshop.png" alt="ByteSize Homepage" width="738">
+</p>
