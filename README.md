@@ -24,3 +24,9 @@ Once logged in, you can access the homepage, where you’ll find your habit-trac
 <p align="center">
   <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-homepage.png" alt="ByteSize Homepage" width="738">
 </p>
+
+Head over to the progress page to check your current achievements. You'll find a detailed graph tracking the time you've dedicated to coding and a streak tracker to help you stay consistent with your healthy habits.
+
+<p align="center">
+  <img src="https://github.com/DannyGreenan/byte-size-habits/blob/main/public/byte-progress.png" alt="ByteSize Homepage" width="738">
+</p>
