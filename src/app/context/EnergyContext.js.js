@@ -4,8 +4,6 @@ import { createContext, useContext, useState } from "react";
 
 export const EnergyContext = createContext();
 
-// export const useEnergy = () => useContext(EnergyContext);
-
 export const EnergyProvider = ({ children }) => {
   const [energy, setEnergy] = useState(null);
 

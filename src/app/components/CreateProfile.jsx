@@ -57,7 +57,6 @@ const CreateProfile = ({ setCreate }) => {
 				localStorage.setItem('user', userStringified);
 				setLoggedInUser(user);
 				router.push('/home');
-				console.log('here we go?');
 			})
 			.catch((error) => {
 				setCreateError(true);

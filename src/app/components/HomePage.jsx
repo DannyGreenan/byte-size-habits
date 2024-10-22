@@ -67,7 +67,6 @@ const HomePage = ({ setEmotion }) => {
 			  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
 			})
 
-			console.log("------------->",totalProgress.reverse());
 			const userUpdate = {
 				progress: totalProgress.reverse(),
 				currency:
