@@ -29,7 +29,7 @@ export default function EnergyBar({}) {
 			</div>
 			{energy === 0 ? (
 				<p className='label-text font-extrabold text-red-600'>
-					Please charge me... I'm out of juice!!
+					Please charge me... I&apos;m out of juice!!
 				</p>
 			) : null}
 		</>
