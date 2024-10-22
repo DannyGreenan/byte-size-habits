@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { patchUser } from "@/app/models/profile.model";
 import { UserContext } from "../context/UserContext";
 
-export default function progressDayFiller() {
+export default function ProgressDayFiller() {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const dateSort = (a, b) => {
