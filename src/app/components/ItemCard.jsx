@@ -6,6 +6,7 @@ import { patchUser } from "../models/profile.model";
 
 const ItemCard = ({ item, index }) => {
   const [hover, setHover] = useState(false);
+  const [insufficientFunds, setInsufficientFunds] = useState(false);
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const [itemPurchased, setItemPurchased] = useState(false);
 
@@ -20,7 +21,19 @@ const ItemCard = ({ item, index }) => {
     }
   }, []);
 
+  useEffect(()=>{
+    if(insufficientFunds) {
+      setTimeout(()=>{
+        setInsufficientFunds(false)
+      }, 5000)
+    }
+  }, [insufficientFunds])
+
   const handleBuy = (event) => {
+    if(loggedInUser.currency < item.cost) {
+      setInsufficientFunds(true)
+      return console.log("not enough funds");
+    }
     const newItem = item.description;
     const currentItems = loggedInUser.stored_items;
     const newCurrency = loggedInUser.currency - item.cost;
@@ -103,6 +116,12 @@ const ItemCard = ({ item, index }) => {
               </button>
             </div>
           )}
+          {insufficientFunds 
+          ? <span className={'label-text text-red-400 font-extrabold width w-8'}>Insufficient Funds</span>
+          : <>
+              <div> </div>
+              <div> </div>
+          </>}
         </div>
       </figure>
     </div>
