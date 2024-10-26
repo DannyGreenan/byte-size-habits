@@ -6,7 +6,6 @@ import { fetchItems } from "@/app/models/items.model";
 
 function Shop() {
   const [items, setAllItems] = useState([]);
-  const [bag, setBag] = useState([]);
 
   useEffect(() => {
     fetchItems(setAllItems);
