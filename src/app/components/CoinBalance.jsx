@@ -9,7 +9,7 @@ const CoinBalance = () => {
 
 	useEffect(() => {
 		setCoins(loggedInUser.currency);
-	}, [loggedInUser.currency])
+	}, [loggedInUser])
 
 	return (
 		<div className='fex items-center space-x-2'>
