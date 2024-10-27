@@ -93,7 +93,7 @@ const HeroBar = () => {
                 Tutorials
               </label>
 
-              <button className={`btn ${todaysHabitComplete? "btn-error" : "btn-neutral"} text-neutral-content`}>
+              <button className={`btn ${todaysHabitComplete? "btn-error text-primary-content" : "btn-neutral text-neutral-content"}`}>
                 Streak
                 <FaFire size={30} className="opacity-50" />
               </button>
