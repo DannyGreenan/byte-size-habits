@@ -38,9 +38,6 @@ const Progress = () => {
   const boxUtil = "border-2 border-byteDarkBlue px-10 py-5 rounded-2xl ";
   const flexUtil = "flex flex-row items-center justify-center relative ";
   function daysAndTimes(userProgress, length) {
-    if (userProgress.length > 6) {
-      length = 7;
-    }
     const days = [];
     const times = [];
     for (let i = 0; i < length; i++) {
