@@ -15,6 +15,7 @@ const UserProfile = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const [editLoading, setEditLoading] = useState(false);
   const [editedMsg, setEditedMsg] = useState(false);
+  const [edittedSettings, setEdittedSettings] = useState(false);
   const [goal, setGoal] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState(0);
 
@@ -24,22 +25,32 @@ const UserProfile = () => {
   }, []);
 
   const handleDifficultyChange = (number) => {
+    if (loggedInUser.difficulty != number) setEdittedSettings(true);
+    else setEdittedSettings(false);
     setSelectedDifficulty(number);
     setEditedMsg(false);
   };
 
   function handleGoal(event) {
-    setGoal(event.target.value);
+    const selectedGaol = event.target.value;
+    if (loggedInUser.goal != selectedGaol) setEdittedSettings(true);
+    else setEdittedSettings(false);
+    setGoal(selectedGaol);
     setEditedMsg(false);
   }
 
   const handleSubmit = () => {
+    if (!edittedSettings) {
+      setEditedMsg(false);
+      return;
+    }
     setEditLoading(true);
     patchUser(loggedInUser.user_id, {
       goal,
       difficulty: selectedDifficulty,
     }).then((user) => {
       setLoggedInUser(user);
+      setEdittedSettings(false);
       setEditLoading(false);
       setEditedMsg(true);
     });
@@ -107,7 +118,9 @@ const UserProfile = () => {
                               "Save Edits"
                             )}
                           </button>
-                          <p>{editedMsg ? "Account edited" : null}</p>
+                          <p className="text-primary-content">
+                            {editedMsg ? "Account edited" : null}
+                          </p>
                         </div>
                       </div>
                       <div className="w-full lg:w-4/12 px-4 lg:order-1"></div>
