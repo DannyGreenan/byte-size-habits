@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { FaFire } from "react-icons/fa";
 import { UserContext } from "../context/UserContext";
 import CoinBalance from "./CoinBalance";
@@ -8,6 +8,7 @@ import InstructionsPopup from "./InstructionsPopup";
 import { PiNotebook } from "react-icons/pi";
 
 const HeroBar = () => {
+  const [theme, setTheme] = useState('default');
   const { loggedInUser } = useContext(UserContext);
 
   if(Object.keys(loggedInUser).length === 0) return
@@ -19,6 +20,12 @@ const HeroBar = () => {
   const todaysIndex = totalProgress.findIndex(item => item.date === progressDate)
   if(todaysIndex === -1 ) return
   const todaysHabitComplete = totalProgress[todaysIndex].time
+
+  const storeTheme = (e) => {
+    console.log('theme changed');
+    console.log(e.target.value);
+    setTheme(e.target.value)
+  }
 
   return (
     <div className="bg-neutral border-2 border-accent w-full max-w-4xl mx-auto m-10 rounded-xl">
@@ -100,7 +107,7 @@ const HeroBar = () => {
               {/* Flexbox container for theme switcher and dropdown */}
               <div className="flex items-center space-x-4 text-primary">
                 {/* Theme switcher */}
-                <label className="swap swap-rotate">
+                {theme === 'default' ? <label className="swap swap-rotate">
                   <input
                     type="checkbox"
                     className="theme-controller hidden"
@@ -120,7 +127,7 @@ const HeroBar = () => {
                     viewBox="0 0 24 24">
                     <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
                   </svg>
-                </label>
+                </label> : null}
 
                 {/* Theme dropdown */}
                 <div className="dropdown">
@@ -137,7 +144,8 @@ const HeroBar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl">
+                    className="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl"
+                    onClick={storeTheme}>
                     <li>
                       <input
                         type="radio"
