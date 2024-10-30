@@ -38,9 +38,11 @@ const Progress = () => {
   const boxUtil = "border-2 border-byteDarkBlue px-10 py-5 rounded-2xl ";
   const flexUtil = "flex flex-row items-center justify-center relative ";
   function daysAndTimes(userProgress, length) {
+    let startingIndex = userProgress.length - length;
+    if (startingIndex < 1) startingIndex = 0;
     const days = [];
     const times = [];
-    for (let i = 0; i < length; i++) {
+    for (let i = startingIndex; i < userProgress.length; i++) {
       const dateStr = userProgress[i].date.slice(0, 10);
       if (userProgress[i].time !== null) {
         days.push(dateStr);
@@ -88,8 +90,8 @@ const Progress = () => {
   };
 
   const handleLastWeek = () => {
-    if (loggedInUser.progress.length > 16) {
-      length = 15;
+    if (loggedInUser.progress.length > 14) {
+      length = 14;
     }
     const daysTimesObj = daysAndTimes(userProgress, length);
 
@@ -98,7 +100,7 @@ const Progress = () => {
   };
   const handleLastMonth = () => {
     if (loggedInUser.progress.length > 30) {
-      length = 31;
+      length = 30;
     }
     const daysTimesObj = daysAndTimes(userProgress, length);
     setChartColumns(daysTimesObj.days);
@@ -110,8 +112,8 @@ const Progress = () => {
     setChartRows(daysTimesObj.times);
   };
   const handleThisWeek = () => {
-    if (loggedInUser.progress.length > 8) {
-      length = 8;
+    if (loggedInUser.progress.length > 7) {
+      length = 7;
     }
     const daysTimesObj = daysAndTimes(userProgress, length);
     setChartColumns(daysTimesObj.days);
