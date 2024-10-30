@@ -26,7 +26,6 @@ export async function patchPet(pet_id, updates, returnFunction, key) {
   if (error) {
     console.error("Error updating user:", error);
   } else {
-    console.log("Pet updated successfully:", data);
     if (key) returnFunction(updates[key]);
     return data[0];
   }
@@ -41,7 +40,6 @@ export async function addPet() {
   if (error) {
     console.error("Error adding user:", error);
   } else {
-    console.log("pet added successfully:", data);
     return data[0];
   }
 }

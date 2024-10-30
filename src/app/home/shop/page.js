@@ -6,7 +6,6 @@ import { fetchItems } from "@/app/models/items.model";
 
 function Shop() {
   const [items, setAllItems] = useState([]);
-  const [bag, setBag] = useState([]);
 
   useEffect(() => {
     fetchItems(setAllItems);
@@ -24,7 +23,11 @@ function Shop() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {items.length > 0
             ? items.map((item, index) => (
-                <div id={index} className=" flex justify-center px-4 py-2">
+                <div
+                  key={item.description}
+                  id={index}
+                  className=" flex justify-center px-4 py-2"
+                >
                   <ItemCard index={index} item={item} />
                 </div>
               ))
