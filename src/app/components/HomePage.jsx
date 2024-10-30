@@ -63,9 +63,16 @@ const HomePage = ({ setEmotion }) => {
 			}
 			
 			let streak = 0
-			totalProgress.reverse().forEach((dateKey, index) => {
-			  if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
-			})
+			totalProgress.reverse()
+			for (let index = 0; index < totalProgress.length; index++) {
+				const dateKey = totalProgress[index];
+				
+				// 24h * 60m * 60s * 1000ms  === 86400000ms
+				if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) {
+					if(dateKey.time > 0) streak++
+						else break;
+				}
+			}
 
 			const userUpdate = {
 				progress: totalProgress.reverse(),
@@ -122,11 +129,17 @@ const HomePage = ({ setEmotion }) => {
 			}
 
 				let streak = 0
-				totalProgress.reverse().forEach((dateKey, index) => {
+				totalProgress.reverse()
+				for (let index = 0; index < totalProgress.length; index++) {
+					const dateKey = totalProgress[index];
+					
 					// 24h * 60m * 60s * 1000ms  === 86400000ms
-				 	if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) streak++
-				})
-			
+					if (new Date(progressDate) - new Date(dateKey.date) === index * 86400000) {
+						if(dateKey.time > 0) streak++
+							else break;
+					}
+				}
+
 			const userUpdate = {
 				progress: totalProgress.reverse(),
 				currency:
