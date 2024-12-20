@@ -36,7 +36,6 @@ export async function patchUser(user_id, updates) {
   if (error) {
     console.error("Error updating user:", error);
   } else {
-    console.log("User updated successfully:", data);
     return data[0];
   }
 }
@@ -50,7 +49,6 @@ export async function addUser(userPlaceholder) {
   if (error) {
     console.error("Error adding user:", error);
   } else {
-    console.log("User added successfully:", data);
     return data[0];
   }
 }
@@ -63,7 +61,5 @@ export async function deleteUser(user_id) {
 
   if (error) {
     console.error("Error deleting user:", error);
-  } else {
-    console.log("User deleted successfully:", data);
   }
 }

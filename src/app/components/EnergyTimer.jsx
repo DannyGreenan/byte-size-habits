@@ -6,6 +6,7 @@ import { getPet, patchPet } from '@/app/models/pet.model';
 import { UserContext } from '../context/UserContext';
 import { EnergyContext } from '../context/EnergyContext.js';
 import EnergyNotification from './EnergyNotications';
+import ProgressDayFiller from './ProgressDayFiller';
 
 
 export default function EnergyTimer() {
@@ -94,6 +95,9 @@ export default function EnergyTimer() {
 		}
 	}, [timerTrigger, pet]);
 
-  return <EnergyNotification />
+  return <>
+  	<EnergyNotification />
+	<ProgressDayFiller />
+  </>
 
 }
